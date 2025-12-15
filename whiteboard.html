@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,9 @@
 
 <body class="light">
 
-<header class="top-header">WHITEBOARD</header>
+<header class="top-header" id="headerTitle">
+  WHITEBOARD – Pen
+</header>
 
 <div class="sidebar">
 
@@ -18,7 +19,7 @@
   <div class="pen-wrapper">
     <button class="tool pen-btn" onclick="togglePenMenu()">✏</button>
     <div class="pen-menu" id="penMenu">
-      <button onclick="selectPen('pen')">Normal Pen</button>
+      <button onclick="selectPen('pen')">Pen</button>
       <button onclick="selectPen('marker')">Marker</button>
       <button onclick="selectPen('highlighter')">Highlighter</button>
     </div>
