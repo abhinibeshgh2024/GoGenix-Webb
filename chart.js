@@ -1,13 +1,26 @@
 let chartInstance = null;
 
+// PAGE LOAD HOTE HI EK ROW
+window.onload = function () {
+  addRow();
+};
+
 function addRow() {
   const table = document.getElementById("dataTable");
+
   const row = document.createElement("div");
   row.className = "row";
-  row.innerHTML = `
-    <input type="text" placeholder="Label">
-    <input type="number" placeholder="Value">
-  `;
+
+  const labelInput = document.createElement("input");
+  labelInput.type = "text";
+  labelInput.placeholder = "Label";
+
+  const valueInput = document.createElement("input");
+  valueInput.type = "number";
+  valueInput.placeholder = "Value";
+
+  row.appendChild(labelInput);
+  row.appendChild(valueInput);
   table.appendChild(row);
 }
 
@@ -15,8 +28,11 @@ function generateChart() {
   const rows = document.querySelectorAll(".row");
   const labels = [];
   const values = [];
-  const errorBox = document.getElementById("error");
+
+  const title = document.getElementById("chartTitle").value;
+  const desc = document.getElementById("chartDesc").value;
   const type = document.getElementById("chartType").value;
+  const errorBox = document.getElementById("error");
 
   errorBox.innerText = "";
 
@@ -31,7 +47,7 @@ function generateChart() {
   });
 
   if (labels.length === 0) {
-    errorBox.innerText = "Please enter at least one valid data row.";
+    errorBox.innerText = "At least one valid data row is required.";
     return;
   }
 
@@ -46,14 +62,23 @@ function generateChart() {
     data: {
       labels: labels,
       datasets: [{
-        label: "Chart Maker Data",
+        label: desc || "Chart Data",
         data: values,
-        backgroundColor: "#00bfff"
+        backgroundColor: "#00bfff",
+        borderColor: "#00bfff"
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      plugins: {
+        title: {
+          display: true,
+          text: title || "Chart Maker Output"
+        },
+        legend: {
+          display: true
+        }
+      }
     }
   });
 }
