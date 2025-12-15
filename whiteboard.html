@@ -2,46 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Whiteboard</title>
+<title>Whiteboard Pro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="whiteboard.css">
 </head>
 
 <body class="light">
 
-<header class="top-header" id="headerTitle">
-  WHITEBOARD – Pen
+<header class="header" id="headerTitle">
+  WHITEBOARD · PEN
 </header>
 
-<div class="sidebar">
+<!-- LEFT TOOLBAR -->
+<div class="toolbar">
 
   <!-- PEN DROPDOWN -->
-  <div class="pen-wrapper">
-    <button class="tool pen-btn" onclick="togglePenMenu()">✏</button>
-    <div class="pen-menu" id="penMenu">
-      <button onclick="selectPen('pen')">Pen</button>
-      <button onclick="selectPen('marker')">Marker</button>
-      <button onclick="selectPen('highlighter')">Highlighter</button>
+  <div class="tool-group">
+    <button class="tool-btn" onclick="togglePenMenu()" title="Pen">✏️</button>
+    <div class="dropdown" id="penMenu">
+      <button onclick="selectPen('pen')">🖊 Normal Pen</button>
+      <button onclick="selectPen('marker')">🖍 Marker</button>
+      <button onclick="selectPen('highlighter')">🟨 Highlighter</button>
     </div>
   </div>
 
-  <button class="tool" onclick="setTool('text')">🔤</button>
-  <button class="tool" onclick="setTool('eraser')">🧽</button>
+  <button class="tool-btn" onclick="setTool('text')" title="Text">🔤</button>
+  <button class="tool-btn" onclick="setTool('eraser')" title="Eraser">🧽</button>
 
-  <label class="tool upload">
+  <label class="tool-btn upload" title="Image">
     🖼
     <input type="file" hidden onchange="addImage(event)">
   </label>
 
-  <input type="color" id="colorPicker" class="tool color">
-  <input type="range" id="sizePicker" min="1" max="30" value="4" class="tool range">
+  <input type="color" id="colorPicker" class="tool-color" title="Color">
+  <input type="range" id="sizePicker" min="1" max="30" value="4" class="tool-range" title="Size">
 
-  <button class="tool toggle" onclick="toggleMode()">🌙</button>
-  <button class="tool" onclick="clearBoard()">🗑</button>
+  <button class="tool-btn" onclick="toggleMode()" title="Dark/Light">🌗</button>
+  <button class="tool-btn" onclick="clearBoard()" title="Clear">🗑</button>
 </div>
 
-<div class="board-container" id="boardContainer">
-  <canvas id="board"></canvas>
+<!-- BOARD -->
+<div class="board" id="boardContainer">
+  <canvas id="canvas"></canvas>
 </div>
 
 <script src="whiteboard.js"></script>
