@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body.light { background: #f1f3f4; }
@@ -9,43 +9,54 @@ body.dark { background: #121212; }
 .top-header {
   position: fixed;
   top: 0;
-  left: 60px;
+  left: 70px;
   right: 0;
   height: 50px;
-  background: #1a73e8;
+  background: linear-gradient(90deg,#1a73e8,#4285f4);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 10;
+  font-size: 16px;
+  font-weight: 600;
+  z-index: 20;
 }
 
+/* SIDEBAR */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 60px;
+  width: 70px;
   height: 100vh;
-  background: #1a73e8;
+  background: #0f172a;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
-  gap: 10px;
+  gap: 12px;
+  z-index: 30;
 }
 
 .tool {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
   border: none;
-  background: white;
+  background: #1e293b;
+  color: white;
   cursor: pointer;
   font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: 0.2s;
 }
 
+.tool:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* PEN MENU – INSIDE SCREEN */
 .pen-wrapper {
   position: relative;
 }
@@ -53,29 +64,31 @@ body.dark { background: #121212; }
 .pen-menu {
   display: none;
   position: absolute;
-  left: 55px;
+  left: 75px;
   top: 0;
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background: #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .pen-menu button {
-  display: block;
-  width: 120px;
-  padding: 8px;
+  width: 140px;
+  padding: 10px;
   border: none;
-  background: white;
+  background: transparent;
+  color: white;
+  text-align: left;
   cursor: pointer;
 }
 
 .pen-menu button:hover {
-  background: #e8f0fe;
+  background: #2563eb;
 }
 
+/* BOARD */
 .board-container {
   position: absolute;
-  left: 60px;
+  left: 70px;
   top: 50px;
   right: 0;
   bottom: 0;
@@ -83,35 +96,37 @@ body.dark { background: #121212; }
   overflow: auto;
 }
 
-body.dark .board-container {
-  background: #000;
-}
-
 canvas {
   width: 3000px;
   height: 2000px;
 }
 
+/* TEXT BOX */
 .text-box {
   position: absolute;
-  min-width: 150px;
-  padding: 8px 26px 8px 8px;
+  min-width: 160px;
+  padding: 8px 40px 8px 8px;
   background: white;
-  border: 1px solid #1a73e8;
+  border: 2px dashed #2563eb;
   border-radius: 6px;
   cursor: move;
 }
 
-.text-box .cancel {
+.text-actions {
   position: absolute;
   top: 4px;
   right: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  color: red;
+  display: flex;
+  gap: 6px;
 }
 
-.img-box {
+.text-actions span {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.fixed-text {
   position: absolute;
-  cursor: move;
+  cursor: pointer;
+  white-space: pre;
 }
