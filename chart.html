@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chart Maker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="chart.css">
+</head>
+<body>
+
+<header>
+  <h1>📊 AI Based Chart Maker</h1>
+  <p>Accurate • Responsive • Intelligent</p>
+</header>
+
+<main class="container">
+
+  <section class="input-panel">
+    <h2>Enter Data</h2>
+
+    <label>Chart Type</label>
+    <select id="chartType">
+      <option value="bar">Bar Chart</option>
+      <option value="line">Line Chart</option>
+      <option value="pie">Pie Chart</option>
+    </select>
+
+    <label>Labels (comma separated)</label>
+    <input type="text" id="labels" placeholder="Jan, Feb, Mar">
+
+    <label>Values (comma separated – numbers only)</label>
+    <input type="text" id="values" placeholder="10, 20, 30">
+
+    <button onclick="generateChart()">Generate Chart</button>
+
+    <div id="error"></div>
+  </section>
+
+  <section class="chart-panel">
+    <canvas id="chartCanvas"></canvas>
+  </section>
+
+</main>
+
+<footer>
+  <p>Designed with precision & tradition</p>
+</footer>
+
+<script src="chart.js"></script>
+</body>
+</html>
