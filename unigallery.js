@@ -1,3 +1,5 @@
+let currentImage = "";
+
 const imageData = {
     devotion: [
         "https://picsum.photos/id/1011/800/1200",
@@ -23,27 +25,47 @@ function loadGallery(category) {
     const title = document.getElementById("sectionTitle");
 
     gallery.innerHTML = "";
-    title.innerText =
-        category.charAt(0).toUpperCase() + category.slice(1);
+    title.innerText = category.toUpperCase();
 
     imageData[category].forEach(src => {
-        const card = document.createElement("div");
-        card.className = "gallery-card";
-
-        card.innerHTML = `
-            <img src="${src}" alt="gallery image">
-            <div class="download-bar">
-                <a href="${src}" download>PNG</a>
-                <a href="${src}" download>JPG</a>
-                <a href="${src}" download>PDF</a>
+        gallery.innerHTML += `
+            <div class="gallery-card">
+                <img src="${src}">
+                <div class="card-actions">
+                    <button onclick="viewImage('${src}')">View</button>
+                    <button onclick="directDownload('${src}')">Download</button>
+                </div>
             </div>
         `;
-
-        gallery.appendChild(card);
     });
-
-    window.scrollTo({ top: 140, behavior: "smooth" });
 }
 
-/* Default Load */
+function viewImage(src) {
+    currentImage = src;
+    document.getElementById("modalImg").src = src;
+    document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+function directDownload(src) {
+    downloadFile(src, "jpg");
+}
+
+function downloadImage(type) {
+    downloadFile(currentImage, type);
+}
+
+function downloadFile(src, type) {
+    const link = document.createElement("a");
+    link.href = src;
+    link.download = `GoGenix_Image.${type}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+/* Default */
 loadGallery("devotion");
