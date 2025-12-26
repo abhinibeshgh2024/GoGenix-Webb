@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UniGallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<div class="navbar-wrapper">
+    <div class="navbar">
+        <div class="nav-item" onclick="loadGallery('devotion')">Devotion</div>
+        <div class="nav-item" onclick="loadGallery('nature')">Nature</div>
+        <div class="nav-item" onclick="loadGallery('environment')">Environment</div>
+        <div class="nav-item" onclick="loadGallery('monuments')">Monuments</div>
+    </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<section class="section">
+    <h2 id="sectionTitle">Devotion</h2>
+    <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- JS -->
+<script src="js/app.js"></script>
+</body>
+</html>
