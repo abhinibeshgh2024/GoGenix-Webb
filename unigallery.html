@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <title>GoGenix Art Gallery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="unigallery.css">
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
 <header class="main-header">
-    <div class="brand">
-        <h1>GoGenix</h1>
-        <p>Art Gallery</p>
-    </div>
+    <h1>GoGenix Art Gallery</h1>
 
     <nav class="navbar">
-        <div class="nav-item" onclick="loadGallery('devotion')">Devotion</div>
-        <div class="nav-item" onclick="loadGallery('nature')">Nature</div>
-        <div class="nav-item" onclick="loadGallery('environment')">Environment</div>
-        <div class="nav-item" onclick="loadGallery('monuments')">Monuments</div>
+        <span onclick="loadGallery('devotion')">Devotion</span>
+        <span onclick="loadGallery('nature')">Nature</span>
+        <span onclick="loadGallery('environment')">Environment</span>
+        <span onclick="loadGallery('monuments')">Monuments</span>
     </nav>
 </header>
 
-<!-- ===== CONTENT ===== -->
+<!-- ===== GALLERY ===== -->
 <section class="section">
     <h2 id="sectionTitle">Devotion</h2>
     <div class="gallery" id="gallery"></div>
 </section>
 
-<!-- JS -->
+<!-- ===== VIEW MODAL ===== -->
+<div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">×</span>
+    <img id="modalImg">
+    <div class="modal-actions">
+        <button onclick="downloadImage('png')">PNG</button>
+        <button onclick="downloadImage('jpg')">JPG</button>
+        <button onclick="downloadImage('pdf')">PDF</button>
+    </div>
+</div>
+
 <script src="unigallery.js"></script>
 </body>
 </html>
