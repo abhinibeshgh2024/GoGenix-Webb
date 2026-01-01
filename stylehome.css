@@ -59,8 +59,7 @@ nav ul{
   padding: 12px 40px;
   font-weight: bold;
   font-size: 20px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 3px solid rgba(255, 255, 255, 0.28);
   background: transparent;
   backdrop-filter: blur(6px);
 }
@@ -227,6 +226,7 @@ footer{
     font-size: 15px;
   }
 }
+
 
 
 
