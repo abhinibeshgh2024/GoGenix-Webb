@@ -1,52 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Whiteboard Pro</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="whiteboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoGenix Webb | Whiteboard</title>
+    <link rel="stylesheet" href="whiteboard.css">
 </head>
-
-<body class="light">
-
-<!-- HEADER -->
-<header class="header">
-  <div class="title">WHITEBOARD PRO</div>
-  <button class="toggle" onclick="toggleTheme()">🌙</button>
-</header>
-
-<!-- HORIZONTAL MENU -->
-<nav class="menu-bar">
-  <button>File</button>
-  <button onclick="undo()">Undo</button>
-  <button onclick="redo()">Redo</button>
-  <button onclick="addPage()">New Page</button>
-  <button onclick="exportPNG()">Export PNG</button>
-</nav>
-
-<!-- TOOLBAR -->
-<div class="toolbar">
-  <div class="tool-group">
-    <button onclick="togglePenMenu()">✏</button>
-    <div class="dropdown" id="penMenu">
-      <button onclick="selectPen('pen')">Pen</button>
-      <button onclick="selectPen('marker')">Marker</button>
-      <button onclick="selectPen('highlighter')">Highlighter</button>
+<body>
+    <div class="whiteboard-container">
+        <header>
+            <h1>Whiteboard</h1>
+            <div class="toolbar">
+                <button id="penButton" class="tool">Pen</button>
+                <button id="eraserButton" class="tool">Eraser</button>
+                <input type="color" id="colorPicker" class="tool" value="#000000">
+                <input type="range" id="brushSize" min="1" max="20" value="5" class="tool">
+                <button id="clearButton" class="tool clear-btn">Clear</button>
+            </div>
+        </header>
+        <canvas id="whiteboard"></canvas>
     </div>
-  </div>
-
-  <button onclick="setTool('text')">🔤</button>
-  <button onclick="setTool('eraser')">🧽</button>
-
-  <input type="color" id="colorPicker">
-  <input type="range" id="sizePicker" min="1" max="30" value="4">
-</div>
-
-<!-- BOARD -->
-<div class="board-wrapper">
-  <canvas id="board"></canvas>
-</div>
-
-<script src="whiteboard.js"></script>
+    <script src="whiteboard.js"></script>
 </body>
 </html>
