@@ -222,14 +222,6 @@ footer{
   }
 }
 
-/* ================= NAVBAR BORDER UPGRADE ================= */
-nav ul{
-  background: transparent !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-
 
 
 
