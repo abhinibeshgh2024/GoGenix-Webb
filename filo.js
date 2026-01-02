@@ -64,23 +64,46 @@ async function pdfToJpg(){
 
 /* Merge PDF */
 async function mergePdf(){
-    const files=document.getElementById("mergePdf").files;
-    if(files.length<2){
-        showAlert("Please select at least 2 PDF files.");
+    const input = document.getElementById("mergePdf");
+    const files = Array.from(input.files);
+
+    if(files.length < 2){
+        showAlert("Please select at least TWO PDF files to merge.");
         return;
     }
-    const merged=await PDFLib.PDFDocument.create();
-    for(let f of files){
-        if(f.type!=="application/pdf"){
-            showAlert("Only PDF files allowed.");
+
+    // Validate all files first
+    for(let file of files){
+        if(file.type !== "application/pdf"){
+            showAlert("Only PDF files are allowed for merging.");
             return;
         }
-        const pdf=await PDFLib.PDFDocument.load(await f.arrayBuffer());
-        const pages=await merged.copyPages(pdf,pdf.getPageIndices());
-        pages.forEach(p=>merged.addPage(p));
     }
-    saveAs(new Blob([await merged.save()]),"merged.pdf");
+
+    try{
+        const mergedPdf = await PDFLib.PDFDocument.create();
+
+        for(let file of files){
+            const bytes = await file.arrayBuffer();
+            const pdf = await PDFLib.PDFDocument.load(bytes);
+            const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+            pages.forEach(page => mergedPdf.addPage(page));
+        }
+
+        const mergedBytes = await mergedPdf.save();
+        saveAs(new Blob([mergedBytes]), "merged.pdf");
+
+        showAlert("PDFs merged successfully ✔");
+
+        // Reset input so same files can be selected again
+        input.value = "";
+
+    }catch(err){
+        console.error(err);
+        showAlert("Error while merging PDFs.");
+    }
 }
+
 
 /* Compress PDF */
 async function compressPdf(){
