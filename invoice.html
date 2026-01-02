@@ -1,80 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>GoGenix Invoice Generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="invoice.css">
-</head>
-<body>
+<section class="card">
+    <h2>Signature</h2>
 
-<header class="header">
-    <h1>GoGenix Invoice Generator</h1>
-    <p>Create professional invoices instantly</p>
-</header>
+    <label class="checkbox">
+        <input type="checkbox" id="digitalSign" onchange="toggleSign(this)">
+        Digitally Signed
+    </label>
 
-<div class="container">
-
-    <!-- BUSINESS DETAILS -->
-    <section class="card">
-        <h2>Business Details</h2>
-        <input type="text" id="businessName" placeholder="Business / Company Name">
-        <input type="text" id="businessAddress" placeholder="Business Address">
-        <input type="email" id="businessEmail" placeholder="Business Email">
-        <input type="text" id="businessPhone" placeholder="Business Phone">
-    </section>
-
-    <!-- CLIENT DETAILS -->
-    <section class="card">
-        <h2>Client Details</h2>
-        <input type="text" id="clientName" placeholder="Client Name">
-        <input type="text" id="clientAddress" placeholder="Client Address">
-        <input type="email" id="clientEmail" placeholder="Client Email">
-    </section>
-
-    <!-- INVOICE META -->
-    <section class="card">
-        <h2>Invoice Info</h2>
-        <input type="text" id="invoiceNumber" placeholder="Invoice Number">
-        <input type="date" id="invoiceDate">
-        <input type="date" id="dueDate">
-    </section>
-
-    <!-- ITEMS -->
-    <section class="card">
-        <h2>Invoice Items</h2>
-
-        <div class="item-row">
-            <input type="text" placeholder="Item Name" class="item-name">
-            <input type="number" placeholder="Qty" class="item-qty">
-            <input type="number" placeholder="Price" class="item-price">
-        </div>
-
-        <button class="btn secondary" onclick="addItem()">+ Add Item</button>
-    </section>
-
-    <!-- TAX & DISCOUNT -->
-    <section class="card">
-        <h2>Tax & Discount</h2>
-        <input type="number" id="tax" placeholder="Tax %">
-        <input type="number" id="discount" placeholder="Discount %">
-    </section>
-
-    <!-- NOTES -->
-    <section class="card">
-        <h2>Notes</h2>
-        <textarea id="notes" placeholder="Additional notes..."></textarea>
-    </section>
-
-    <!-- ACTION -->
-    <div class="action">
-        <button class="btn primary" onclick="generateInvoice()">Generate & Download PDF</button>
-    </div>
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="invoice.js"></script>
-
-</body>
-</html>
+    <label class="checkbox">
+        <input type="checkbox" id="manualSign" onchange="toggleSign(this)">
+        Manually Signed
+    </label>
+</section>
