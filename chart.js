@@ -1,6 +1,5 @@
 let chart;
-const rowsDiv = document.getElementById("dataRows");
-const errorBox = document.getElementById("error");
+const rows = document.getElementById("rows");
 
 addRow();
 
@@ -8,36 +7,26 @@ function addRow() {
   const row = document.createElement("div");
   row.className = "data-row";
   row.innerHTML = `
-    <input type="text" placeholder="Label">
+    <input placeholder="Label">
     <input type="number" placeholder="Value">
-    <input type="color" value="#2563eb">
   `;
-  rowsDiv.appendChild(row);
+  rows.appendChild(row);
 }
 
 function generateChart() {
-  errorBox.textContent = "";
-
   const labels = [];
   const data = [];
-  const colors = [];
 
   document.querySelectorAll(".data-row").forEach(r => {
     const label = r.children[0].value;
     const value = r.children[1].value;
-    const color = r.children[2].value;
-
     if (label && value) {
       labels.push(label);
       data.push(Number(value));
-      colors.push(color);
     }
   });
 
-  if (!data.length) {
-    errorBox.textContent = "Please add valid data rows.";
-    return;
-  }
+  if (!data.length) return;
 
   if (chart) chart.destroy();
 
@@ -46,10 +35,9 @@ function generateChart() {
     data: {
       labels,
       datasets: [{
-        label: chartTitle.value || "Dataset",
+        label: chartTitle.value || "Data",
         data,
-        backgroundColor: colors,
-        borderColor: colors,
+        backgroundColor: generateColors(data.length),
         borderWidth: 2
       }]
     },
@@ -66,7 +54,15 @@ function generateChart() {
   });
 }
 
-function exportPDF() {
-  window.print();
+function generateColors(count) {
+  const baseColors = [
+    "#2563eb", "#16a34a", "#dc2626",
+    "#9333ea", "#f59e0b", "#0ea5e9",
+    "#14b8a6", "#e11d48"
+  ];
+  return Array.from({ length: count }, (_, i) => baseColors[i % baseColors.length]);
 }
 
+function downloadPDF() {
+  window.print();
+}
