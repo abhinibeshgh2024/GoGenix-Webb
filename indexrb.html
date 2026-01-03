@@ -60,14 +60,8 @@
 <label>Text Color</label><input type="color" id="textColor" value="#000000">
 <label>Background Color</label><input type="color" id="bgColor" value="#ffffff">
 
-<!-- ===== COVER LETTER ===== -->
-<h2>Cover Letter</h2>
-<label>Position / Role</label><input id="coverRole" placeholder="Job Title">
-<label>Company Name</label><input id="coverCompany" placeholder="Company">
-<button onclick="generateCoverLetter()">✉️ Generate Cover Letter</button>
-
 <!-- ===== DOWNLOAD ===== -->
-<button class="download" onclick="downloadPDF()">⬇ Download Resume + Cover Letter</button>
+<button class="download" onclick="downloadPDF()">⬇ Download Resume</button>
 
 </div>
 
@@ -111,11 +105,6 @@
 <section>
   <h3>Certifications</h3>
   <ul id="p-certifications"></ul>
-</section>
-
-<section id="cover-letter-preview" style="display:none">
-  <h3>Cover Letter</h3>
-  <pre id="generated-letter"></pre>
 </section>
 
 </div>
