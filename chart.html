@@ -9,16 +9,16 @@
 <body>
 
 <header class="header glass">
-  <img src="WEBB-removebg-preview.png" alt="WRBB Logo">
-  <h2>Webb Chart Maker</h2>
-  <p>Accurate • Reliable • Responsive</p>
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
+  <h1>Webb Chart Maker</h1>
+  <p>Simple • Accurate • Professional</p>
 </header>
 
 <main class="container">
 
-  <!-- INPUT PANEL -->
-  <section class="input-panel glass">
-    <h2>Chart Configuration</h2>
+  <!-- INPUT SECTION -->
+  <section class="glass panel">
+    <h2>Chart Settings</h2>
 
     <label>Chart Title</label>
     <input id="chartTitle" placeholder="Enter chart title">
@@ -30,22 +30,21 @@
       <option value="pie">Pie Chart</option>
     </select>
 
-    <h3>Data Rows</h3>
-    <div id="dataRows"></div>
+    <h3>Chart Data</h3>
+    <div id="rows"></div>
 
-    <button onclick="addRow()">➕ Add Data Row</button>
+    <button onclick="addRow()">➕ Add Row</button>
+    <button onclick="generateChart()">📊 Generate Chart</button>
   </section>
 
   <!-- CHART PREVIEW -->
-  <section class="chart-panel glass" id="printArea">
+  <section class="glass panel chart-box" id="printArea">
     <canvas id="chartCanvas"></canvas>
   </section>
 
-  <!-- ACTIONS -->
-  <section class="action-panel glass">
-    <button onclick="generateChart()">📊 Generate Chart</button>
-    <button onclick="exportPDF()">⬇ Export PDF</button>
-    <div id="error"></div>
+  <!-- ACTION -->
+  <section class="glass panel">
+    <button onclick="downloadPDF()">⬇ Download PDF</button>
   </section>
 
 </main>
