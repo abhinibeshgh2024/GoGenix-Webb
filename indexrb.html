@@ -1,12 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instant Resume Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <header class="top-header">
   <h1>Instant Resume Builder</h1>
-  <span class="invoice-id">Resume ID: <span id="resumeId"></span></span>
+  <div class="meta">
+    Resume ID: <span id="resumeId"></span><br>
+    Date: <span id="genDate"></span>
+  </div>
 </header>
 
-<div class="container invoice-layout">
+<div class="container">
 
   <!-- INPUT PANEL -->
-  <div class="form-section">
+  <div class="form-section glass">
     <h2>Candidate Details</h2>
 
     <label>Full Name</label>
@@ -36,20 +49,19 @@
     <label>Profile Photo</label>
     <input type="file" accept="image/*" onchange="previewPhoto(event)">
 
-    <button onclick="analyzeResume()">📊 Analyze</button>
+    <button onclick="analyzeResume()">📊 Analyze Resume</button>
     <button onclick="downloadPDF()">⬇ Download PDF</button>
   </div>
 
-  <!-- RESUME / INVOICE -->
+  <!-- RESUME PREVIEW -->
   <div class="preview-section invoice" id="resume">
 
     <div class="invoice-header">
-      <img id="profile-pic" />
+      <img id="profile-pic">
       <div>
         <h2 id="p-name">Your Name</h2>
         <p id="p-email"></p>
         <p id="p-phone"></p>
-        <p class="date">Generated: <span id="genDate"></span></p>
       </div>
     </div>
 
@@ -88,7 +100,11 @@
   </div>
 </div>
 
-<div class="analysis-box" id="resume-analysis" style="display:none">
-  <h3>Resume Insights</h3>
+<div class="analysis-box" id="resume-analysis">
+  <h3>Resume Analysis</h3>
   <ul id="analysis-list"></ul>
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
