@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGenix | Webb Tab</title>
+<title>Webb | Chart Maker</title>
 
 <style>
 /* ===== RESET ===== */
@@ -26,13 +26,24 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 30px;
+  padding:16px 28px;
   backdrop-filter: blur(14px);
   background: rgba(255,255,255,0.08);
 }
 
+/* 🔥 LOGO FIX HERE */
 header img{
-  height:42px;
+  height:56px;          /* medium size */
+  max-width:160px;
+  object-fit:contain;
+}
+
+/* Mobile tweak */
+@media (max-width:600px){
+  header img{
+    height:48px;
+    max-width:130px;
+  }
 }
 
 /* ===== NAVBAR ===== */
@@ -76,7 +87,7 @@ nav{
   z-index:100;
 }
 
-/* 🔧 FIX: right side overflow */
+/* Right overflow fix */
 .dropdown-menu.right-fix{
   right:0;
   left:auto;
@@ -104,9 +115,16 @@ main{
 }
 
 .page-title{
-  font-size:26px;       /* chhota */
+  font-size:26px;
   letter-spacing:2px;
-  white-space:nowrap;  /* single line */
+  white-space:nowrap;
+}
+
+/* Mobile title */
+@media (max-width:600px){
+  .page-title{
+    font-size:22px;
+  }
 }
 
 /* ===== ABOUT ===== */
@@ -144,7 +162,7 @@ footer{
 <!-- ===== HEADER ===== -->
 <header>
   <img src="WEBB-removebg-preview.png" alt="Webb Logo">
-  <img src="UNITED_PLATFORM-removebg-preview.png" alt="United Platform">
+  <img src="UNITED_PLATFORM-removebg-preview.png" alt="United Platform Logo">
 </header>
 
 <!-- ===== NAVBAR ===== -->
@@ -176,4 +194,40 @@ footer{
 
     <li class="dropdown">
       <a href="#">Specials ▾</a>
-      <ul class="dropdown-m
+      <ul class="dropdown-menu right-fix">
+        <li><a href="unigallery.html">Art Gallery</a></li>
+      </ul>
+    </li>
+
+  </ul>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main>
+  <h1 class="page-title">WELCOME TO WEBB TAB</h1>
+</main>
+
+<!-- ===== ABOUT ===== -->
+<section class="about">
+  <h2>About Webb Tab</h2>
+  <p>
+    Webb Tab is a unified digital workspace created to bring essential productivity
+    and creative tools under one clean and efficient interface. Instead of switching
+    between multiple platforms, users can access whiteboard, resume builder, chart
+    maker, QR generator, file converter, invoice generator and network speed testing
+    tools from a single location.
+    <br><br>
+    The interface is designed with clarity, balance and performance in mind, using
+    a modern glass based design language that feels professional on every device.
+    Webb Tab is ideal for students, developers, designers and professionals who value
+    speed, organization and simplicity.
+  </p>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  © One Tab, Excellent Utility
+</footer>
+
+</body>
+</html>
