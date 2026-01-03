@@ -8,7 +8,7 @@ body {
 }
 
 .top-header {
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   background: linear-gradient(90deg,#5d3fd3,#1e3a8a);
   display: flex;
   justify-content: space-between;
@@ -88,3 +88,4 @@ section { margin-top:1.5rem; border-bottom:1px dashed #ccc; padding-bottom:0.5re
   #resume, #resume * { visibility:visible; }
   #resume { position:absolute; top:0; left:0; width:100%; }
 }
+
