@@ -9,11 +9,12 @@ html, body {
 
 body {
   margin: 0;
-  background: linear-gradient(135deg,#1e1b4b,#312e81,#020617);
+  background: linear-gradient(135deg, #1e1b4b, #312e81, #020617);
   color: #fff;
   overflow-x: hidden;
 }
 
+/* GLASS */
 .glass {
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(14px);
@@ -21,21 +22,29 @@ body {
   border-radius: 16px;
 }
 
+/* HEADER */
 .header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 18px;
-  margin: 16px;
+  text-align: center;
+  padding: 24px;
+  margin: 20px;
 }
 
+.header img {
+  width: 110px;
+}
+
+.header h1 {
+  margin: 10px 0 4px;
+}
+
+/* LAYOUT */
 .container {
   max-width: 1100px;
   margin: auto;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .input-panel,
@@ -45,14 +54,15 @@ body {
 }
 
 .chart-panel {
-  background: #fff;
+  background: #ffffff;
   color: #000;
 }
 
+/* FORM */
 label {
   font-weight: bold;
-  margin-top: 12px;
   display: block;
+  margin-top: 12px;
 }
 
 input, select {
@@ -63,29 +73,19 @@ input, select {
   border: none;
 }
 
-h3 {
-  margin-top: 20px;
-}
-
-.dataset {
-  border: 1px dashed rgba(255,255,255,0.35);
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-
 .data-row {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
-.data-row input {
+.data-row input[type="text"],
+.data-row input[type="number"] {
   flex: 1;
 }
 
 button {
-  margin-top: 12px;
+  margin-top: 14px;
   padding: 12px;
   border-radius: 10px;
   border: none;
@@ -95,17 +95,13 @@ button {
   color: #fff;
 }
 
-.action-panel button {
-  width: 100%;
-}
-
 .footer {
   text-align: center;
-  margin: 16px;
+  margin: 20px;
   padding: 12px;
 }
 
-/* 📄 PDF EXPORT */
+/* PDF — ONE PAGE */
 @media print {
   body * {
     visibility: hidden;
@@ -117,5 +113,6 @@ button {
     position: absolute;
     inset: 0;
     padding: 40px;
+    transform: scale(0.95);
   }
 }
