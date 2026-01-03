@@ -224,6 +224,45 @@ footer{
   }
 }
 
+.analytics-box {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 20px;
+    color: #fff;
+    margin-top: 30px;
+}
+
+.analytics-box h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.live-users {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+canvas {
+    max-width: 100%;
+    margin-bottom: 25px;
+}
+
+.country-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.country-list div {
+    background: rgba(0,0,0,0.35);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+}
+
 
 
 
