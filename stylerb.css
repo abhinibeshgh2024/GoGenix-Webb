@@ -3,13 +3,13 @@
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: linear-gradient(135deg,#020617,#0f172a);
   color: #e5e7eb;
 }
 
 .top-header {
-  background: linear-gradient(90deg, #1e3a8a, #020617);
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg,#1e3a8a,#020617);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,23 +36,17 @@ body {
 
 .preview-section {
   width: 60%;
-  min-width: 350px;
-  background: #ffffff;
-  color: #000;
+  background: white;
+  color: black;
   border-radius: 14px;
   padding: 2rem;
 }
 
 h2, h3 {
-  margin-top: 0;
-  color: #2563eb;
+  color: var(--headingColor, #1e3a8a);
 }
 
-label {
-  margin-top: 1rem;
-  display: block;
-  font-weight: bold;
-}
+label { font-weight: bold; margin-top: 1rem; display:block; }
 
 input, textarea {
   width: 100%;
@@ -61,21 +55,19 @@ input, textarea {
   border-radius: 8px;
   border: none;
   background: #334155;
-  color: #fff;
+  color: white;
 }
 
-textarea { min-height: 70px; }
-
 button {
+  margin-top: 10px;
   width: 100%;
-  margin-top: 1rem;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  background: linear-gradient(135deg,#2563eb,#38bdf8);
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .invoice-header {
@@ -86,57 +78,21 @@ button {
 }
 
 #profile-pic {
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   border-radius: 12px;
   object-fit: cover;
   display: none;
-  border: 2px solid #2563eb;
+  border: 2px solid #1e3a8a;
 }
 
-.invoice-row {
+section {
   margin-top: 1.5rem;
   border-bottom: 1px dashed #ccc;
-  padding-bottom: 1rem;
-}
-
-ul {
-  padding-left: 1.2rem;
-}
-
-.progress-box {
-  margin-top: 2rem;
-}
-
-.progress-bar {
-  height: 12px;
-  background: #ddd;
-  border-radius: 10px;
-}
-
-#progressFill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #2563eb, #38bdf8);
-  border-radius: 10px;
-}
-
-.analysis-box {
-  display: none;
-  margin: 2rem;
-  padding: 2rem;
-  background: rgba(30,41,59,0.7);
-  border-radius: 16px;
 }
 
 @media print {
   body * { visibility: hidden; }
-  #resume, #resume * {
-    visibility: visible;
-  }
-  #resume {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-  }
+  #resume, #resume * { visibility: visible; }
+  #resume { position:absolute; top:0; left:0; width:100%; }
 }
