@@ -1,78 +1,94 @@
 let chart;
-const dataTable = document.getElementById("dataTable");
+const datasetsDiv = document.getElementById("datasets");
 const errorBox = document.getElementById("error");
 
-addRow(); // initial row
+addDataset();
 
-function addRow() {
+function addDataset() {
+  const ds = document.createElement("div");
+  ds.className = "dataset";
+
+  ds.innerHTML = `
+    <label>Dataset Label</label>
+    <input class="ds-label" placeholder="Dataset name">
+
+    <label>Color</label>
+    <input type="color" class="ds-color" value="#2563eb">
+
+    <div class="rows"></div>
+    <button onclick="addRow(this)">➕ Add Data Row</button>
+  `;
+
+  datasetsDiv.appendChild(ds);
+  addRow(ds.querySelector("button"));
+}
+
+function addRow(btn) {
+  const rows = btn.previousElementSibling;
   const row = document.createElement("div");
   row.className = "data-row";
   row.innerHTML = `
-    <input type="text" placeholder="Label">
+    <input placeholder="Label">
     <input type="number" placeholder="Value">
   `;
-  dataTable.appendChild(row);
-}
-
-function generateColors(count) {
-  const colors = [];
-  for (let i = 0; i < count; i++) {
-    const hue = Math.floor((360 / count) * i);
-    colors.push(`hsl(${hue}, 70%, 55%)`);
-  }
-  return colors;
+  rows.appendChild(row);
 }
 
 function generateChart() {
   errorBox.textContent = "";
 
-  const title = document.getElementById("chartTitle").value;
   const type = document.getElementById("chartType").value;
-  const rows = document.querySelectorAll(".data-row");
+  const title = document.getElementById("chartTitle").value;
 
   let labels = [];
-  let values = [];
+  let datasets = [];
 
-  rows.forEach(row => {
-    const inputs = row.querySelectorAll("input");
-    if (inputs[0].value && inputs[1].value) {
-      labels.push(inputs[0].value);
-      values.push(Number(inputs[1].value));
+  document.querySelectorAll(".dataset").forEach(ds => {
+    const label = ds.querySelector(".ds-label").value;
+    const color = ds.querySelector(".ds-color").value;
+    const rows = ds.querySelectorAll(".data-row");
+
+    let data = [];
+    rows.forEach(r => {
+      const l = r.children[0].value;
+      const v = r.children[1].value;
+      if (l && v) {
+        if (!labels.includes(l)) labels.push(l);
+        data.push(Number(v));
+      }
+    });
+
+    if (data.length) {
+      datasets.push({
+        label,
+        data,
+        backgroundColor: color,
+        borderColor: color,
+        borderWidth: 2,
+        fill: false
+      });
     }
   });
 
-  if (labels.length === 0) {
-    errorBox.textContent = "Please enter at least one valid data row.";
+  if (!datasets.length) {
+    errorBox.textContent = "Please add at least one dataset.";
     return;
   }
 
-  const colors = generateColors(values.length);
-
   if (chart) chart.destroy();
 
-  const ctx = document.getElementById("chartCanvas").getContext("2d");
-  chart = new Chart(ctx, {
-    type: type,
-    data: {
-      labels: labels,
-      datasets: [{
-        label: title || "Dataset",
-        data: values,
-        backgroundColor: colors,
-        borderColor: colors,
-        borderWidth: 2,
-        fill: false
-      }]
-    },
+  chart = new Chart(chartCanvas, {
+    type,
+    data: { labels, datasets },
     options: {
       responsive: true,
       plugins: {
-        legend: { display: true },
-        title: {
-          display: !!title,
-          text: title
-        }
+        title: { display: !!title, text: title }
       }
     }
   });
+}
+
+function exportPDF() {
+  window.print();
 }
