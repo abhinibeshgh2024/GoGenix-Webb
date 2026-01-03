@@ -1,88 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoGenix Webb | Webb Tab</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoGenix | Webb Tab</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="webbtab.css" />
+<style>
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+body{
+  min-height:100vh;
+  background: linear-gradient(135deg,#0a0f2c,#1a1f4a);
+  color:#fff;
+}
+
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 30px;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.08);
+}
+
+header img{
+  height:42px;
+}
+
+/* ===== NAVBAR ===== */
+nav{
+  margin:14px auto;
+  width:92%;
+  border-radius:16px;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.10);
+}
+
+.nav-links{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  list-style:none;
+  padding:14px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-menu{
+  position:absolute;
+  top:36px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  border-radius:10px;
+  list-style:none;
+  padding:10px 0;
+  display:none;
+  min-width:220px;
+  z-index:100;
+}
+
+/* 🔧 FIX: right side overflow */
+.dropdown-menu.right-fix{
+  right:0;
+  left:auto;
+}
+
+.dropdown-menu li a{
+  display:block;
+  padding:10px 18px;
+  color:#fff;
+  white-space:nowrap;
+}
+
+.dropdown-menu li a:hover{
+  background: rgba(255,255,255,0.1);
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
+}
+
+/* ===== MAIN ===== */
+main{
+  text-align:center;
+  padding:70px 20px 30px;
+}
+
+.page-title{
+  font-size:26px;       /* chhota */
+  letter-spacing:2px;
+  white-space:nowrap;  /* single line */
+}
+
+/* ===== ABOUT ===== */
+.about{
+  width:88%;
+  margin:50px auto;
+  padding:30px;
+  border-radius:18px;
+  backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.10);
+}
+
+.about h2{
+  margin-bottom:16px;
+  font-size:24px;
+}
+
+.about p{
+  font-size:16px;
+  line-height:1.7;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:18px;
+  font-size:14px;
+  opacity:0.85;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="glass-header">
-    <img src="WEBB-removebg-preview.png" class="logo-left" alt="Webb Logo">
-    <h1 class="header-title">WEBB TAB</h1>
-    <img src="UNITED_PLATFORM-removebg-preview.png" class="logo-right" alt="United Platform">
-  </header>
+<!-- ===== HEADER ===== -->
+<header>
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
+  <img src="UNITED_PLATFORM-removebg-preview.png" alt="United Platform">
+</header>
 
-  <!-- ================= NAVBAR ================= -->
-  <nav class="glass-navbar">
-    <ul class="nav-links">
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <ul class="nav-links">
 
-      <li class="dropdown">
-        <a href="#">Commons ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="whiteboard.html">WhiteBoard</a></li>
-          <li><a href="indexrb.html">Resume Builder</a></li>
-          <li><a href="chart.html">Chart Maker</a></li>
-          <li><a href="filo.html">File Converter</a></li>
-          <li><a href="qr.html">QR Generator</a></li>
-          <li><a href="invoice.html">Invoice Generator</a></li>
-          <li><a href="speed.html">NetoMeter</a></li>
-        </ul>
-      </li>
+    <li class="dropdown">
+      <a href="#">Commons ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="whiteboard.html">WhiteBoard</a></li>
+        <li><a href="indexrb.html">Resume Builder</a></li>
+        <li><a href="chart.html">Chart Maker</a></li>
+        <li><a href="filo.html">File Converter</a></li>
+        <li><a href="qr.html">QR Generator</a></li>
+        <li><a href="invoice.html">Invoice Generator</a></li>
+        <li><a href="speed.html">NetoMeter</a></li>
+      </ul>
+    </li>
 
-      <li class="dropdown">
-        <a href="#">Programming ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="codex.html">HTML / CSS</a></li>
-          <li><a href="fronto.html">HTML / CSS / JS</a></li>
-          <li><a href="#">UI / UX (Coming Soon)</a></li>
-          <li><a href="#">AI Solutions (Coming Soon)</a></li>
-        </ul>
-      </li>
+    <li class="dropdown">
+      <a href="#">Programming ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="codex.html">HTML / CSS</a></li>
+        <li><a href="fronto.html">HTML / CSS / JS</a></li>
+        <li><a href="#">UI / UX (Coming Soon)</a></li>
+        <li><a href="#">AI Solutions (Coming Soon)</a></li>
+      </ul>
+    </li>
 
-      <li class="dropdown">
-        <a href="#">Specials ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="unigallery.html">Art Gallery</a></li>
-        </ul>
-      </li>
-
-    </ul>
-  </nav>
-
-  <!-- ================= MAIN ================= -->
-  <main class="content">
-    <h2 class="page-title">WELCOME TO WEBB TAB</h2>
-  </main>
-
-  <!-- ================= ABOUT ================= -->
-  <section class="about-section">
-    <h2>About Webb Tab</h2>
-    <p>
-      Webb Tab is designed as a unified productivity workspace where essential digital tools are
-      brought together in a single, clean, and efficient environment. Instead of switching between
-      multiple websites or applications, Webb Tab allows users to access utilities such as a
-      whiteboard, resume builder, chart maker, QR generator, file converter, invoice generator,
-      network speed testing, and creative galleries from one place.
-      <br><br>
-      The platform focuses on simplicity, speed, and usability while maintaining a modern glass
-      interface that feels professional and distraction free. Webb Tab is suitable for students,
-      developers, designers, and professionals who value clarity and efficiency in their workflow.
-      Every tool is designed to work independently while still feeling like part of a single
-      connected ecosystem.
-    </p>
-  </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <p>One Tab, Excellent Utility</p>
-  </footer>
-
-  <script src="webtab.js"></script>
-</body>
-</html>
+    <li class="dropdown">
+      <a href="#">Specials ▾</a>
+      <ul class="dropdown-m
