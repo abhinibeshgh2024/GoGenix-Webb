@@ -2,25 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GoGenix | Advanced Resume Builder</title>
+  <title>GoGenix | Ultimate Resume Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="stylerb.css">
 </head>
 <body>
 
 <header class="top-header">
-  <h1>GoGenix Advanced Resume Builder</h1>
-  <div class="controls">
-    Heading Color <input type="color" id="headingColor" value="#1e3a8a">
-    Text Color <input type="color" id="textColor" value="#000000">
-    Theme 
-    <select id="themeSelect">
-      <option value="default">Default</option>
-      <option value="corporate">Corporate</option>
-      <option value="academic">Academic</option>
-      <option value="creative">Creative</option>
-    </select>
-  </div>
+  <h1>GoGenix Ultimate Resume Builder</h1>
 </header>
 
 <div class="container">
@@ -37,44 +26,74 @@
 
 <!-- ===== EDUCATION ===== -->
 <h2>Education</h2>
-<input placeholder="Institute" id="eduInstitute">
-<input placeholder="Course / Degree" id="eduCourse">
-<input placeholder="City" id="eduCity">
-<input placeholder="Batch (e.g. 2021–2025)" id="eduBatch">
-<button onclick="addEducation()">➕ Add Education</button>
+<div id="edu-section">
+  <div class="edu-row">
+    <input placeholder="Institute" class="eduInstitute">
+    <input placeholder="Course / Degree" class="eduCourse">
+    <input placeholder="City" class="eduCity">
+    <input placeholder="Batch (e.g. 2021–2025)" class="eduBatch">
+  </div>
+</div>
+<button onclick="addEducationRow()">➕ Add Another Education</button>
 
 <!-- ===== EXPERIENCE ===== -->
 <h2>Experience</h2>
-<input placeholder="Company Name" id="expCompany">
-<input placeholder="Role / Position" id="expRole">
-<input placeholder="Duration" id="expDuration">
-<textarea placeholder="Work Description" id="expDesc"></textarea>
-<button onclick="addExperience()">➕ Add Experience</button>
+<div id="exp-section">
+  <div class="exp-row">
+    <input placeholder="Company Name" class="expCompany">
+    <input placeholder="Role / Position" class="expRole">
+    <input placeholder="Duration" class="expDuration">
+    <textarea placeholder="Work Description" class="expDesc"></textarea>
+  </div>
+</div>
+<button onclick="addExperienceRow()">➕ Add Another Experience</button>
 
 <!-- ===== SKILLS ===== -->
 <h2>Skills</h2>
-<input placeholder="Skill (e.g. Java, AI, SQL)" id="skillInput">
-<button onclick="addSkill()">➕ Add Skill</button>
+<div id="skill-section">
+  <div class="skill-row">
+    <input placeholder="Skill (e.g. Java, AI, SQL)" class="skillInput">
+  </div>
+</div>
+<button onclick="addSkillRow()">➕ Add Another Skill</button>
 
 <!-- ===== PROJECTS ===== -->
 <h2>Projects</h2>
-<input placeholder="Project Title" id="projTitle">
-<textarea placeholder="Project Description" id="projDesc"></textarea>
-<button onclick="addProject()">➕ Add Project</button>
+<div id="proj-section">
+  <div class="proj-row">
+    <input placeholder="Project Title" class="projTitle">
+    <textarea placeholder="Project Description" class="projDesc"></textarea>
+  </div>
+</div>
+<button onclick="addProjectRow()">➕ Add Another Project</button>
 
 <!-- ===== PUBLICATIONS ===== -->
 <h2>Publications</h2>
-<input placeholder="Paper Title" id="pubTitle">
-<input placeholder="Journal Name" id="pubJournal">
-<input placeholder="Volume / Issue / Year" id="pubVolume">
-<button onclick="addPublication()">➕ Add Publication</button>
+<div id="pub-section">
+  <div class="pub-row">
+    <input placeholder="Paper Title" class="pubTitle">
+    <input placeholder="Journal Name" class="pubJournal">
+    <input placeholder="Volume / Issue / Year" class="pubVolume">
+  </div>
+</div>
+<button onclick="addPublicationRow()">➕ Add Another Publication</button>
 
 <!-- ===== CERTIFICATIONS ===== -->
 <h2>Certifications</h2>
-<input placeholder="Certificate Name" id="certName">
-<input placeholder="Organization" id="certOrg">
-<input placeholder="Year" id="certYear">
-<button onclick="addCertification()">➕ Add Certification</button>
+<div id="cert-section">
+  <div class="cert-row">
+    <input placeholder="Certificate Name" class="certName">
+    <input placeholder="Organization" class="certOrg">
+    <input placeholder="Year" class="certYear">
+  </div>
+</div>
+<button onclick="addCertificationRow()">➕ Add Another Certification</button>
+
+<!-- ===== COLOR PALETTE ===== -->
+<h2>Color Palette</h2>
+<label>Header Color</label><input type="color" id="headingColor" value="#1e3a8a">
+<label>Text Color</label><input type="color" id="textColor" value="#000000">
+<label>Background Color</label><input type="color" id="bgColor" value="#ffffff">
 
 <!-- ===== COVER LETTER ===== -->
 <h2>Cover Letter</h2>
