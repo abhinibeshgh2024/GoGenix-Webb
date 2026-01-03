@@ -21,96 +21,105 @@ body{
   flex-direction:column;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   background:transparent;
   text-align:center;
-  padding:18px 10px;
+  padding:18px;
 }
-
 header img{
-  width:120px;
-  margin-bottom:6px;
+  width:110px;
 }
-
 header h1{
   font-size:26px;
-  font-weight:600;
 }
-
 header p{
   font-size:14px;
-  opacity:0.85;
+  opacity:.85;
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
 .main{
   flex:1;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:18px;
+  padding:20px;
 }
 
-/* ===== GLASS ===== */
+/* GLASS */
 .glass{
   width:100%;
-  max-width:480px;
-  padding:28px;
-  border-radius:20px;
+  max-width:460px;
+  padding:30px;
+  border-radius:22px;
   background:rgba(255,255,255,0.12);
   backdrop-filter:blur(14px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  box-shadow:0 10px 35px rgba(0,0,0,.35);
   text-align:center;
 }
 
-/* ===== SPEED CIRCLE ===== */
-.circle{
-  width:220px;
-  height:220px;
+/* SPEED METER */
+.meter{
+  width:240px;
+  height:240px;
   border-radius:50%;
-  border:12px solid rgba(255,255,255,0.25);
-  margin:20px auto;
+  background:
+    conic-gradient(#38bdf8 0deg, rgba(255,255,255,.2) 0deg);
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
+  margin:25px auto;
+  position:relative;
+}
+
+.meter::after{
+  content:"";
+  width:190px;
+  height:190px;
+  background:rgba(0,0,0,0.55);
+  border-radius:50%;
+  position:absolute;
+}
+
+.center{
+  position:relative;
+  z-index:1;
 }
 
 .speed{
-  font-size:36px;
+  font-size:38px;
   font-weight:700;
 }
 
 .unit{
   font-size:14px;
-  opacity:0.85;
+  opacity:.85;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button{
-  margin-top:20px;
-  padding:14px 30px;
+  margin-top:22px;
+  padding:14px 34px;
   border-radius:14px;
   border:none;
-  background:#ffffff;
+  background:#fff;
   color:#000;
   font-weight:600;
   cursor:pointer;
 }
 
-/* ===== RESULT ===== */
+/* RESULT */
 .result{
-  margin-top:20px;
+  margin-top:18px;
   font-size:15px;
-  line-height:1.8;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer{
-  margin-top:20px;
+  margin-top:18px;
   font-size:13px;
-  opacity:0.8;
+  opacity:.8;
 }
 </style>
 </head>
@@ -126,16 +135,17 @@ button{
 <div class="main">
 <div class="glass">
 
-  <div class="circle">
-    <div class="speed" id="speed">0</div>
-    <div class="unit">Mbps</div>
+  <div class="meter" id="meter">
+    <div class="center">
+      <div class="speed" id="speed">0</div>
+      <div class="unit">Mbps</div>
+    </div>
   </div>
 
   <button onclick="startTest()">Start Speed Test</button>
 
   <div class="result" id="result">
-    Download: -- Mbps<br>
-    Upload: -- Mbps
+    Click start to measure speed
   </div>
 
   <div class="footer">
@@ -146,53 +156,55 @@ button{
 </div>
 
 <script>
+const meter = document.getElementById("meter");
 const speedEl = document.getElementById("speed");
 const resultEl = document.getElementById("result");
 
-/* ===== DOWNLOAD TEST ===== */
-async function testDownload(){
-  const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg";
+/* REAL DOWNLOAD TEST */
+async function getRealSpeed(){
+  const url = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg";
   const start = performance.now();
-  const response = await fetch(imageUrl + "?cache=" + Math.random());
-  const blob = await response.blob();
+  const res = await fetch(url + "?t=" + Math.random());
+  const blob = await res.blob();
   const end = performance.now();
 
-  const sizeBits = blob.size * 8;
-  const timeSeconds = (end - start) / 1000;
-  return (sizeBits / timeSeconds / 1024 / 1024).toFixed(2);
+  const bits = blob.size * 8;
+  const seconds = (end - start) / 1000;
+  return Math.min((bits / seconds / 1024 / 1024).toFixed(2), 200);
 }
 
-/* ===== UPLOAD TEST ===== */
-async function testUpload(){
-  const size = 5 * 1024 * 1024; // 5MB
-  const data = new Blob([new Uint8Array(size)]);
-  const start = performance.now();
-
-  await fetch("https://httpbin.org/post",{
-    method:"POST",
-    body:data
-  });
-
-  const end = performance.now();
-  const timeSeconds = (end - start) / 1000;
-  return ((size * 8) / timeSeconds / 1024 / 1024).toFixed(2);
+/* ANIMATION */
+function animateMeter(target){
+  let current = 0;
+  const maxDeg = 270;
+  const interval = setInterval(()=>{
+    current += target / 40;
+    if(current >= target){
+      current = target;
+      clearInterval(interval);
+    }
+    const deg = (current / target) * maxDeg;
+    meter.style.background =
+      `conic-gradient(#38bdf8 ${deg}deg, rgba(255,255,255,.2) ${deg}deg)`;
+    speedEl.innerText = current.toFixed(1);
+  },40);
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
 async function startTest(){
-  speedEl.innerText = "…";
-  resultEl.innerHTML = "Testing download...";
+  speedEl.innerText = "0";
+  meter.style.background =
+    "conic-gradient(#38bdf8 0deg, rgba(255,255,255,.2) 0deg)";
+  resultEl.innerText = "Testing download speed...";
 
   try{
-    const download = await testDownload();
-    speedEl.innerText = download;
-    resultEl.innerHTML = `Download: ${download} Mbps<br>Testing upload...`;
-
-    const upload = await testUpload();
-    resultEl.innerHTML = `Download: ${download} Mbps<br>Upload: ${upload} Mbps`;
-  }catch(e){
-    resultEl.innerHTML = "Speed test failed. Check internet.";
-    speedEl.innerText = "0";
+    const realSpeed = await getRealSpeed();
+    animateMeter(realSpeed);
+    setTimeout(()=>{
+      resultEl.innerHTML = `Download Speed: <b>${realSpeed} Mbps</b>`;
+    },1800);
+  }catch{
+    resultEl.innerText = "Speed test failed.";
   }
 }
 </script>
