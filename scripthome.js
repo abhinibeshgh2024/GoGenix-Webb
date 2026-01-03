@@ -73,7 +73,7 @@ const db = getFirestore(app);
 const today = new Date().toISOString().split("T")[0];
 const sessionId = Math.random().toString(36).substring(2);
 
-// ---------- COUNTRY DETECTION ----------
+// ---------- COUNTRY ----------
 async function getCountry() {
   try {
     const res = await fetch("https://ipapi.co/json/");
@@ -88,27 +88,34 @@ async function getCountry() {
 async function registerVisit() {
   const country = await getCountry();
 
-  await setDoc(doc(db, "visits", today, "users", sessionId), {
-    country,
-    time: serverTimestamp()
-  });
-
-  await setDoc(doc(db, "liveUsers", sessionId), {
-    time: Date.now()
-  });
+  await setDoc(
+    doc(db, "visits", today, "users", sessionId),
+    { country, time: serverTimestamp() }
+  );
 }
 
-// ---------- LIVE USERS ----------
-async function loadLiveUsers() {
-  const snapshot = await getDocs(collection(db, "liveUsers"));
-  const now = Date.now();
-  let active = 0;
+// ---------- COUNTS ----------
+async function loadCounts() {
+  const snap = await getDocs(collection(db, "visits"));
+  const now = new Date();
 
-  snapshot.forEach(doc => {
-    if (now - doc.data().time < 60000) active++;
+  let daily = 0, weekly = 0, monthly = 0, yearly = 0;
+
+  snap.forEach(d => {
+    const date = new Date(d.id);
+    const diff = (now - date) / (1000 * 60 * 60 * 24);
+    const count = d.size || 1;
+
+    if (diff < 1) daily += count;
+    if (diff < 7) weekly += count;
+    if (diff < 30) monthly += count;
+    if (diff < 365) yearly += count;
   });
 
-  document.getElementById("liveUsers").innerText = active;
+  dailyCount.innerText = daily;
+  weeklyCount.innerText = weekly;
+  monthlyCount.innerText = monthly;
+  yearlyCount.innerText = yearly;
 }
 
 // ---------- GRAPH ----------
@@ -117,12 +124,12 @@ async function loadGraph() {
   const labels = [];
   const data = [];
 
-  snap.forEach(doc => {
-    labels.push(doc.id);
-    data.push(doc.data().count || 1);
+  snap.forEach(d => {
+    labels.push(d.id);
+    data.push(d.size || 1);
   });
 
-  new Chart(document.getElementById("visitorChart"), {
+  new Chart(visitorChart, {
     type: "line",
     data: {
       labels,
@@ -130,8 +137,8 @@ async function loadGraph() {
         label: "Daily Visitors",
         data,
         borderColor: "#00ff88",
-        fill: false,
-        tension: 0.4
+        tension: 0.4,
+        fill: false
       }]
     },
     options: {
@@ -141,32 +148,29 @@ async function loadGraph() {
   });
 }
 
-// ---------- COUNTRY LIST ----------
+// ---------- COUNTRY DATA ----------
 async function loadCountries() {
   const snap = await getDocs(collection(db, "visits", today, "users"));
   const map = {};
+  countryList.innerHTML = "";
 
-  snap.forEach(doc => {
-    const c = doc.data().country;
+  snap.forEach(d => {
+    const c = d.data().country;
     map[c] = (map[c] || 0) + 1;
   });
-
-  const container = document.getElementById("countryList");
-  container.innerHTML = "";
 
   for (let c in map) {
     const div = document.createElement("div");
     div.innerText = `${c}: ${map[c]}`;
-    container.appendChild(div);
+    countryList.appendChild(div);
   }
 }
 
 // ---------- INIT ----------
 registerVisit();
-loadLiveUsers();
+loadCounts();
 loadGraph();
 loadCountries();
-setInterval(loadLiveUsers, 10000);
 
 
 
