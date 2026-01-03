@@ -1,32 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Webb | Speed Test</title>
-    <link rel="stylesheet" href="speedtest.css">
+<meta charset="UTF-8">
+<title>Webb | Net Speed Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:transparent;
+  text-align:center;
+  padding:18px 10px;
+}
+
+header img{
+  width:120px;
+  margin-bottom:6px;
+}
+
+header h1{
+  font-size:26px;
+  font-weight:600;
+}
+
+header p{
+  font-size:14px;
+  opacity:0.85;
+}
+
+/* ===== MAIN ===== */
+.main{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+}
+
+/* ===== GLASS ===== */
+.glass{
+  width:100%;
+  max-width:480px;
+  padding:28px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(14px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  text-align:center;
+}
+
+/* ===== SPEED CIRCLE ===== */
+.circle{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  border:12px solid rgba(255,255,255,0.25);
+  margin:20px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+.speed{
+  font-size:36px;
+  font-weight:700;
+}
+
+.unit{
+  font-size:14px;
+  opacity:0.85;
+}
+
+/* ===== BUTTON ===== */
+button{
+  margin-top:20px;
+  padding:14px 30px;
+  border-radius:14px;
+  border:none;
+  background:#ffffff;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* ===== RESULT ===== */
+.result{
+  margin-top:20px;
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  margin-top:20px;
+  font-size:13px;
+  opacity:0.8;
+}
+</style>
 </head>
+
 <body>
 
-<div class="speedtest-container">
-     <img src="WEBB-removebg-preview.png" width="160px" height="150px" style="align-items: center; justify-content:center" ></img>
-    <h1>Internet Speed Test</h1>
+<header>
+  <img src="WEBB-removebg-preview.png">
+  <h1>Webb Net Speed Test</h1>
+  <p>Accurate • Clean • Reliable</p>
+</header>
 
-    <div class="meter">
-        <svg width="260" height="260">
-            <circle cx="130" cy="130" r="110" class="bg"/>
-            <circle cx="130" cy="130" r="110" class="progress"/>
-        </svg>
-        <div class="speed-value">
-            <span id="speed">0</span>
-            <small>Mbps</small>
-        </div>
-    </div>
+<div class="main">
+<div class="glass">
 
-    <button onclick="startTest()">Start Test</button>
+  <div class="circle">
+    <div class="speed" id="speed">0</div>
+    <div class="unit">Mbps</div>
+  </div>
 
-    <p class="status" id="status">Ready</p>
+  <button onclick="startTest()">Start Speed Test</button>
+
+  <div class="result" id="result">
+    Download: -- Mbps<br>
+    Upload: -- Mbps
+  </div>
+
+  <div class="footer">
+    Built with discipline & correctness
+  </div>
+
+</div>
 </div>
 
-<script src="speedtest.js"></script>
+<script>
+const speedEl = document.getElementById("speed");
+const resultEl = document.getElementById("result");
+
+/* ===== DOWNLOAD TEST ===== */
+async function testDownload(){
+  const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg";
+  const start = performance.now();
+  const response = await fetch(imageUrl + "?cache=" + Math.random());
+  const blob = await response.blob();
+  const end = performance.now();
+
+  const sizeBits = blob.size * 8;
+  const timeSeconds = (end - start) / 1000;
+  return (sizeBits / timeSeconds / 1024 / 1024).toFixed(2);
+}
+
+/* ===== UPLOAD TEST ===== */
+async function testUpload(){
+  const size = 5 * 1024 * 1024; // 5MB
+  const data = new Blob([new Uint8Array(size)]);
+  const start = performance.now();
+
+  await fetch("https://httpbin.org/post",{
+    method:"POST",
+    body:data
+  });
+
+  const end = performance.now();
+  const timeSeconds = (end - start) / 1000;
+  return ((size * 8) / timeSeconds / 1024 / 1024).toFixed(2);
+}
+
+/* ===== MAIN ===== */
+async function startTest(){
+  speedEl.innerText = "…";
+  resultEl.innerHTML = "Testing download...";
+
+  try{
+    const download = await testDownload();
+    speedEl.innerText = download;
+    resultEl.innerHTML = `Download: ${download} Mbps<br>Testing upload...`;
+
+    const upload = await testUpload();
+    resultEl.innerHTML = `Download: ${download} Mbps<br>Upload: ${upload} Mbps`;
+  }catch(e){
+    resultEl.innerHTML = "Speed test failed. Check internet.";
+    speedEl.innerText = "0";
+  }
+}
+</script>
+
 </body>
 </html>
