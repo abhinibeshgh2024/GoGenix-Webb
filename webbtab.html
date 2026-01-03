@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoGenix | Webb Tab</title>
+<title>The Webb Tab</title>
 
 <style>
-/* ===== RESET ===== */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family:"Segoe UI", sans-serif;
 }
 
-/* ===== BACKGROUND ===== */
 body{
   min-height:100vh;
-  background: linear-gradient(135deg,#0a0f2c,#1a1f4a);
+  background:linear-gradient(135deg,#0a0f2c,#1a1f4a);
   color:#fff;
+  overflow-x:hidden;
 }
 
 /* ===== HEADER ===== */
@@ -27,19 +26,19 @@ header{
   justify-content:space-between;
   align-items:center;
   padding:16px 28px;
-  backdrop-filter: blur(14px);
-  background: rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.08);
+  position:relative;
+  z-index:1000;
 }
 
-/* 🔥 LOGO FIX HERE */
 header img{
-  height:56px;          /* medium size */
-  max-width:160px;
+  height:156px;
+  width:160px;
   object-fit:contain;
 }
 
-/* Mobile tweak */
-@media (max-width:600px){
+@media(max-width:600px){
   header img{
     height:48px;
     max-width:130px;
@@ -51,8 +50,10 @@ nav{
   margin:14px auto;
   width:92%;
   border-radius:16px;
-  backdrop-filter: blur(14px);
-  background: rgba(255,255,255,0.10);
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.10);
+  position:relative;
+  z-index:999; /* 🔥 VERY IMPORTANT */
 }
 
 .nav-links{
@@ -76,21 +77,30 @@ nav{
 
 .dropdown-menu{
   position:absolute;
-  top:36px;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
-  border-radius:10px;
+  top:38px;
+  left:0;
+  background:rgba(0,0,0,0.88);
+  backdrop-filter:blur(12px);
+  border-radius:12px;
   list-style:none;
-  padding:10px 0;
+  padding:8px 0;
   display:none;
+
   min-width:220px;
-  z-index:100;
+  max-height:260px;            /* ✅ LIMIT HEIGHT */
+  overflow-y:auto;             /* ✅ SCROLL ENABLE */
+  overscroll-behavior:contain; /* ✅ MOBILE SAFE */
+
+  z-index:2000;                /* 🔥 ABOVE EVERYTHING */
 }
 
-/* Right overflow fix */
-.dropdown-menu.right-fix{
-  right:0;
-  left:auto;
+/* Scrollbar clean */
+.dropdown-menu::-webkit-scrollbar{
+  width:6px;
+}
+.dropdown-menu::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.3);
+  border-radius:10px;
 }
 
 .dropdown-menu li a{
@@ -101,17 +111,25 @@ nav{
 }
 
 .dropdown-menu li a:hover{
-  background: rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.1);
 }
 
 .dropdown:hover .dropdown-menu{
   display:block;
 }
 
+/* Right overflow fix */
+.dropdown-menu.right-fix{
+  right:0;
+  left:auto;
+}
+
 /* ===== MAIN ===== */
 main{
   text-align:center;
   padding:70px 20px 30px;
+  position:relative;
+  z-index:1;
 }
 
 .page-title{
@@ -120,11 +138,8 @@ main{
   white-space:nowrap;
 }
 
-/* Mobile title */
-@media (max-width:600px){
-  .page-title{
-    font-size:22px;
-  }
+@media(max-width:600px){
+  .page-title{font-size:22px;}
 }
 
 /* ===== ABOUT ===== */
@@ -133,8 +148,10 @@ main{
   margin:50px auto;
   padding:30px;
   border-radius:18px;
-  backdrop-filter: blur(16px);
-  background: rgba(255,255,255,0.10);
+  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,0.10);
+  position:relative;
+  z-index:1; /* 🔥 LOWER than dropdown */
 }
 
 .about h2{
@@ -159,13 +176,11 @@ footer{
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <header>
   <img src="WEBB-removebg-preview.png" alt="Webb Logo">
   <img src="UNITED_PLATFORM-removebg-preview.png" alt="United Platform Logo">
 </header>
 
-<!-- ===== NAVBAR ===== -->
 <nav>
   <ul class="nav-links">
 
@@ -202,33 +217,23 @@ footer{
   </ul>
 </nav>
 
-<!-- ===== MAIN ===== -->
 <main>
   <h1 class="page-title">WELCOME TO WEBB TAB</h1>
 </main>
 
-<!-- ===== ABOUT ===== -->
 <section class="about">
   <h2>About Webb Tab</h2>
   <p>
-    Webb Tab is a unified digital workspace created to bring essential productivity
-    and creative tools under one clean and efficient interface. Instead of switching
-    between multiple platforms, users can access whiteboard, resume builder, chart
-    maker, QR generator, file converter, invoice generator and network speed testing
-    tools from a single location.
-    <br><br>
-    The interface is designed with clarity, balance and performance in mind, using
-    a modern glass based design language that feels professional on every device.
-    Webb Tab is ideal for students, developers, designers and professionals who value
-    speed, organization and simplicity.
+    Webb Tab is a unified digital workspace bringing essential productivity tools
+    together under one refined interface. Designed for clarity, balance and speed,
+    it helps users work without distraction while maintaining a professional
+    aesthetic across all devices.
   </p>
 </section>
 
-<!-- ===== FOOTER ===== -->
 <footer>
-  One Tab, Excellent Utility
+One Tab, Excellent Utility
 </footer>
 
 </body>
 </html>
-
