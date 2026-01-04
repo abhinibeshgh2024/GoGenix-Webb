@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
-
 body{
   background:linear-gradient(135deg,#0b102a,#14091f);
   color:#fff;
@@ -25,6 +24,11 @@ header.main-header{
   padding:20px;
   background:transparent;
   z-index:1000;
+}
+
+header.main-header img{
+  width:160px;
+  margin-bottom:12px;
 }
 
 header.main-header h1{
@@ -152,14 +156,12 @@ header.main-header h1{
 }
 
 .modal .close:hover{color:#c9a4ff;}
-
-/* DOWNLOAD OPTIONS ANIMATION */
-@keyframes slideIn{from{transform:translateY(-20px);opacity:0} to{transform:translateY(0);opacity:1}}
 </style>
 </head>
 <body>
 
 <header class="main-header">
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
   <h1>GoGenix Art Gallery</h1>
   <nav class="navbar">
     <button onclick="loadGallery('devotion')">Devotion</button>
@@ -189,24 +191,24 @@ header.main-header h1{
 <script>
 const galleryData = {
   devotion:[
-    'images/devotion1.jpg',
-    'images/devotion2.jpg',
-    'images/devotion3.jpg'
+    'https://picsum.photos/id/1011/400/300',
+    'https://picsum.photos/id/1012/400/300',
+    'https://picsum.photos/id/1013/400/300'
   ],
   nature:[
-    'images/nature1.jpg',
-    'images/nature2.jpg',
-    'images/nature3.jpg'
+    'https://picsum.photos/id/1021/400/300',
+    'https://picsum.photos/id/1022/400/300',
+    'https://picsum.photos/id/1023/400/300'
   ],
   environment:[
-    'images/environment1.jpg',
-    'images/environment2.jpg',
-    'images/environment3.jpg'
+    'https://picsum.photos/id/1031/400/300',
+    'https://picsum.photos/id/1032/400/300',
+    'https://picsum.photos/id/1033/400/300'
   ],
   monuments:[
-    'images/monuments1.jpg',
-    'images/monuments2.jpg',
-    'images/monuments3.jpg'
+    'https://picsum.photos/id/1041/400/300',
+    'https://picsum.photos/id/1042/400/300',
+    'https://picsum.photos/id/1043/400/300'
   ]
 };
 
@@ -245,6 +247,7 @@ function downloadImage(type){
     const doc = new jsPDF();
     const img = new Image();
     img.src = currentSrc;
+    img.crossOrigin = "anonymous";
     img.onload = ()=>{
       const ratio = img.width/img.height;
       const width = doc.internal.pageSize.getWidth();
