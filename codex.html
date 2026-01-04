@@ -34,7 +34,7 @@ header{
   padding:24px 20px;
   backdrop-filter:blur(14px);
   background: rgba(255,255,255,0.05);
-  border:none;
+  border:1px solid rgba(255,255,255,0.15);
   border-radius:18px;
   margin:15px;
   animation:fadeSoft 1s ease forwards;
@@ -43,6 +43,7 @@ header{
 header img{
   width:160px;
   margin-bottom:12px;
+  animation:floatY 4.5s ease-in-out infinite, softGlow 4s ease-in-out infinite;
 }
 
 header h2{
@@ -64,7 +65,6 @@ header h2{
   flex:1 1 300px;
   min-width:280px;
   max-width:450px;
-  height:250px;
   background: rgba(255,255,255,0.06);
   backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,0.18);
@@ -133,6 +133,17 @@ textarea:focus{
   to{opacity:1;}
 }
 
+@keyframes floatY{
+  0% {transform: translateY(0);}
+  50%{transform: translateY(-6px);}
+  100%{transform: translateY(0);}
+}
+
+@keyframes softGlow{
+  0% {filter:drop-shadow(0 0 0 rgba(139,92,246,0.15));}
+  50% {filter:drop-shadow(0 0 16px rgba(139,92,246,0.55));}
+  100% {filter:drop-shadow(0 0 0 rgba(139,92,246,0.15));}
+}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -186,7 +197,3 @@ cssCode.addEventListener("input", updateOutput);
 
 </body>
 </html>
-
-
-
-
