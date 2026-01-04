@@ -37,20 +37,6 @@ header{
 
 header img{
   width:170px;
-  animation: softGlow 2s ease-in-out infinite;
-            animation: floatY 4s ease-in-out infinite;
-}
-/* Light glow fade in & out */
-@keyframes softGlow {
-  0% {
-    filter: drop-shadow(0 0 0px rgba(139,92,246,0.15));
-  }
-  50% {
-    filter: drop-shadow(0 0 16px rgba(139,92,246,0.55));
-  }
-  100% {
-    filter: drop-shadow(0 0 0px rgba(139,92,246,0.15));
-  }
 }
   /* ================= NAVBAR ================= */
 .navbar{
@@ -187,14 +173,39 @@ footer{
   from{opacity:0}
   to{opacity:.85}
 }
+  .logo-animated {
+  animation: floatY 4.5s ease-in-out infinite,
+             softGlow 4s ease-in-out infinite;
+}
+
+/* Vertical gentle movement */
+@keyframes floatY {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Light glow fade in & out */
+@keyframes softGlow {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(139,92,246,0.15));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(139,92,246,0.55));
+  }
+  100% {
+    filter: drop-shadow(0 0 0px rgba(139,92,246,0.15));
+  }
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
-  <img src="UNITED_PLATFORM-removebg-preview.png" alt="United Platform">
+  <img src="WEBB-removebg-preview.png" class="logo-animated" alt="Webb Logo">
+  <img src="UNITED_PLATFORM-removebg-preview.png" class="logo-animated" alt="United Platform">
 </header>
 
 <nav class="navbar">
@@ -270,6 +281,7 @@ document.addEventListener("click",e=>{
 
 </body>
 </html>
+
 
 
 
