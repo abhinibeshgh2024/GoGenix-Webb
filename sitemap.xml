@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://gogenixwebb.xyz/</loc>
     <lastmod>2026-01-06</lastmod>
     <priority>1.0</priority>
   </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/webbtab.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/indexrb.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/fronto.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/codex.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/filo.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/invoice.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/qr.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/speed.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/unigallery.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/teaminfo.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gogenixwebb.xyz/chart.html</loc>
+    <lastmod>2026-01-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
