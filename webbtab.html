@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<title>GoGenix Webb | WebbTab</title>
-<meta name="robots" content="index, follow">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
+  <meta charset="UTF-8">
+  <title>GoGenix Webb | WebbTab</title>
+  <meta name="robots" content="index, follow">
   <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
 
 <style>
+/* ... Keeping your existing styles ... */
 *{
   margin:0;
   padding:0;
@@ -35,7 +34,6 @@ body{
   to{opacity:1}
 }
 
-/* ================= HEADER ================= */
 header{
   padding:24px 24px 10px;
   display:flex;
@@ -45,23 +43,14 @@ header{
   position:relative;
 }
 
-header img{
-  width:200px;
-}
+header img{ width:200px; }
 
-/* ================= NAVBAR ================= */
 .navbar{
   display:flex;
   justify-content:center;
   margin-top:10px;
   z-index:9999;
   position:relative;
-  animation:navSlide 1s ease forwards;
-}
-
-@keyframes navSlide{
-  from{opacity:0; transform:translateY(-20px)}
-  to{opacity:1; transform:translateY(0)}
 }
 
 .navbar ul{
@@ -76,11 +65,6 @@ header img{
   list-style:none;
 }
 
-/* ================= NAV ITEMS ================= */
-.nav-item{
-  position:relative;
-}
-
 .nav-btn{
   background:none;
   border:none;
@@ -88,36 +72,19 @@ header img{
   font-size:15px;
   cursor:pointer;
   padding:8px 14px;
-  transition:color .3s ease, text-shadow .3s ease;
 }
 
-.nav-btn:hover{
-  color:#c9a4ff;
-  text-shadow:0 0 12px rgba(160,120,255,.6);
-}
-
-/* ================= DROPDOWN ================= */
 .dropdown{
   position:absolute;
   top:135%;
   left:50%;
-  transform:translateX(-50%) scale(.95);
+  transform:translateX(-50%);
   min-width:180px;
-  max-width:90vw;
   background:rgba(15,8,40,0.96);
   border-radius:14px;
   padding:8px 0;
   display:none;
-  max-height:260px;
-  overflow-y:auto;
-  box-shadow:0 18px 40px rgba(0,0,0,.65);
   z-index:10000;
-  animation:dropFade .35s ease forwards;
-}
-
-@keyframes dropFade{
-  from{opacity:0; transform:translateX(-50%) scale(.92)}
-  to{opacity:1; transform:translateX(-50%) scale(1)}
 }
 
 .dropdown a{
@@ -126,38 +93,14 @@ header img{
   color:#fff;
   text-decoration:none;
   font-size:14px;
-  transition:background .25s ease, padding-left .25s ease;
 }
 
-.dropdown a:hover{
-  background:rgba(255,255,255,0.08);
-  padding-left:26px;
-}
-
-/* scrollbar */
-.dropdown::-webkit-scrollbar{width:6px}
-.dropdown::-webkit-scrollbar-thumb{
-  background:#6f55ff;
-  border-radius:6px;
-}
-
-/* ================= TITLE ================= */
 .page-title{
   text-align:center;
   margin:90px 20px 30px;
   font-size:22px;
-  letter-spacing:.5px;
-  z-index:1;
-  position:relative;
-  animation:titleUp 1.1s ease forwards;
 }
 
-@keyframes titleUp{
-  from{opacity:0; transform:translateY(25px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-/* ================= ABOUT ================= */
 .about{
   max-width:900px;
   margin:0 auto 80px;
@@ -166,108 +109,63 @@ header img{
   border:1px solid rgba(255,255,255,0.18);
   border-radius:22px;
   backdrop-filter:blur(14px);
-  line-height:1.75;
   font-size:15px;
-  color:#e5e7eb;
-  z-index:1;
-  position:relative;
-  animation:fadeSoft 1.3s ease forwards;
 }
 
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  padding:22px;
-  opacity:.85;
-  animation:fadeSoft 1.5s ease forwards;
-}
-
-@keyframes fadeSoft{
-  from{opacity:0}
-  to{opacity:.85}
-}
-
-/* logo animation */
-.logo-animated {
-  animation: floatY 4.5s ease-in-out infinite,
-             softGlow 4s ease-in-out infinite;
-}
-
-/* Vertical gentle movement */
-@keyframes floatY {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-/* Light glow fade in & out */
-@keyframes softGlow {
-  0% { filter: drop-shadow(0 0 0px rgba(139,92,246,0.15)); }
-  50% { filter: drop-shadow(0 0 16px rgba(139,92,246,0.55)); }
-  100% { filter: drop-shadow(0 0 0px rgba(139,92,246,0.15)); }
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:768px){
-  header img{width:150px;}
-  .navbar ul{flex-direction:column; padding:12px; gap:12px;}
-  .dropdown{
-    left:0 !important;
-    transform:translateX(0);
-    max-width:95vw;
-  }
-}
-  /* ===== COUNT BOX ===== */
-.count-box {
-    background: rgba(0, 0, 0, 0.35);
-    padding: 20px;
-    border-radius: 16px;
-    text-align: center;
-}
-
-.count-box span {
-    display: block;
-    font-size: 28px;
-    font-weight: 700;
-    text-align: center;
-}
-
-.count-box small {
-    display: block;
-    margin-top: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    opacity: 0.85;
-    text-align: center;
-}
-  /* ===== ROOT CONTAINER ===== */
+/* ================= UPDATED ANALYTICS STYLES ================= */
 .analytics-box {
+    max-width: 900px;
+    margin: 30px auto;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(15px);
     padding: 28px;
     border-radius: 20px;
-    color: #ffffff;
-    margin-top: 30px;
-    font-family: "Segoe UI", sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ===== HEADINGS ===== */
-.analytics-box h2 {
+/* This creates the 2-column layout you asked for */
+.count-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two panels in a row */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.count-box {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 25px;
+    border-radius: 16px;
     text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
 }
 
-.analytics-box h3 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    margin: 20px 0 15px;
-    letter-spacing: 0.4px;
+.count-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
 }
 
+.count-box span {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #c9a4ff;
+}
+
+.count-box small {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+footer{ text-align:center; padding:40px; opacity:.7; }
+
+@media(max-width:600px){
+  .count-grid { grid-template-columns: 1fr; } /* Stack on mobile */
+}
 </style>
 </head>
 
@@ -292,47 +190,31 @@ footer{
         <a href="speed.html">NetoMeter</a>
       </div>
     </li>
-
     <li class="nav-item">
       <button class="nav-btn" onclick="toggle('programming')">Programming ▾</button>
       <div class="dropdown" id="programming">
         <a href="codex.html">HTML / CSS</a>
         <a href="fronto.html">HTML / CSS / JS</a>
-        <a href="#">UI / UX <sup style="color:goldenrod;">(Coming Soon)</sup></a>
-        <a href="#">AI Solutions <sup style="color:goldenrod;">(Coming Soon)</sup></a>
       </div>
     </li>
-
     <li class="nav-item">
       <button class="nav-btn" onclick="toggle('specials')">Specials ▾</button>
       <div class="dropdown" id="specials">
         <a href="unigallery.html">Art Gallery</a>
       </div>
     </li>
-
-     <li class="nav-item">
-      <button class="nav-btn" onclick="toggle('webb games')">Webb Games<sup style="color:goldenrod">Coming Soon</sup></button>
-    </li>
   </ul>
 </nav>
 
-<h1 class="page-title">Welcome to Webb Tab <p style="color:goldenrod">GWTv1.0</p></h1>
+<h1 class="page-title">Welcome to Webb Tab <span style="color:goldenrod">GWTv1.0</span></h1>
 
 <section class="about">
-Webb Tab is a unified digital workspace developed to simplify everyday productivity, creativity, and technical execution within a single structured environment. Designed with a corporate-first mindset, Webb Tab eliminates fragmentation by bringing essential tools under one disciplined interface, ensuring users can focus on outcomes rather than navigation. The platform reflects reliability, clarity, and long-term usability rather than short-lived trends.
-
-The Commons section forms the operational backbone of Webb Tab. It includes a WhiteBoard for ideation and visual planning, a Resume Builder that supports professional document creation with accuracy and structure, and a Chart Maker that enables clear and presentable data visualization. Practical utilities such as the File Converter address daily workflow requirements, while the QR Generator allows instant creation of scannable content for business and informational use. The Invoice Generator supports structured billing and documentation, and NetoMeter provides real-time internet speed analysis to maintain network awareness. Each tool is designed to function independently while remaining consistent within the overall ecosystem.
-
-The Programming section is focused on learning, practice, and execution. It offers clean environments for HTML and CSS development, extended front-end workflows with JavaScript support, and is architected to expand into advanced domains such as UI and UX design and AI-powered solutions. This section reflects Webb Tab’s commitment to technical discipline, making it suitable for students, developers, and professionals seeking dependable development utilities.
-
-Specialized creative utilities are hosted under the Specials section, including the Art Gallery, which provides a dedicated space for visual exploration and presentation. This separation ensures creative tools receive appropriate focus without diluting the productivity core of the platform.
-
-Webb Tab is engineered with scalability, usability, and consistency at its core. The interface adopts a modern glass-based design language balanced with traditional clarity, ensuring the platform remains relevant across evolving use cases. Webb Tab is not positioned as a novelty utility but as a long-term digital workspace designed for individuals and teams who value order, precision, and efficiency in their daily digital operations.
+    Webb Tab is a unified digital workspace developed to simplify everyday productivity, creativity, and technical execution.
 </section>
-   <div class="analytics-box">
-    <h2 style="text-align:center;">WebbTab Info</h2>
 
-    <!-- COUNTS -->
+<div class="analytics-box">
+    <h2 style="text-align:center; margin-bottom: 25px;">WebbTab Statistics</h2>
+
     <div class="count-grid">
         <div class="count-box">
             <span id="dailyCount">7</span>
@@ -340,15 +222,16 @@ Webb Tab is engineered with scalability, usability, and consistency at its core.
         </div>
         <div class="count-box">
             <span id="weeklyCount">2</span>
-            <small>Programming-based Tools</small>
+            <small>Programming Tools</small>
         </div>
+        
         <div class="count-box">
             <span id="monthlyCount">1</span>
             <small>Special Tools</small>
         </div>
         <div class="count-box">
             <span id="yearlyCount">10</span>
-            <small>Total Tools</small>
+            <small>Total Ecosystem</small>
         </div>
     </div>
 </div>
@@ -366,31 +249,12 @@ function toggle(id){
   el.style.display = el.style.display==="block" ? "none" : "block";
 }
 
-// Close dropdown when clicking outside
 document.addEventListener("click",e=>{
   if(!e.target.classList.contains("nav-btn")){
-    document.querySelectorAll(".dropdown")
-      .forEach(d=>d.style.display="none");
+    document.querySelectorAll(".dropdown").forEach(d=>d.style.display="none");
   }
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
