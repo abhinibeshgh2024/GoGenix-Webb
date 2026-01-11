@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-Gronix Video Maker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .video-preview {
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline-item {
+            width: 80px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .timeline-item.active {
+            border-color: #00f2fe;
+            transform: scale(1.1);
+        }
+
+        /* Filter styles */
+        .filter-sepia { filter: sepia(1); }
+        .filter-grayscale { filter: grayscale(1); }
+        .filter-vintage { filter: sepia(0.5) contrast(1.2) brightness(0.8); }
+    </style>
+</head>
+<body class="p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-8 flex justify-between items-center">
+            <h1 class="text-3xl font-bold tracking-tight">V-Maker <span class="text-blue-300">Studio</span></h1>
+            <button onclick="exportVideo()" class="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-full font-semibold transition">
+                Download Video
+            </button>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="glass-panel p-6 space-y-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Add Images</label>
+                    <input type="file" id="imageInput" multiple accept="image/*" class="block w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white/20 file:text-white hover:file:bg-white/30 cursor-pointer"/>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Select Filter</label>
+                    <select id="filterSelect" onchange="updatePreview()" class="w-full bg-white/10 border border-white/20 rounded-lg p-2 focus:outline-none">
+                        <option value="none">Normal</option>
+                        <option value="filter-grayscale">Black & White</option>
+                        <option value="filter-sepia">Sepia</option>
+                        <option value="filter-vintage">Vintage</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Transition Speed</label>
+                    <input type="range" class="w-full accent-blue-400" min="1" max="5" value="3">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Background Music</label>
+                    <input type="file" id="audioInput" accept="audio/*" class="text-xs"/>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-panel p-4">
+                    <div class="video-preview flex items-center justify-center">
+                        <img id="mainPreview" class="max-h-full transition-all duration-500" src="" alt="Preview Area">
+                        <div id="noData" class="text-gray-400">Upload images to start</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4 overflow-x-auto">
+                    <h3 class="text-xs uppercase tracking-widest text-gray-400 mb-3">Timeline</h3>
+                    <div id="timeline" class="flex gap-4 min-h-[60px]">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let images = [];
+        let currentIndex = 0;
+
+        const imageInput = document.getElementById('imageInput');
+        const timeline = document.getElementById('timeline');
+        const mainPreview = document.getElementById('mainPreview');
+        const noData = document.getElementById('noData');
+        const filterSelect = document.getElementById('filterSelect');
+
+        // Handle Image Uploads
+        imageInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const imgObj = {
+                        url: event.target.result,
+                        filter: 'none'
+                    };
+                    images.push(imgObj);
+                    renderTimeline();
+                };
+                reader.readAsDataURL(file);
+            });
+            noData.classList.add('hidden');
+        });
+
+        function renderTimeline() {
+            timeline.innerHTML = '';
+            images.forEach((img, index) => {
+                const div = document.createElement('div');
+                div.className = `timeline-item ${index === currentIndex ? 'active' : ''}`;
+                div.style.backgroundImage = `url(${img.url})`;
+                div.onclick = () => selectImage(index);
+                timeline.appendChild(div);
+            });
+            if(images.length > 0) selectImage(currentIndex);
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            mainPreview.src = images[index].url;
+            filterSelect.value = images[index].filter;
+            updatePreview();
+            renderTimeline();
+        }
+
+        function updatePreview() {
+            if(!images[currentIndex]) return;
+            
+            // Save filter choice
+            images[currentIndex].filter = filterSelect.value;
+            
+            // Apply CSS filter for instant Canva-like feedback
+            mainPreview.className = 'max-h-full transition-all duration-500 ' + filterSelect.value;
+        }
+
+        function exportVideo() {
+            if(images.length === 0) return alert("Add images first!");
+            
+            alert("Exporting... In a real app, this sends the data to your Go Backend to process with FFmpeg.");
+            console.log("Data to send to Go Backend:", images);
+        }
+    </script>
+</body>
+</html>
