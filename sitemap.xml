@@ -73,9 +73,16 @@
     <priority>0.8</priority>
   </url>
 
-    <url>
-    <loc>https://gogenixwebb.xyz/videocreator.html</loc>
-    <lastmod>2026-01-11</lastmod>
+     <url>
+    <loc>https://gogenixwebb.xyz/webbgames.html</loc>
+    <lastmod>2026-01-24</lastmod>
     <priority>0.8</priority>
   </url>
+
+    <url>
+    <loc>https://gogenixwebb.xyz/ticgame.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
