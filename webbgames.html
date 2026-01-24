@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebbJam | NexGen Game Stop</title>
+    <title>Webbjam | Ultimate Gaming Hub</title>
     <style>
         :root {
             --primary: #38bdf8;
-            --secondary: #c084fc;
             --bg: #0b0f1a;
-            --card: rgba(255, 255, 255, 0.03);
+            --card-bg: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
         body {
             min-height: 100vh;
@@ -25,175 +24,178 @@
             overflow-x: hidden;
         }
 
-        /* NAVIGATION */
-        nav {
+        /* HEADER SECTION */
+        header {
             width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            text-align: center;
+            padding: 40px 20px;
         }
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-box img { width: 50px; }
-        .logo-box span { font-weight: 800; letter-spacing: 2px; color: var(--primary); }
 
-        /* HERO SECTION */
+        .logo-img {
+            width: 220px; /* Bada aur clear size */
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.5)) contrast(1.1) brightness(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 14px;
+            letter-spacing: 8px;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+
+        /* HERO AREA */
         .hero {
             text-align: center;
-            padding: 80px 20px;
-            max-width: 800px;
+            margin-bottom: 50px;
+            padding: 0 20px;
         }
-        .hero h1 {
-            font-size: clamp(40px, 8vw, 70px);
-            font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+
+        .hero p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 15px auto;
+            line-height: 1.6;
         }
-        .hero p { color: #94a3b8; font-size: 18px; line-height: 1.6; }
 
         /* GAMES GRID */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             width: 100%;
-            max-width: 1100px;
-            padding: 40px 20px;
+            max-width: 1000px;
+            padding: 0 20px 60px 20px;
+        }
+
+        /* Game Card Style */
+        .game-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .game-card {
-            background: var(--card);
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 20px;
-            transition: 0.4s;
+            border-radius: 28px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
         }
 
         .game-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(56, 189, 248, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .game-icon {
+        .icon {
             font-size: 50px;
             margin-bottom: 20px;
             display: block;
         }
 
-        .game-card h3 { font-size: 22px; margin-bottom: 10px; color: #fff; }
-        .game-card p { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+        .game-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
 
-        .play-btn {
+        .game-card p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 25px;
+            min-height: 42px;
+        }
+
+        .status-btn {
             display: inline-block;
-            padding: 10px 25px;
+            padding: 12px 30px;
             background: var(--primary);
             color: #000;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        /* STATUS BADGE */
-        .badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
+        .game-card:hover .status-btn {
+            box-shadow: 0 0 20px var(--primary);
         }
-        .badge-live { background: #22c55e; color: #000; }
-        .badge-soon { background: #64748b; color: #fff; }
+
+        .locked {
+            background: #1e293b;
+            color: #64748b;
+        }
 
         /* FOOTER */
         footer {
             margin-top: auto;
             width: 100%;
-            padding: 40px;
-            border-top: 1px solid var(--border);
+            padding: 40px 20px;
             text-align: center;
-        }
-        .footer-content { color: #475569; font-size: 13px; }
-
-        /* DECORATION */
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
-            opacity: 0.1;
-            z-index: -1;
-            top: 10%;
-            left: 5%;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: #475569;
         }
     </style>
 </head>
 <body>
 
-<div class="glow"></div>
+    <header>
+        <img src="N-removebg-preview.png" alt="Webbjam Logo" class="logo-img">
+    </header>
 
-<nav>
-    <div class="logo-box">
-        <img src="N-removebg-preview.png" alt="Logo" style="height:180px; weight:280px;>
-    </div>
-</nav>
+    <section class="hero">
+        <p>Your premium destination for high-speed, lag-free browser gaming. Developed under the Webb Diagnostics architecture.</p>
+    </section>
 
-<section class="hero">
-    <h1>Experience the Future of Fun</h1>
-    <p>Welcome to the official Webb Games Hub. High-performance, browser-based games designed for speed and precision. No downloads, just pure gaming.</p>
-</section>
+    <main class="games-grid">
+        
+        <a href="tictactoe.html" class="game-link">
+            <div class="game-card">
+                <span class="icon">🎯</span>
+                <h3>Tic-Tac-Toe</h3>
+                <p>Classic 3x3 strategy game. Play against a friend or the CPU.</p>
+                <span class="status-btn">Play Now</span>
+            </div>
+        </a>
 
-<div class="games-grid">
-    <a href="tictactoe.html" class="game-card">
-        <span class="badge badge-live">LIVE</span>
-        <span class="game-icon">🎯</span>
-        <h3>Tic-Tac-Toe</h3>
-        <p>The classic strategy game. Challenge your friends or test your luck against the CPU.</p>
-        <span class="play-btn">PLAY NOW</span>
-    </a>
+        <div class="game-card" style="opacity: 0.6; cursor: default;">
+            <span class="icon">🐍</span>
+            <h3>Snake Pro</h3>
+            <p>Retro arcade fun. Optimized for Webb high-performance browsers.</p>
+            <span class="status-btn locked">Coming Soon</span>
+        </div>
 
-    <div class="game-card" style="opacity: 0.7;">
-        <span class="badge badge-soon">COMING SOON</span>
-        <span class="game-icon">🐍</span>
-        <h3>Snake Retro</h3>
-        <p>The legendary arcade experience is being optimized for Webb performance.</p>
-        <span class="play-btn" style="background: #334155;">LOCKED</span>
-    </div>
+        <div class="game-card" style="opacity: 0.6; cursor: default;">
+            <span class="icon">⌨️</span>
+            <h3>Webb Typer</h3>
+            <p>Test your typing speed with Webbjam's precision engine.</p>
+            <span class="status-btn locked">Coming Soon</span>
+        </div>
 
-    <div class="game-card" style="opacity: 0.7;">
-        <span class="badge badge-soon">COMING SOON</span>
-        <span class="game-icon">⌨️</span>
-        <h3>Speed Typer</h3>
-        <p>Test your typing speed and accuracy in this fast-paced keyboard challenge.</p>
-        <span class="play-btn" style="background: #334155;">LOCKED</span>
-    </div>
-</div>
+    </main>
 
-<footer>
-    <div class="footer-content">
-        <p>© 2024 Webb Gaming Diagnostics. All Rights Reserved.</p>
-        <p style="margin-top: 10px; font-size: 11px;">Powered by Webb high-speed architecture.</p>
-    </div>
-</footer>
+    <footer>
+        <p>© 2024 Webbjam Diagnostics. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
