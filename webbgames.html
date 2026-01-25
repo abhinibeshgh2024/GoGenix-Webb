@@ -28,12 +28,12 @@
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
-            background: rgba(11, 15, 26, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(11, 15, 26, 0.98);
+            backdrop-filter: blur(25px);
             border-right: 1px solid var(--border);
             padding: 30px 20px;
             position: fixed;
-            left: -280px; /* Initially hidden */
+            left: -285px; 
             top: 0;
             z-index: 3000;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -46,13 +46,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
-        }
-
-        .close-sidebar {
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--secondary);
-            padding: 5px;
         }
 
         .category-item {
@@ -70,45 +63,37 @@
         .category-item:hover, .category-item.active {
             background: var(--card);
             color: var(--primary);
-            box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.1);
         }
 
-        /* --- OPEN BUTTON --- */
+        /* --- OPEN BUTTON (FLOATING ARROW) --- */
         .open-sidebar-btn {
             position: fixed;
-            left: 20px;
+            left: 0;
             top: 50%;
             transform: translateY(-50%);
             background: var(--primary);
             color: #000;
-            width: 40px;
-            height: 60px;
+            width: 30px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0 10px 10px 0;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
             z-index: 2500;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-            transition: 0.3s;
-        }
-        .open-sidebar-btn:hover { padding-left: 10px; width: 50px; }
-
-        /* --- MAIN CONTENT --- */
-        .main-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
+        /* --- MAIN WRAPPER --- */
+        .main-wrapper { width: 100%; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* --- STICKY HEADER --- */
         nav {
             width: 100%;
-            padding: 20px 60px;
+            padding: 15px 30px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Space between logo and home */
             align-items: center;
             background: rgba(11, 15, 26, 0.6);
             backdrop-filter: blur(15px);
@@ -119,65 +104,91 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .logo-box img { width: 180px; filter: drop-shadow(0 0 10px var(--primary)); }
+        .logo-box img { width: 160px; filter: drop-shadow(0 0 8px var(--primary)); display: block; }
 
-        .content-area { padding: 40px 60px; }
+        .home-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            transition: 0.3s;
+        }
 
-        .section-header { margin-bottom: 30px; }
-        .section-header h2 { font-size: 32px; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
-        .section-header p { color: #94a3b8; margin-top: 5px; }
+        .home-link:hover { background: var(--primary); color: #000; }
 
-        /* --- GRID --- */
+        .content-area { padding: 30px; }
+
+        .section-header { margin-bottom: 25px; }
+        .section-header h2 { font-size: 26px; color: #fff; letter-spacing: 1px; }
+        .section-header p { color: #64748b; font-size: 14px; }
+
+        /* --- GAMES GRID (RESPONSIVE) --- */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 20px;
         }
 
         .game-card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 18px;
+            padding: 20px;
             position: relative;
-            transition: 0.4s;
-            min-height: 280px;
+            transition: 0.3s;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .game-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.08);
-        }
+        .game-icon { font-size: 35px; margin-bottom: 10px; }
+        .game-card h3 { font-size: 18px; margin-bottom: 5px; }
+        .game-card p { font-size: 12px; color: #94a3b8; line-height: 1.4; }
 
-        .game-icon { font-size: 40px; margin-bottom: 15px; }
         .play-btn {
             background: var(--primary);
             color: #000;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             text-align: center;
             text-decoration: none;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
+            margin-top: 15px;
         }
 
-        .locked-card { opacity: 0.5; cursor: not-allowed; }
-        .locked-btn { background: #334155; color: #94a3b8; }
+        .locked-card { opacity: 0.5; }
+        .locked-btn { background: #1e293b; color: #475569; }
 
-        .badge {
-            position: absolute; top: 20px; right: 20px;
-            padding: 4px 10px; border-radius: 50px; font-size: 9px; font-weight: 900;
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 600px) {
+            nav { padding: 15px 20px; }
+            .logo-box img { width: 130px; }
+            .content-area { padding: 20px; }
+            
+            /* 2 Games in one row on mobile */
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .game-card { padding: 15px; min-height: 200px; }
+            .game-icon { font-size: 30px; }
+            .game-card h3 { font-size: 14px; }
+            .game-card p { display: none; } /* Hide desc on small mobile to save space */
+            .play-btn { font-size: 10px; padding: 8px; }
+            .section-header h2 { font-size: 20px; }
         }
-        .badge-live { background: #22c55e; color: #000; }
-        .badge-soon { background: #64748b; color: #fff; }
 
         .glow {
-            position: fixed; width: 400px; height: 400px; background: var(--primary);
-            filter: blur(180px); opacity: 0.05; z-index: -1; top: 20%; left: 40%;
+            position: fixed; width: 300px; height: 300px; background: var(--primary);
+            filter: blur(150px); opacity: 0.05; z-index: -1; top: 10%; left: 10%;
         }
     </style>
 </head>
@@ -189,15 +200,15 @@
 
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h3 style="color: var(--primary)">CATEGORIES</h3>
-        <div class="close-sidebar" onclick="toggleSidebar()">✕</div>
+        <h3 style="color: var(--primary); font-size: 18px;">GENIX MENU</h3>
+        <div style="cursor:pointer; font-size: 20px;" onclick="toggleSidebar()">✕</div>
     </div>
     <ul class="category-list">
-        <li class="category-item active" onclick="loadCategory('trending')"><span>🔥</span> Trending Now</li>
-        <li class="category-item" onclick="loadCategory('retro')"><span>🕹️</span> Arcade Retro</li>
-        <li class="category-item" onclick="loadCategory('brain')"><span>🧠</span> Brain & Logic</li>
-        <li class="category-item" onclick="loadCategory('action')"><span>⚔️</span> Action & Combat</li>
-        <li class="category-item" onclick="loadCategory('skills')"><span>⌨️</span> Skills & Typing</li>
+        <li class="category-item active" onclick="loadCategory('trending')"><span>🔥</span> Trending</li>
+        <li class="category-item" onclick="loadCategory('retro')"><span>🕹️</span> Retro</li>
+        <li class="category-item" onclick="loadCategory('brain')"><span>🧠</span> Brain</li>
+        <li class="category-item" onclick="loadCategory('action')"><span>⚔️</span> Action</li>
+        <li class="category-item" onclick="loadCategory('skills')"><span>⌨️</span> Skills</li>
     </ul>
 </aside>
 
@@ -206,13 +217,15 @@
         <div class="logo-box">
             <img src="N-removebg-preview.png" alt="Logo">
         </div>
-        <div id="clock" style="color: var(--primary); font-weight: 700; font-family: monospace; font-size: 18px;">00:00:00</div>
+        <a href="#" class="home-link" onclick="loadCategory('trending')">
+            <span>🏠</span> HOME
+        </a>
     </nav>
 
     <div class="content-area">
         <div class="section-header">
-            <h2 id="cat-title">Trending Now</h2>
-            <p id="cat-desc">The most played games on WebbJamm right now.</p>
+            <h2 id="cat-title">Trending Games</h2>
+            <p id="cat-desc">Hand-picked for WebbJamm players.</p>
         </div>
 
         <div class="games-grid" id="game-display">
@@ -223,36 +236,36 @@
 <script>
     const allGames = {
         trending: [
-            { name: "Tic-Tac-Toe", icon: "🎯", live: true, link: "ticgame.html", desc: "Classic 3x3 to 6x6 battle." },
-            { name: "Snake Pro", icon: "🐍", live: false, desc: "Neon survival arcade." },
-            { name: "Space Wars", icon: "🚀", live: false, desc: "Infinite space shooter." },
-            { name: "Speed Typer", icon: "⌨️", live: false, desc: "Master your keyboard." },
-            { name: "Mind Match", icon: "🧠", live: false, desc: "Neural pattern memory." }
+            { name: "Tic-Tac-Toe", icon: "🎯", live: true, link: "ticgame.html", desc: "Strategy battle." },
+            { name: "Snake Pro", icon: "🐍", live: false, desc: "Neon survival." },
+            { name: "Space Wars", icon: "🚀", live: false, desc: "Space shooter." },
+            { name: "Speed Typer", icon: "⌨️", live: false, desc: "WPM Master." },
+            { name: "Mind Match", icon: "🧠", live: false, desc: "Memory trainer." },
+            { name: "Ping Pong", icon: "🏓", live: false, desc: "Reflex tennis." }
         ],
         retro: [
-            { name: "Brick Breaker", icon: "🧱", live: false, desc: "Physics based paddle game." },
-            { name: "Pac-Webb", icon: "🟡", live: false, desc: "Escape the digital ghosts." },
-            { name: "Tetris Genix", icon: "🔳", live: false, desc: "The ultimate block puzzle." },
-            { name: "Ping Pong", icon: "🏓", live: false, desc: "High-speed reflex tennis." },
-            { name: "Tank 90", icon: "🚜", live: false, desc: "Protect the base." }
+            { name: "Brick Breaker", icon: "🧱", live: false, desc: "Paddle game." },
+            { name: "Pac-Webb", icon: "🟡", live: false, desc: "Ghost escape." },
+            { name: "Tetris Genix", icon: "🔳", live: false, desc: "Block puzzle." },
+            { name: "Tank 90", icon: "🚜", live: false, desc: "Base defense." }
         ],
         brain: [
-            { name: "Sudoku Elite", icon: "🔢", live: false, desc: "Mathematical grid puzzles." },
-            { name: "Chess Webb", icon: "♟️", live: false, desc: "Grandmaster AI challenge." },
-            { name: "2048 Neon", icon: "🧊", live: false, desc: "Merge the numbers to win." },
-            { name: "Crossword", icon: "📝", live: false, desc: "Vocabulary power challenge." }
+            { name: "Sudoku Elite", icon: "🔢", live: false, desc: "Math grid." },
+            { name: "Chess Webb", icon: "♟️", live: false, desc: "AI challenge." },
+            { name: "2048 Neon", icon: "🧊", live: false, desc: "Merge tiles." },
+            { name: "Crossword", icon: "📝", live: false, desc: "Vocabulary." }
         ],
         action: [
-            { name: "Cyber Runner", icon: "🏃", live: false, desc: "Infinite neon parkour." },
-            { name: "Dungeon Soul", icon: "🗡️", live: false, desc: "Pixel art RPG adventure." },
-            { name: "Street Brawl", icon: "🥊", live: false, desc: "Classic 2D fighting." },
-            { name: "Shadow Ninja", icon: "🥷", live: false, desc: "Stealth action gameplay." }
+            { name: "Cyber Runner", icon: "🏃", live: false, desc: "Neon parkour." },
+            { name: "Dungeon Soul", icon: "🗡️", live: false, desc: "RPG quest." },
+            { name: "Street Brawl", icon: "🥊", live: false, desc: "2D fighting." },
+            { name: "Shadow Ninja", icon: "🥷", live: false, desc: "Stealth." }
         ],
         skills: [
-            { name: "Aim Lab", icon: "🔫", live: false, desc: "Precision clicking trainer." },
-            { name: "Fast Fingers", icon: "🖐️", live: false, desc: "Reaction time tester." },
-            { name: "Webb Paint", icon: "🎨", live: false, desc: "Digital creative tool." },
-            { name: "Guitar Hero", icon: "🎸", live: false, desc: "Rhythm and beat master." }
+            { name: "Aim Lab", icon: "🔫", live: false, desc: "Click trainer." },
+            { name: "Fast Fingers", icon: "🖐️", live: false, desc: "Reaction test." },
+            { name: "Webb Paint", icon: "🎨", live: false, desc: "Digital Art." },
+            { name: "Guitar Hero", icon: "🎸", live: false, desc: "Rhythm master." }
         ]
     };
 
@@ -263,46 +276,37 @@
     function loadCategory(cat) {
         const grid = document.getElementById('game-display');
         const title = document.getElementById('cat-title');
-        const desc = document.getElementById('cat-desc');
         
-        // Update text
-        title.innerText = cat.charAt(0).toUpperCase() + cat.slice(1);
-        desc.innerText = `Explore our collection of ${cat} games.`;
-        
-        // Clear grid
+        title.innerText = cat === 'trending' ? 'Trending Games' : cat.charAt(0).toUpperCase() + cat.slice(1) + ' Games';
         grid.innerHTML = "";
 
-        // Load Games
         allGames[cat].forEach(game => {
             const card = document.createElement('div');
             card.className = `game-card ${game.live ? '' : 'locked-card'}`;
             card.innerHTML = `
-                <span class="badge ${game.live ? 'badge-live' : 'badge-soon'}">${game.live ? 'LIVE' : 'SOON'}</span>
                 <div>
                     <div class="game-icon">${game.icon}</div>
                     <h3>${game.name}</h3>
                     <p>${game.desc}</p>
                 </div>
-                ${game.live ? `<a href="${game.link}" class="play-btn">PLAY NOW</a>` : `<span class="play-btn locked-btn">LOCKED</span>`}
+                ${game.live ? `<a href="${game.link}" class="play-btn">PLAY NOW</a>` : `<span class="play-btn locked-btn">SOON</span>`}
             `;
             grid.appendChild(card);
         });
 
-        // Close sidebar on mobile/click
-        if(window.innerWidth < 1000) toggleSidebar();
-        
-        // UI styling update
-        document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-        event.currentTarget.classList.add('active');
+        if(window.innerWidth < 1000) {
+            document.getElementById('sidebar').classList.remove('active');
+        }
+
+        // Highlight active category in sidebar
+        document.querySelectorAll('.category-item').forEach(el => {
+            el.classList.remove('active');
+            if(el.innerText.toLowerCase().includes(cat)) el.classList.add('active');
+        });
     }
 
-    // Initial Load
+    // Load Trending on Startup
     loadCategory('trending');
-
-    // Clock
-    setInterval(() => {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
-    }, 1000);
 </script>
 
 </body>
