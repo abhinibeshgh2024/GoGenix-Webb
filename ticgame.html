@@ -13,7 +13,15 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        /* RESET & NO TAP HIGHLIGHT */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent; 
+            outline: none;
+        }
 
         body {
             min-height: 100vh;
@@ -23,43 +31,25 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+            user-select: none; 
+            -webkit-user-select: none;
         }
 
-        /* --- STICKY BLURRED HEADER --- */
+        /* --- TRANSPARENT NON-STICKY HEADER --- */
         nav {
             width: 100%;
-            padding: 15px 30px;
+            padding: 20px 0; /* Vertical padding */
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Logo in center */
             align-items: center;
-            background: rgba(11, 15, 26, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            border-bottom: 1px solid var(--border);
+            background: transparent; /* Full Transparent */
             margin-bottom: 20px;
         }
 
-        .logo-small { width: 130px; filter: drop-shadow(0 0 10px var(--primary)); }
-
-        .home-link {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 13px;
-            padding: 8px 18px;
-            border: 1px solid var(--primary);
-            border-radius: 50px;
+        .logo-small { 
+            width: 140px; 
+            filter: drop-shadow(0 0 10px var(--primary)); 
             transition: 0.3s;
-            letter-spacing: 1px;
-        }
-
-        .home-link:hover { 
-            background: var(--primary); 
-            color: #000; 
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
         /* SETUP BOX */
@@ -145,9 +135,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(11, 15, 26, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(11, 15, 26, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -220,27 +210,14 @@
             #game-board { gap: 8px; }
             .cell { border-radius: 10px; }
         }
-        /* Sabhi elements se tap highlight hatane ke liye */
-* {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none; /* Long press menu bhi disable karega buttons pe */
-    outline: none; /* Focus outline bhi hatayega */
-}
-
-/* Specific cells ke liye taaki tap ekdum clean lage */
-.cell {
-    user-select: none; /* Text select nahi hoga tap karte waqt */
-    -webkit-user-select: none;
-}
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-box">
+        <a href="webbgames.html">
             <img src="N-removebg-preview.png" alt="Logo" class="logo-small">
-        </div>
-        <a href="webbgames.html" class="home-link">🏠 HOME</a>
+        </a>
     </nav>
 
     <div class="setup-container" id="setup">
@@ -306,7 +283,6 @@
             boardEl.style.display = "grid";
             boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
             
-            // Dynamic sizing
             const screenPadding = 40;
             const availableWidth = Math.min(window.innerWidth - screenPadding, 400);
             boardEl.style.width = availableWidth + "px";
