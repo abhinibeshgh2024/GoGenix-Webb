@@ -1,29 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <meta charset="UTF-8">
   <meta name="description" content="GoGenix Webb - Your ultimate destination for free digital tools. Create professional invoices, amazing charts, generate QR codes, and test website speed instantly. Code and run your programs without any barriers. Explore Art Gallery for free AI-generated images and download in any provided format. Fast, secure, and easy to use.">
   <meta name="robots" content="index, follow">
   <title>GoGenix Webb | Home</title>
 
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="stylehome.css">
 
+  <style>
+    /* --- CUSTOM IMAGE BUTTON STYLES --- */
+    .nav-button-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .img-nav-btn {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 180px;
+      backdrop-filter: blur(10px);
+    }
+
+    .img-nav-btn img {
+      width: 80px; /* Logos size adjustment */
+      height: 80px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+      transition: 0.4s ease;
+      margin-bottom: 15px;
+    }
+
+    .img-nav-btn span {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      font-size: 14px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    /* Hover States */
+    .img-nav-btn:hover {
+      transform: translateY(-15px);
+      background: rgba(56, 189, 248, 0.08);
+      border-color: #38bdf8;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+
+    .img-nav-btn:hover img {
+      filter: drop-shadow(0 0 15px #38bdf8);
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .img-nav-btn:hover span {
+      color: #38bdf8;
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+    }
+
+    /* Mobile Adjustment */
+    @media (max-width: 600px) {
+      .nav-button-container { gap: 20px; }
+      .img-nav-btn { width: 140px; padding: 15px; }
+      .img-nav-btn img { width: 60px; height: 60px; }
+      .img-nav-btn span { font-size: 12px; }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
   <header>
     <div class="logo">
       <img src="WEBB-removebg-preview.png" alt="G4G Webb Logo">
@@ -32,39 +97,41 @@
     <div class="right-logo">
       <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="United Platform">
     </div>
-
-     
   </header>
 
-  <!-- ================= NAVIGATION ================= -->
   <nav>
     <h1 class="page-title">No Signups, No Premium, Only Productivity</h1>
-    <ul>
-      <li><a href="webbtab.html">GenixTab</a></li>
-      <li><a href="webbgames.html">WebbJamm</a></li>
-    </ul>
+    
+    <div class="nav-button-container">
+      <a href="webbtab.html" class="img-nav-btn">
+        <img src="UNITED_PLATFORM-removebg-preview.png" alt="GenixTab Icon">
+        <span>GenixTab</span>
+      </a>
+
+      <a href="webbgames.html" class="img-nav-btn">
+        <img src="N-removebg-preview.png" alt="WebbJamm Icon">
+        <span>WebbJamm</span>
+      </a>
+    </div>
   </nav>
-    <!-- ================= ABOUT SECTION ================= -->
+
   <section class="about-section">
     <div class="about-card">
       <h2>About GoGenix Webb</h2>
       <p>
         GoGenix Webb is a unified platform built to deliver essential internet utility tools in a simple, structured, and distraction-free environment. Designed with a <b>productivity-first mindset</b>, the platform eliminates unnecessary barriers such as <b>sign-ups, subscriptions, or premium locks</b>, allowing users to focus purely on functionality and efficiency.
-
-At its core, GoGenix Webb serves as a centralized workspace for practical web utilities that are reliable, fast, and purpose-driven. Every component is developed to support seamless access, clean navigation, and consistent performance across devices.
+        At its core, GoGenix Webb serves as a centralized workspace for practical web utilities that are reliable, fast, and purpose-driven. Every component is developed to support seamless access, clean navigation, and consistent performance across devices.
       </p>
       <p>
-      <b>No sign-ups. No premium tiers. No interruptions.</b>
-Just straightforward tools engineered for real-world productivity.
-
-GoGenix Webb stands for <b>clarity, accessibility, and long-term usability</b>, bringing essential internet utilities together under one unified platform.
+        <b>No sign-ups. No premium tiers. No interruptions.</b>
+        Just straightforward tools engineered for real-world productivity.
+        GoGenix Webb stands for <b>clarity, accessibility, and long-term usability</b>, bringing essential internet utilities together under one unified platform.
       </p>
     </div>
   </section>
+
   <div class="analytics-box">
     <h2>Website Analytics</h2>
-
-    <!-- COUNTS -->
     <div class="count-grid">
         <div class="count-box">
             <span id="dailyCount">207</span>
@@ -83,82 +150,24 @@ GoGenix Webb stands for <b>clarity, accessibility, and long-term usability</b>, 
             <small>Updates</small>
         </div>
     </div>
-</div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-
-
-
-
-  <!-- ================= FOOTER ================= -->
- 
   <div class="footer-box" style="text-align:center;margin-top: 50px;">
     <h4>Follow Us</h4>
     <div class="social-links" style="margin-top: 36px;">
         <a href="https://www.linkedin.com/company/gogenixwebb" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         <a href="https://www.instagram.com/gogenix_weser/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
     </div>
-</div>
-   <footer>
+  </div>
+
+  <footer>
     <p>© 2026 GoGenix Webb. United Platform by GoGenix WeSer. All rights reserved.</p>
   </footer>
 
-  <!-- Script -->
   <script src="scripthome.js"></script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
