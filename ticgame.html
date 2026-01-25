@@ -13,14 +13,9 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* RESET & NO TAP HIGHLIGHT */
         * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent; 
-            outline: none;
+            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent; outline: none;
         }
 
         body {
@@ -31,248 +26,186 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            user-select: none; 
+            user-select: none;
             -webkit-user-select: none;
         }
 
-        /* --- TRANSPARENT NON-STICKY HEADER --- */
         nav {
-            width: 100%;
-            padding: 20px 0; /* Vertical padding */
-            display: flex;
-            justify-content: center; /* Logo in center */
-            align-items: center;
-            background: transparent; /* Full Transparent */
-            margin-bottom: 20px;
+            width: 100%; padding: 20px 0;
+            display: flex; justify-content: center; align-items: center;
+            background: transparent; margin-bottom: 10px;
         }
 
-        .logo-small { 
-            width: 140px; 
-            filter: drop-shadow(0 0 10px var(--primary)); 
-            transition: 0.3s;
-        }
+        .logo-small { width: 140px; filter: drop-shadow(0 0 10px var(--primary)); }
 
-        /* SETUP BOX */
         .setup-container {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: var(--card); border: 1px solid var(--border);
+            padding: 20px; border-radius: 20px; backdrop-filter: blur(10px);
+            width: 90%; max-width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-align: center;
         }
 
-        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        label { display: block; margin-bottom: 8px; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
 
         select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            background: #1e293b;
-            border: 1px solid var(--border);
-            color: #fff;
-            cursor: pointer;
-            font-weight: 600;
+            width: 100%; padding: 10px; border-radius: 10px;
+            background: #1e293b; border: 1px solid var(--border);
+            color: #fff; cursor: pointer; font-weight: 600; font-size: 14px;
         }
 
         .toss-btn { 
-            width: 100%;
-            padding: 15px;
-            background: var(--primary); 
-            color: #000; 
-            border: none; 
-            margin-top: 20px; 
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
+            width: 100%; padding: 15px; background: var(--primary); 
+            color: #000; border: none; margin-top: 15px; 
+            border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s;
         }
         .toss-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary); }
 
-        /* GAME BOARD AREA */
-        .status-msg { height: 40px; margin: 20px 0; font-size: 1.2rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
+        .status-msg { height: 40px; margin: 15px 0; font-size: 1.1rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
 
         .board-wrapper { 
-            position: relative; 
-            margin: 10px auto; 
-            border-radius: 24px;
-            overflow: hidden; 
-            background: rgba(255,255,255,0.02);
-            padding: 10px;
-            border: 1px solid var(--border);
+            position: relative; margin: 5px auto; border-radius: 24px;
+            overflow: hidden; background: rgba(255,255,255,0.02);
+            padding: 10px; border: 1px solid var(--border);
         }
 
-        #game-board {
-            display: none; 
-            gap: 10px;
-            margin: 0 auto;
-            max-width: 95vw;
-        }
+        #game-board { display: none; gap: 10px; margin: 0 auto; max-width: 95vw; }
 
         .cell {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(2rem, 10vw, 3rem);
-            font-weight: 900;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 15px; aspect-ratio: 1;
+            display: flex; align-items: center; justify-content: center;
+            font-size: clamp(1.8rem, 8vw, 2.8rem); cursor: pointer;
+            transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .cell:hover { background: rgba(255,255,255,0.08); transform: scale(0.95); }
+        .cell:hover { background: rgba(255,255,255,0.08); }
 
-        /* LOCAL WINNER FLASH */
         #winner-flash {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 15, 26, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            font-size: clamp(1.5rem, 6vw, 2.5rem);
-            font-weight: 900;
-            color: #fff;
-            text-align: center;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.5s ease;
-            transform: scale(0.8);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 15, 26, 0.95); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; font-size: 1.8rem; font-weight: 900;
+            color: #fff; text-align: center; z-index: 100;
+            opacity: 0; pointer-events: none; transition: 0.4s; transform: scale(0.9);
         }
         #winner-flash.show { opacity: 1; transform: scale(1); pointer-events: auto; }
 
         .win-cell { 
-            background: rgba(56, 189, 248, 0.3) !important; 
+            background: rgba(56, 189, 248, 0.2) !important; 
             border-color: var(--primary) !important;
-            box-shadow: 0 0 20px var(--primary);
-            animation: pulse 1s infinite;
+            box-shadow: 0 0 15px var(--primary);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        /* CONTROLS */
-        .controls { display: none; gap: 15px; width: 90%; max-width: 400px; margin-top: 20px; }
+        .controls { display: none; gap: 12px; width: 90%; max-width: 400px; margin-top: 15px; }
         .controls button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            background: transparent;
+            flex: 1; padding: 12px; border-radius: 10px;
+            font-weight: 700; cursor: pointer; transition: 0.3s; background: transparent;
         }
         .btn-restart { border: 1px solid var(--primary); color: var(--primary); }
-        .btn-restart:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); }
         .btn-reset { border: 1px solid #ef4444; color: #ef4444; }
-        .btn-reset:hover { background: #ef4444; color: #fff; }
 
-        /* BACK LINK STYLE */
         .back-link { 
-            margin: 40px 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #64748b; 
-            text-decoration: none; 
-            font-size: 13px; 
-            font-weight: 600;
-            letter-spacing: 2px;
-            padding: 12px 25px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.02);
-            transition: 0.4s;
-        }
-        .back-link:hover { 
-            color: var(--primary); 
-            border-color: var(--primary);
-            background: rgba(56, 189, 248, 0.05);
-            transform: translateY(-3px);
+            margin: 30px 0; color: #64748b; text-decoration: none; 
+            font-size: 12px; font-weight: 600; letter-spacing: 1px;
         }
 
-        @media (max-width: 480px) {
-            #game-board { gap: 8px; }
-            .cell { border-radius: 10px; }
-        }
+        @media (max-width: 480px) { #game-board { gap: 6px; } .cell { border-radius: 10px; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="webbgames.html">
-            <img src="N-removebg-preview.png" alt="Logo" class="logo-small">
-        </a>
+        <a href="webbgames.html"><img src="N-removebg-preview.png" alt="Logo" class="logo-small"></a>
     </nav>
 
     <div class="setup-container" id="setup">
-        <h2 style="margin-bottom: 20px; font-size: 18px; color: var(--secondary);">GAME SETTINGS</h2>
+        <h2 style="font-size: 16px; color: var(--secondary); letter-spacing: 2px;">MATCH CONFIG</h2>
+        
         <div class="setup-grid">
+            <div style="grid-column: span 2;">
+                <label>Game Mode</label>
+                <select id="game-mode" onchange="toggleP2Selection()">
+                    <option value="human">🆚 VS HUMAN</option>
+                    <option value="cpu">🤖 VS CPU (AI)</option>
+                </select>
+            </div>
             <div>
                 <label>Grid Size</label>
                 <select id="grid-size">
                     <option value="3">3 x 3</option>
                     <option value="4">4 x 4</option>
-                    <option value="5">5 x 5</option>
                 </select>
             </div>
             <div>
-                <label>Choose Sign</label>
-                <select id="player-sign">
-                    <option value="X">Sign X</option>
-                    <option value="O">Sign O</option>
+                <label>Player 1 Emoji</label>
+                <select id="p1-emoji">
+                    <option value="❌">❌ Cross</option>
+                    <option value="🔥">🔥 Fire</option>
+                    <option value="👻">👻 Ghost</option>
+                    <option value="💎">💎 Diamond</option>
+                    <option value="🦁">🦁 Lion</option>
+                </select>
+            </div>
+            <div id="p2-box">
+                <label>Player 2 Emoji</label>
+                <select id="p2-emoji">
+                    <option value="⭕">⭕ Circle</option>
+                    <option value="⚡">⚡ Thunder</option>
+                    <option value="💀">💀 Skull</option>
+                    <option value="👑">👑 Crown</option>
+                    <option value="🐯">🐯 Tiger</option>
                 </select>
             </div>
         </div>
-        <button class="toss-btn" onclick="startToss()">START TOSS & PLAY</button>
+        <button class="toss-btn" onclick="startToss()">START MATCH</button>
     </div>
 
-    <div class="status-msg" id="status">Ready to Play?</div>
+    <div class="status-msg" id="status">Prepare for Battle</div>
 
     <div class="board-wrapper">
         <div id="winner-flash">
             <div id="flash-text">WINNER!</div>
-            <button class="toss-btn" style="width: auto; padding: 10px 30px; margin-top: 15px;" onclick="restartGrid()">PLAY AGAIN</button>
+            <button class="toss-btn" style="width: auto; padding: 10px 30px; margin-top: 15px;" onclick="restartGrid()">REMATCH</button>
         </div>
         <div id="game-board"></div>
     </div>
 
     <div class="controls" id="controls">
         <button class="btn-restart" onclick="restartGrid()">RESTART</button>
-        <button class="btn-reset" onclick="location.reload()">FULL RESET</button>
+        <button class="btn-reset" onclick="location.reload()">NEW SETTINGS</button>
     </div>
 
     <a href="webbgames.html" class="back-link">← BACK TO WEBBJAMM</a>
 
     <script>
-        let board = [], size = 3, currentPlayer = "", gameActive = false;
+        let board = [], size = 3, gameActive = false;
+        let p1Sign, p2Sign, currentPlayer, isCPU;
+        const allEmojis = ["🍕", "🛸", "🌈", "🎈", "🏀", "🎮", "👾", "🦊"];
+
+        function toggleP2Selection() {
+            const p2Box = document.getElementById('p2-box');
+            p2Box.style.opacity = document.getElementById('game-mode').value === 'cpu' ? '0.3' : '1';
+            p2Box.style.pointerEvents = document.getElementById('game-mode').value === 'cpu' ? 'none' : 'auto';
+        }
 
         function startToss() {
             const status = document.getElementById('status');
-            status.innerText = "COIN TOSSING...";
-            status.style.color = "var(--secondary)";
+            isCPU = document.getElementById('game-mode').value === 'cpu';
+            p1Sign = document.getElementById('p1-emoji').value;
             
+            if(isCPU) {
+                p2Sign = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+            } else {
+                p2Sign = document.getElementById('p2-emoji').value;
+                if(p1Sign === p2Sign) { alert("Dono same emoji nahi le sakte!"); return; }
+            }
+
+            status.innerText = "TOSSING...";
             setTimeout(() => {
-                currentPlayer = Math.random() > 0.5 ? "X" : "O";
-                status.innerText = `WINNER: PLAYER ${currentPlayer}`;
-                status.style.color = "var(--primary)";
+                currentPlayer = Math.random() > 0.5 ? p1Sign : p2Sign;
+                status.innerText = `${currentPlayer} WON THE TOSS!`;
                 setTimeout(initGame, 1000);
-            }, 1000);
+            }, 800);
         }
 
         function initGame() {
@@ -282,9 +215,7 @@
             
             boardEl.style.display = "grid";
             boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-            
-            const screenPadding = 40;
-            const availableWidth = Math.min(window.innerWidth - screenPadding, 400);
+            const availableWidth = Math.min(window.innerWidth - 40, 400);
             boardEl.style.width = availableWidth + "px";
             boardEl.innerHTML = "";
 
@@ -297,36 +228,68 @@
 
             document.getElementById('setup').style.display = "none";
             document.getElementById('controls').style.display = "flex";
-            document.getElementById('status').innerText = `TURN: PLAYER ${currentPlayer}`;
+            updateStatus();
             gameActive = true;
+            if(isCPU && currentPlayer === p2Sign) setTimeout(cpuMove, 600);
         }
 
         function handleMove(index) {
-            if (board[index] !== "" || !gameActive) return;
+            if (board[index] !== "" || !gameActive || (isCPU && currentPlayer === p2Sign)) return;
+            makeMove(index);
+        }
+
+        function makeMove(index) {
             board[index] = currentPlayer;
             const cells = document.querySelectorAll('.cell');
             cells[index].innerText = currentPlayer;
-            cells[index].style.color = currentPlayer === "X" ? "var(--primary)" : "var(--secondary)";
 
             const winData = checkWin();
             if (winData) {
                 highlightWinner(winData);
-                showFlash(`PLAYER ${currentPlayer}\nVICTORY!`);
+                showFlash(`${currentPlayer}\nDOMINATED!`);
                 gameActive = false;
                 return;
             }
 
             if (!board.includes("")) {
-                showFlash("IT'S A DRAW!");
+                showFlash("LEGENDARY DRAW!");
                 gameActive = false;
                 return;
             }
 
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            document.getElementById('status').innerText = `TURN: PLAYER ${currentPlayer}`;
+            currentPlayer = currentPlayer === p1Sign ? p2Sign : p1Sign;
+            updateStatus();
+
+            if (isCPU && gameActive && currentPlayer === p2Sign) {
+                setTimeout(cpuMove, 600);
+            }
         }
 
-        function checkWin() {
+        function cpuMove() {
+            if(!gameActive) return;
+            // 1. Try to win
+            let move = findBestMove(p2Sign) || findBestMove(p1Sign);
+            // 2. Or take middle
+            if(move === null && board[Math.floor(board.length/2)] === "") move = Math.floor(board.length/2);
+            // 3. Or random
+            if(move === null) {
+                const available = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+                move = available[Math.floor(Math.random() * available.length)];
+            }
+            makeMove(move);
+        }
+
+        function findBestMove(sign) {
+            const lines = getLines();
+            for (let line of lines) {
+                const vals = line.map(idx => board[idx]);
+                const emptyIdx = line.find(idx => board[idx] === "");
+                if (vals.filter(v => v === sign).length === size - 1 && emptyIdx !== undefined) return emptyIdx;
+            }
+            return null;
+        }
+
+        function getLines() {
             const lines = [];
             for (let i = 0; i < size; i++) {
                 let row = [], col = [];
@@ -342,16 +305,25 @@
                 d2.push(i * size + (size - 1 - i));
             }
             lines.push(d1, d2);
+            return lines;
+        }
+
+        function checkWin() {
+            const lines = getLines();
             for (let line of lines) {
                 if (line.every(idx => board[idx] === currentPlayer)) return line;
             }
             return null;
         }
 
+        function updateStatus() {
+            const name = isCPU && currentPlayer === p2Sign ? "🤖 CPU" : `👤 PLAYER (${currentPlayer})`;
+            document.getElementById('status').innerText = `TURN: ${name}`;
+        }
+
         function highlightWinner(indices) {
             const cells = document.querySelectorAll('.cell');
             indices.forEach(idx => cells[idx].classList.add('win-cell'));
-            document.getElementById('status').innerText = "🏆 MATCH OVER";
         }
 
         function showFlash(msg) {
@@ -366,10 +338,10 @@
             document.querySelectorAll('.cell').forEach(c => {
                 c.innerText = "";
                 c.className = 'cell';
-                c.style.color = "#fff";
             });
             gameActive = true;
-            document.getElementById('status').innerText = `TURN: PLAYER ${currentPlayer}`;
+            updateStatus();
+            if(isCPU && currentPlayer === p2Sign) setTimeout(cpuMove, 600);
         }
     </script>
 </body>
