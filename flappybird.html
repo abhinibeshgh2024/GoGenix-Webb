@@ -33,7 +33,7 @@
         .setup-container {
             background: var(--card); border: 1px solid var(--border);
             padding: 25px; border-radius: 24px; backdrop-filter: blur(15px);
-            width: 90%; max-width: 400px; text-align: center;
+            width: 90%; max-width: 500px; text-align: center;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
@@ -77,7 +77,7 @@
             overflow: hidden;
         }
 
-        canvas { display: block; cursor: pointer; }
+        canvas { display: block; cursor: pointer; max-width: 95vw; }
 
         .score-display { font-size: 22px; font-weight: 900; color: var(--primary); }
 
@@ -162,8 +162,8 @@
             document.getElementById('main-nav').style.display = "none";
             document.getElementById('game-area').style.display = "flex";
 
-            canvas.width = Math.min(window.innerWidth - 40, 360);
-            canvas.height = 500;
+            canvas.width = Math.min(window.innerWidth - 40, 500);
+            canvas.height = 450;
 
             const elem = document.documentElement;
             if (elem.requestFullscreen) elem.requestFullscreen().catch(() => {});
@@ -201,8 +201,8 @@
             // Pipe Logic
             if(pipes.length > 0 && pipes[0].x < -50) pipes.shift();
             
-            if(pipes[pipes.length-1].x < canvas.width - 200) {
-                let gap = 140;
+            if(pipes[pipes.length-1].x < canvas.width - 250) {
+                let gap = 150;
                 let minPipeHeight = 50;
                 let top = Math.random() * (canvas.height - gap - (minPipeHeight * 2)) + minPipeHeight;
                 pipes.push({ x: canvas.width, top: top, bottom: top + gap });
