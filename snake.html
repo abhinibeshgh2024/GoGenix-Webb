@@ -13,7 +13,6 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* Reset & Scroll Fix */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent; outline: none;
@@ -24,18 +23,14 @@
             background: radial-gradient(circle at top right, #1e293b, #0b0f1a);
             color: #fff;
             display: flex; flex-direction: column; align-items: center;
-            overflow: hidden; /* Screen hilna band ho jayegi */
-            touch-action: none; /* Mobile scroll fix */
+            overflow-x: hidden; /* Sirf horizontal scroll band hai, vertical chalu rahega adjustment ke liye */
         }
 
         /* --- NAV & LOGO --- */
-        nav {
-            width: 100%; padding: 20px 0;
-            display: flex; justify-content: center; align-items: center;
-        }
+        nav { width: 100%; padding: 20px 0; display: flex; justify-content: center; align-items: center; }
         .logo-small { width: 140px; filter: drop-shadow(0 0 10px var(--primary)); }
 
-        /* --- SETUP CONTAINER (Tic-Tac-Toe Style) --- */
+        /* --- SETUP CONTAINER --- */
         .setup-container {
             background: var(--card); border: 1px solid var(--border);
             padding: 25px; border-radius: 24px; backdrop-filter: blur(15px);
@@ -69,9 +64,8 @@
             display: none; 
         }
 
-        canvas { display: block; border-radius: 18px; max-width: 90vw; height: auto; }
+        canvas { display: block; border-radius: 18px; max-width: 95vw; height: auto; }
 
-        /* --- GAME OVER FLASH --- */
         #winner-flash {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(11, 15, 26, 0.95); backdrop-filter: blur(12px);
@@ -84,7 +78,7 @@
 
         /* --- CONTROLS --- */
         .controls-grid { 
-            display: none; margin-top: 20px; 
+            display: none; margin-top: 20px; margin-bottom: 40px;
             grid-template-columns: repeat(3, 70px); gap: 10px; 
         }
         .btn {
@@ -97,7 +91,7 @@
         .btn:active { transform: scale(0.9); background: var(--primary); color: #000; }
         .up { grid-column: 2; } .left { grid-column: 1; } .right { grid-column: 3; } .down { grid-column: 2; }
 
-        .back-link { margin-top: auto; padding-bottom: 20px; color: #64748b; text-decoration: none; font-size: 12px; font-weight: 600; }
+        .back-link { margin-top: 20px; padding-bottom: 40px; color: #64748b; text-decoration: none; font-size: 12px; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -160,6 +154,7 @@
         const ctx = canvas.getContext("2d");
         const box = 20;
         let snake, food, d, score, gameSpeed, snakeColor, gameLoop, wallMode;
+        let isPlaying = false; // Scroll control variable
 
         function startGame() {
             gameSpeed = parseInt(document.getElementById('game-speed').value);
@@ -171,6 +166,10 @@
             document.getElementById('controls').style.display = "grid";
             document.getElementById('status').style.display = "block";
 
+            // Game Area par auto-scroll taaki user ko adjust na karna pade
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+
+            isPlaying = true; // Ab arrow keys lock ho jayengi
             resetGame();
         }
 
@@ -197,12 +196,13 @@
             if(dir == "DOWN" && d != "UP") d = "DOWN";
         }
 
-        // SCROLL PREVENTION & Keyboard Controls
+        // Logic: Agar game chalu hai (isPlaying), tabhi scroll rukega
         document.addEventListener("keydown", e => {
             const arrowKeys = [37, 38, 39, 40];
-            if(arrowKeys.includes(e.keyCode)) {
-                e.preventDefault(); // Browser scroll rok dega
+            if(isPlaying && arrowKeys.includes(e.keyCode)) {
+                e.preventDefault(); 
             }
+            
             if(e.keyCode == 37 && d != "RIGHT") d = "LEFT";
             if(e.keyCode == 38 && d != "DOWN") d = "UP";
             if(e.keyCode == 39 && d != "LEFT") d = "RIGHT";
@@ -213,17 +213,13 @@
             ctx.fillStyle = "#000";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Snake Body
             for(let i=0; i<snake.length; i++) {
                 ctx.fillStyle = (i == 0) ? snakeColor : "rgba(255,255,255,0.1)";
-                ctx.shadowBlur = (i == 0) ? 15 : 0;
-                ctx.shadowColor = snakeColor;
                 ctx.beginPath();
                 ctx.roundRect(snake[i].x, snake[i].y, box-2, box-2, 5);
                 ctx.fill();
             }
 
-            // Food
             ctx.shadowBlur = 15; ctx.shadowColor = "#ff4757";
             ctx.fillStyle = "#ff4757";
             ctx.beginPath();
@@ -239,7 +235,6 @@
             if( d == "RIGHT") snakeX += box;
             if( d == "DOWN") snakeY += box;
 
-            // Wall Mode Logic
             if(wallMode === "classic") {
                 if(snakeX < 0) snakeX = canvas.width - box;
                 else if(snakeX >= canvas.width) snakeX = 0;
@@ -247,7 +242,6 @@
                 else if(snakeY >= canvas.height) snakeY = 0;
             }
 
-            // Collision with Food
             if(snakeX == food.x && snakeY == food.y) {
                 score++;
                 document.getElementById('status').innerText = `Score: ${score}`;
@@ -258,9 +252,9 @@
 
             let newHead = { x: snakeX, y: snakeY };
 
-            // Game Over Rules
             if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
                 clearInterval(gameLoop);
+                isPlaying = false; // Game over hote hi scroll phir se unlock
                 document.getElementById('winner-flash').classList.add('show');
                 document.getElementById('flash-text').innerText = `MISSION FAILED\nSCORE: ${score}`;
                 return;
