@@ -11,10 +11,10 @@
         nav { width: 100%; padding: 25px 0 10px 0; display: flex; justify-content: center; }
         .logo-small { width: 150px; filter: drop-shadow(0 0 12px var(--primary)); }
         .setup-container { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 30px; border-radius: 24px; backdrop-filter: blur(15px); width: 90%; max-width: 400px; text-align: center; }
-        .start-btn { width: 100%; padding: 16px; background: var(--primary); color: #000; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .start-btn { width: 100%; padding: 16px; background: var(--primary); color: #000; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px var(--primary); }
         #game-area { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100%; }
         canvas { background: #000; border: 3px solid var(--border); border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
-        .score-ui { position: absolute; top: 20px; width: 90%; display: flex; justify-content: space-between; font-weight: 800; z-index: 10; }
+        .score-ui { position: absolute; top: 20px; width: 90%; display: flex; justify-content: space-between; font-weight: 800; z-index: 10; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -23,7 +23,7 @@
 
     <div class="setup-container" id="setup">
         <h2 style="color: var(--secondary); letter-spacing: 2px; margin-bottom: 10px;">NEON BREAKER</h2>
-        <p style="color: #64748b; font-size: 13px; margin-bottom: 25px;">New: Multi-Ball 🏀 Power-up!<br>Clear levels to reach the top.</p>
+        <p style="color: #64748b; font-size: 13px; margin-bottom: 25px;">Multi-Ball 🏀 Power-up Enabled!<br>High Performance Gaming.</p>
         <button class="start-btn" onclick="startGame()">START MISSION</button>
     </div>
 
@@ -44,15 +44,19 @@
         let bricks = [], powerups = [];
         let score = 0, currentLevel = 1, gameState = "PLAY"; 
         let pointsSinceLastPowerup = 0;
-        let btnRect = { x: 0, y: 0, w: 160, h: 50 };
+
+        // Button Rects
+        const menuBtn = { x: 0, y: 0, w: 180, h: 50 }; 
+        const quitBtn = { x: 0, y: 0, w: 80, h: 35 };
 
         function startGame() {
             document.getElementById('setup').style.display = "none";
             document.getElementById('main-nav').style.display = "none";
             document.getElementById('game-area').style.display = "flex";
             canvas.width = Math.min(window.innerWidth - 30, 400);
-            canvas.height = 500;
-            btnRect.x = canvas.width/2 - 80; btnRect.y = canvas.height/2 + 30;
+            canvas.height = 550; // Increased for quit space
+            menuBtn.x = canvas.width/2 - 90; menuBtn.y = canvas.height/2 + 30;
+            quitBtn.x = canvas.width - 95; quitBtn.y = canvas.height - 45;
             resetLevel();
             requestAnimationFrame(gameLoop);
         }
@@ -60,7 +64,7 @@
         function resetLevel() {
             gameState = "PLAY"; paddleWidth = 85; pointsSinceLastPowerup = 0; powerups = [];
             paddleX = (canvas.width - paddleWidth) / 2;
-            balls = [{ x: canvas.width/2, y: canvas.height-40, dx: 4, dy: -4 }];
+            balls = [{ x: canvas.width/2, y: canvas.height-100, dx: 4, dy: -4 }];
             createBricks();
         }
 
@@ -77,11 +81,18 @@
         }
 
         canvas.addEventListener("click", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const cx = e.clientX - rect.left;
+            const cy = e.clientY - rect.top;
+
+            // Quit Button logic (anytime)
+            if(cx > quitBtn.x && cx < quitBtn.x + quitBtn.w && cy > quitBtn.y && cy < quitBtn.y + quitBtn.h) {
+                location.reload();
+            }
+
+            // Menu Buttons logic (on Game Over/Win)
             if(gameState !== "PLAY") {
-                const rect = canvas.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const clickY = e.clientY - rect.top;
-                if(clickX > btnRect.x && clickX < btnRect.x + btnRect.w && clickY > btnRect.y && clickY < btnRect.y + btnRect.h) {
+                if(cx > menuBtn.x && cx < menuBtn.x + menuBtn.w && cy > menuBtn.y && cy < menuBtn.y + menuBtn.h) {
                     if(gameState === "GAMEOVER") { score = 0; currentLevel = 1; }
                     else { currentLevel++; }
                     resetLevel();
@@ -96,6 +107,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if(gameState === "PLAY") { update(); draw(); } 
             else { drawOverlay(); }
+            drawQuit();
             requestAnimationFrame(gameLoop);
         }
 
@@ -120,11 +132,8 @@
 
             powerups.forEach((p, i) => {
                 p.y += 2.5;
-                if(p.y > canvas.height-25 && p.x > paddleX && p.x < paddleX+paddleWidth) {
-                    if(p.type === '🏀') { // Multi-ball
-                        balls.push({x: balls[0].x, y: balls[0].y, dx: -balls[0].dx, dy: balls[0].dy});
-                        balls.push({x: balls[0].x, y: balls[0].y, dx: balls[0].dx*0.5, dy: balls[0].dy});
-                    }
+                if(p.y > canvas.height-90 && p.x > paddleX && p.x < paddleX+paddleWidth) {
+                    if(p.type === '🏀') { balls.push({x: paddleX+paddleWidth/2, y: canvas.height-100, dx: -4, dy: -4}); }
                     if(p.type === '💊') paddleWidth = 150;
                     if(p.type === '❄️') balls.forEach(b => { b.dx *= 0.6; b.dy *= 0.6; });
                     powerups.splice(i, 1);
@@ -134,7 +143,7 @@
             balls.forEach((ball, i) => {
                 if(ball.x + ball.dx > canvas.width-ballRadius || ball.x + ball.dx < ballRadius) ball.dx = -ball.dx;
                 if(ball.y + ball.dy < ballRadius) ball.dy = -ball.dy;
-                else if(ball.y + ball.dy > canvas.height-25) {
+                else if(ball.y + ball.dy > canvas.height-90) {
                     if(ball.x > paddleX && ball.x < paddleX + paddleWidth) ball.dy = -ball.dy;
                     else { balls.splice(i, 1); }
                 }
@@ -152,7 +161,7 @@
             for(let c=0; c<6; c++) {
                 for(let r=0; r<5; r++) {
                     if(bricks[c][r].status === 1) {
-                        let bx = (c*62)+15, by = (r*22)+60;
+                        let bx = (c*62)+15, by = (r*22)+80;
                         bricks[c][r].x = bx; bricks[c][r].y = by;
                         ctx.fillStyle = r%2===0 ? "#38bdf8" : "#c084fc";
                         ctx.beginPath(); ctx.roundRect(bx, by, 58, 18, 5); ctx.fill();
@@ -161,20 +170,31 @@
             }
             powerups.forEach(p => { ctx.font = "24px Arial"; ctx.fillText(p.type, p.x-10, p.y); });
             balls.forEach(ball => { ctx.beginPath(); ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI*2); ctx.fillStyle = "#fff"; ctx.fill(); });
-            ctx.fillStyle = "#38bdf8"; ctx.shadowBlur = 10; ctx.shadowColor = "#38bdf8";
-            ctx.fillRect(paddleX, canvas.height-25, paddleWidth, paddleHeight); ctx.shadowBlur = 0;
+            ctx.fillStyle = "#38bdf8"; ctx.shadowBlur = 15; ctx.shadowColor = "#38bdf8";
+            ctx.fillRect(paddleX, canvas.height-90, paddleWidth, paddleHeight); ctx.shadowBlur = 0;
+        }
+
+        function drawQuit() {
+            ctx.strokeStyle = "#ff4757"; ctx.lineWidth = 2; ctx.shadowBlur = 10; ctx.shadowColor = "#ff4757";
+            ctx.strokeRect(quitBtn.x, quitBtn.y, quitBtn.w, quitBtn.h);
+            ctx.fillStyle = "#ff4757"; ctx.font = "bold 14px Inter"; ctx.textAlign = "center";
+            ctx.fillText("QUIT", quitBtn.x + 40, quitBtn.y + 22); ctx.shadowBlur = 0;
         }
 
         function drawOverlay() {
-            ctx.fillStyle = "rgba(11, 15, 26, 0.9)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.textAlign = "center"; ctx.fillStyle = gameState === "WIN" ? "#4ade80" : "#ef4444";
-            ctx.font = "bold 32px Inter"; ctx.fillText(gameState === "WIN" ? "LEVEL CLEARED!" : "MISSION FAILED", canvas.width/2, canvas.height/2 - 20);
+            ctx.fillStyle = "rgba(11, 15, 26, 0.95)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.textAlign = "center";
+            const col = gameState === "WIN" ? "#4ade80" : "#ef4444";
             
-            // Neon Button
-            ctx.strokeStyle = gameState === "WIN" ? "#4ade80" : "#ef4444"; ctx.lineWidth = 2;
-            ctx.strokeRect(btnRect.x, btnRect.y, btnRect.w, btnRect.h);
-            ctx.fillStyle = gameState === "WIN" ? "#4ade80" : "#ef4444";
-            ctx.font = "bold 18px Inter"; ctx.fillText(gameState === "WIN" ? "NEXT LEVEL" : "RETRY", canvas.width/2, btnRect.y + 32);
+            ctx.fillStyle = col; ctx.font = "bold 32px Inter";
+            ctx.fillText(gameState === "WIN" ? "MISSION SUCCESS" : "MISSION FAILED", canvas.width/2, canvas.height/2 - 20);
+            
+            // Neon Menu Button
+            ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.shadowBlur = 15; ctx.shadowColor = col;
+            ctx.strokeRect(menuBtn.x, menuBtn.y, menuBtn.w, menuBtn.h);
+            ctx.fillStyle = col; ctx.font = "bold 20px Inter";
+            ctx.fillText(gameState === "WIN" ? "NEXT LEVEL" : "RETRY", canvas.width/2, menuBtn.y + 33);
+            ctx.shadowBlur = 0;
         }
     </script>
 </body>
