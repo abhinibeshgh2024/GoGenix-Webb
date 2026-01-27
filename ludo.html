@@ -3,201 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
-    <title>WebbJamm | Ludo Elite</title>
+    <title>WebbJamm | Ludo Live</title>
     <style>
         :root {
             --primary: #38bdf8;
-            --secondary: #c084fc;
-            --bg: #0b0f1a;
-            --card: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.2);
             --red: #ff4757; --green: #2ecc71; --blue: #2e86de; --yellow: #f1c40f;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { min-height: 100vh; background: #0b0f1a; color: #fff; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+        body { background: #0b0f1a; color: #fff; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
 
-        /* --- CONFIG MENU --- */
-        .setup-container {
-            margin-top: 50px; background: var(--card); border: 1px solid var(--border);
-            padding: 30px; border-radius: 24px; backdrop-filter: blur(15px);
-            width: 90%; max-width: 450px; text-align: center;
-        }
-
-        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-        select { width: 100%; padding: 12px; border-radius: 12px; background: #1e293b; border: 1px solid var(--border); color: #fff; }
-
-        .start-btn { 
-            width: 100%; padding: 16px; background: var(--primary); color: #000; border: none; 
-            border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; 
-        }
-
-        /* --- GAME ENGINE --- */
-        #game-area { display: none; flex-direction: column; align-items: center; width: 100%; height: 100vh; background: #000; position: fixed; inset: 0; z-index: 1000; justify-content: center; }
+        /* --- UI Elements --- */
+        #game-area { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100%; }
+        .board-wrapper { position: relative; border: 4px solid #333; border-radius: 12px; background: #fff; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        canvas { display: block; max-width: 90vw; max-height: 70vh; }
         
-        .board-wrapper { position: relative; border: 5px solid #333; border-radius: 10px; background: #fff; line-height: 0; }
-        canvas { display: block; max-width: 95vw; max-height: 75vh; cursor: pointer; }
-
-        /* --- DICE & UI --- */
-        .game-nav { position: absolute; top: 10px; width: 90%; display: flex; justify-content: space-between; align-items: center; }
-        .dice-box { margin-top: 20px; display: flex; align-items: center; gap: 20px; }
+        .dice-ui { margin-top: 20px; display: flex; align-items: center; gap: 20px; }
         .dice { 
-            width: 70px; height: 70px; background: #fff; border-radius: 15px; color: #000; 
-            font-size: 35px; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; box-shadow: 0 0 20px var(--primary); font-weight: 900;
+            width: 60px; height: 60px; background: #fff; border-radius: 12px; color: #000; 
+            font-size: 30px; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; font-weight: 900; box-shadow: 0 0 15px var(--primary);
         }
-        
-        #celebration {
-            position: absolute; inset: 0; pointer-events: none;
-            background: rgba(56, 189, 248, 0.2); display: none;
-            animation: flash 0.5s infinite; z-index: 5;
-        }
-
-        @keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        .turn-box { padding: 10px 20px; border-radius: 8px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="setup-container" id="setup">
-        <h2 style="color: var(--primary); letter-spacing: 2px;">LUDO ELITE CONFIG</h2>
-        <div class="setup-grid">
-            <div><label>Players</label><select id="pCount"><option value="2">2 Players</option><option value="4" selected>4 Players</option></select></div>
-            <div><label>Emoji</label><select id="pEmoji"><option value="🔥">🔥 Fire</option><option value="👑">👑 King</option><option value="👾">👾 Alien</option><option value="👻">👻 Ghost</option></select></div>
-        </div>
-        <button class="start-btn" onclick="startGame()">ENTER ARENA</button>
+<div id="game-area">
+    <div id="turnIndicator" class="turn-box" style="background: var(--red);">RED'S TURN</div>
+    
+    <div class="board-wrapper">
+        <canvas id="ludoCanvas"></canvas>
     </div>
 
-    <div id="game-area">
-        <div id="celebration"></div>
-        <div class="game-nav">
-            <div id="turnIndicator" style="font-weight: 800; padding: 10px; border-radius: 8px; background: var(--red);">RED'S TURN</div>
-            <div style="color: #666; font-size: 12px;" onclick="location.reload()">EXIT</div>
-        </div>
-
-        <div class="board-wrapper">
-            <canvas id="ludoCanvas"></canvas>
-        </div>
-
-        <div class="dice-box">
-            <div class="dice" id="diceBtn" onclick="rollDice()">🎲</div>
-            <div id="statusText">Tap to Roll</div>
-        </div>
+    <div class="dice-ui">
+        <div class="dice" id="diceBtn" onclick="rollDice()">🎲</div>
+        <div id="status">Roll a 6 to start!</div>
     </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById("ludoCanvas");
-        const ctx = canvas.getContext("2d");
-        const size = 600; 
-        canvas.width = size; canvas.height = size;
-        const s = size / 15; // single square size
+<script>
+    const canvas = document.getElementById("ludoCanvas");
+    const ctx = canvas.getContext("2d");
+    const size = 600; 
+    canvas.width = size; canvas.height = size;
+    const s = size / 15;
 
-        let diceVal = 0, turn = 0, isRolling = false;
-        const pColors = ['#ff4757', '#2ecc71', '#2e86de', '#f1c40f'];
-        const pNames = ["RED", "GREEN", "BLUE", "YELLOW"];
-        let emoji = "🔥";
+    let diceVal = 0;
+    let turn = 0; // 0:Red, 1:Green, 2:Blue, 3:Yellow
+    let isRolling = false;
+    const pColors = ['var(--red)', 'var(--green)', 'var(--blue)', 'var(--yellow)'];
+    const pNames = ["RED", "GREEN", "BLUE", "YELLOW"];
 
-        function startGame() {
-            emoji = document.getElementById('pEmoji').value;
-            document.getElementById('setup').style.display = "none";
-            document.getElementById('game-area').style.display = "flex";
+    // Goti (Pieces) positions: -1 means in Base, 0+ means on Path
+    let pieces = [
+        { player: 0, pos: -1, color: '#ff4757', homeX: 1.5, homeY: 1.5 },
+        { player: 0, pos: -1, color: '#ff4757', homeX: 3.5, homeY: 3.5 },
+        { player: 1, pos: -1, color: '#2ecc71', homeX: 10.5, homeY: 1.5 },
+        { player: 2, pos: -1, color: '#2e86de', homeX: 1.5, homeY: 10.5 },
+        { player: 3, pos: -1, color: '#f1c40f', homeX: 10.5, homeY: 10.5 }
+    ];
+
+    function drawBoard() {
+        ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, size, size);
+        
+        // Draw Bases
+        drawBox(0, 0, 6, 6, '#ff4757'); // Red
+        drawBox(9, 0, 6, 6, '#2ecc71'); // Green
+        drawBox(0, 9, 6, 6, '#2e86de'); // Blue
+        drawBox(9, 9, 6, 6, '#f1c40f'); // Yellow
+
+        // Draw Path Grid
+        ctx.strokeStyle = "#ddd";
+        for(let i=0; i<15; i++) {
+            for(let j=0; j<15; j++) ctx.strokeRect(i*s, j*s, s, s);
+        }
+
+        // Draw Home Paths
+        for(let i=1; i<6; i++) {
+            ctx.fillStyle = '#ff4757'; ctx.fillRect(i*s, 7*s, s, s); // Red path
+            ctx.fillStyle = '#2ecc71'; ctx.fillRect(7*s, i*s, s, s); // Green path
+        }
+
+        // Draw Pieces
+        pieces.forEach(p => {
+            ctx.shadowBlur = 10; ctx.shadowColor = "rgba(0,0,0,0.5)";
+            ctx.font = `${s*0.8}px Arial`;
+            ctx.textAlign = "center";
+            
+            if(p.pos === -1) {
+                // Draw in Base
+                ctx.fillText("🔥", p.homeX * s + s/2, p.homeY * s + s/1.5);
+            } else {
+                // Draw on Path (Simplified for demo)
+                ctx.fillText("🔥", (p.pos % 15) * s + s/2, Math.floor(p.pos / 15) * s + s/1.5);
+            }
+            ctx.shadowBlur = 0;
+        });
+    }
+
+    function drawBox(x, y, w, h, col) {
+        ctx.fillStyle = col; ctx.fillRect(x*s, y*s, w*s, h*s);
+        ctx.fillStyle = "#fff"; ctx.fillRect((x+1)*s, (y+1)*s, (w-2)*s, (h-2)*s);
+    }
+
+    function rollDice() {
+        if(isRolling) return;
+        isRolling = true;
+        let count = 0;
+        let anim = setInterval(() => {
+            diceVal = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('diceBtn').innerText = diceVal;
+            count++;
+            if(count > 8) {
+                clearInterval(anim);
+                isRolling = false;
+                processMove();
+            }
+        }, 50);
+    }
+
+    function processMove() {
+        let currentP = pieces.find(p => p.player === turn);
+        
+        if(diceVal === 6 && currentP.pos === -1) {
+            currentP.pos = 0; // Bring out of base
+            document.getElementById('status').innerText = "Goti Out! 6 Power!";
+            drawBoard();
+        } else if(currentP.pos >= 0) {
+            currentP.pos += diceVal; // Move forward
             drawBoard();
         }
 
-        function drawBoard() {
-            ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, size, size);
-            
-            // Draw Main Path Squares
-            ctx.strokeStyle = "#ccc"; ctx.lineWidth = 1;
-            for(let i=0; i<15; i++){
-                for(let j=0; j<15; j++){ ctx.strokeRect(i*s, j*s, s, s); }
-            }
+        setTimeout(nextTurn, 1000);
+    }
 
-            // Draw Bases
-            drawBase(0, 0, pColors[0]);    // Red
-            drawBase(9, 0, pColors[1]);    // Green
-            drawBase(0, 9, pColors[2]);    // Blue
-            drawBase(9, 9, pColors[3]);    // Yellow
+    function nextTurn() {
+        turn = (turn + 1) % 4;
+        const ind = document.getElementById('turnIndicator');
+        ind.innerText = pNames[turn] + "'S TURN";
+        ind.style.background = `var(--${pNames[turn].toLowerCase()})`;
+        document.getElementById('status').innerText = "Tap Dice to Roll";
+    }
 
-            // Draw Home Paths
-            for(let i=1; i<6; i++) {
-                fillCell(i, 7, pColors[0]); fillCell(7, i, pColors[1]);
-                fillCell(14-i, 7, pColors[3]); fillCell(7, 14-i, pColors[2]);
-            }
-
-            // Draw Safe Zones (Stars)
-            drawStar(1, 6); drawStar(8, 1); drawStar(13, 8); drawStar(6, 13);
-            drawStar(2, 8); drawStar(6, 2); drawStar(12, 6); drawStar(8, 12);
-
-            // Draw Central Finish
-            ctx.beginPath(); ctx.moveTo(6*s, 6*s); ctx.lineTo(9*s, 6*s); ctx.lineTo(7.5*s, 7.5*s); ctx.fillStyle = pColors[1]; ctx.fill();
-            ctx.beginPath(); ctx.moveTo(9*s, 6*s); ctx.lineTo(9*s, 9*s); ctx.lineTo(7.5*s, 7.5*s); ctx.fillStyle = pColors[3]; ctx.fill();
-            ctx.beginPath(); ctx.moveTo(9*s, 9*s); ctx.lineTo(6*s, 9*s); ctx.lineTo(7.5*s, 7.5*s); ctx.fillStyle = pColors[2]; ctx.fill();
-            ctx.beginPath(); ctx.moveTo(6*s, 9*s); ctx.lineTo(6*s, 6*s); ctx.lineTo(7.5*s, 7.5*s); ctx.fillStyle = pColors[0]; ctx.fill();
-
-            // Draw 4 Pieces in each base (Aligned)
-            drawPieces(1.5, 1.5); drawPieces(10.5, 1.5); 
-            drawPieces(1.5, 10.5); drawPieces(10.5, 10.5);
-        }
-
-        function drawBase(x, y, color) {
-            ctx.fillStyle = color; ctx.fillRect(x*s, y*s, 6*s, 6*s);
-            ctx.fillStyle = "#fff"; ctx.fillRect((x+1)*s, (y+1)*s, 4*s, 4*s);
-        }
-
-        function fillCell(x, y, color) { ctx.fillStyle = color; ctx.fillRect(x*s, y*s, s, s); }
-
-        function drawStar(x, y) {
-            ctx.font = `${s*0.6}px Arial`; ctx.textAlign = "center";
-            ctx.fillText("⭐", x*s + s/2, y*s + s/1.4);
-        }
-
-        function drawPieces(bx, by) {
-            ctx.font = `${s*0.8}px Arial`;
-            // Base positions for 4 pieces
-            ctx.fillText(emoji, (bx)*s, (by)*s);
-            ctx.fillText(emoji, (bx+2)*s, (by)*s);
-            ctx.fillText(emoji, (bx)*s, (by+2)*s);
-            ctx.fillText(emoji, (bx+2)*s, (by+2)*s);
-        }
-
-        function rollDice() {
-            if(isRolling) return;
-            isRolling = true;
-            let count = 0;
-            let interval = setInterval(() => {
-                diceVal = Math.floor(Math.random() * 6) + 1;
-                document.getElementById('diceBtn').innerText = diceVal;
-                count++;
-                if(count > 10) {
-                    clearInterval(interval);
-                    isRolling = false;
-                    checkLogic();
-                }
-            }, 60);
-        }
-
-        function checkLogic() {
-            if(diceVal === 6) {
-                document.getElementById('statusText').innerText = "LUCKY 6! Tap Goti to move";
-                flashScreen(); // Celebration flash
-            } else {
-                setTimeout(nextTurn, 1000);
-            }
-        }
-
-        function nextTurn() {
-            turn = (turn + 1) % 4;
-            const el = document.getElementById('turnIndicator');
-            el.innerText = pNames[turn] + "'S TURN";
-            el.style.background = pColors[turn];
-            document.getElementById('statusText').innerText = "Tap to Roll";
-        }
-
-        function flashScreen() {
-            const f = document.getElementById('celebration');
-            f.style.display = "block";
-            setTimeout(() => f.style.display = "none", 1000);
-        }
-    </script>
+    drawBoard();
+</script>
 </body>
 </html>
