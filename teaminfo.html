@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gogenix WeSer | About</title>
+    <title>Gogenix Weser | About</title>
     <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
     
-    <meta name="description" content="Official page for Gogenix (Gogenix Weser). Founded by Abhinibesh Gupta, Gogenix is a forward-thinking platform at gogenixwebb.xyz.">
-    <meta name="keywords" content="Gogenix, Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Team">
+    <meta name="description" content="Official platform of Gogenix Weser, founded by Abhinibesh Gupta. A centralized hub for digital strategy, technical development, and corporate advisory.">
+    <meta name="keywords" content="Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Founder, Digital Strategy">
     <meta name="author" content="Abhinibesh Gupta">
     <meta name="robots" content="index, follow">
 
@@ -18,22 +18,28 @@
         {
           "@type": "Organization",
           "@id": "https://gogenixwebb.xyz/#organization",
-          "name": "Gogenix",
-          "alternateName": "Gogenix Weser",
+          "name": "Gogenix Weser",
           "url": "https://gogenixwebb.xyz",
           "logo": "https://gogenixwebb.xyz/favicon.png",
           "founder": {
             "@type": "Person",
-            "name": "Abhinibesh Gupta"
+            "@id": "https://gogenixwebb.xyz/#founder",
+            "name": "Abhinibesh Gupta",
+            "jobTitle": "Founder & CEO",
+            "url": "https://gogenixwebb.xyz/about",
+            "sameAs": [
+              "https://linkedin.com/in/your-profile",
+              "https://github.com/your-github"
+            ]
           },
-          "description": "Gogenix is a digital ecosystem specializing in innovative developer solutions and advisory services."
+          "description": "GoGenix Weser is an integrated digital ecosystem providing high-level technical infrastructure and strategic advisory services."
         },
         {
-          "@type": "AboutPage",
-          "@id": "https://gogenixwebb.xyz/about#webpage",
-          "url": "https://gogenixwebb.xyz/about",
-          "name": "About Gogenix and The Team",
-          "isPartOf": { "@id": "https://gogenixwebb.xyz/#website" }
+          "@type": "WebSite",
+          "@id": "https://gogenixwebb.xyz/#website",
+          "url": "https://gogenixwebb.xyz",
+          "name": "Gogenix Weser Official",
+          "publisher": { "@id": "https://gogenixwebb.xyz/#organization" }
         }
       ]
     }
@@ -70,31 +76,45 @@
             line-height: 1.6;
         }
 
-        /* Hero / About Section */
+        /* Hero / Specialty Section */
         .hero {
             text-align: center;
-            padding: 100px 20px 60px;
-            max-width: 800px;
+            padding: 120px 20px 60px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero .specialty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--accent);
-            margin-bottom: 30px;
+            max-width: 750px;
+            margin: 0 auto 40px;
         }
 
         /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
         }
 
         .reveal.active {
@@ -113,75 +133,72 @@
             display: flex;
             align-items: center;
             gap: 30px;
-            margin: 60px 0;
+            margin: 50px 0;
             padding: 30px;
             background: var(--glass);
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            transition: transform 0.3s ease;
+            border-radius: 28px;
+            transition: all 0.4s ease;
         }
 
         .media:hover {
-            transform: scale(1.02);
             border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.09);
         }
 
         .media.right { flex-direction: row-reverse; text-align: right; }
 
         .media img {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid rgba(147, 197, 253, 0.4);
-            box-shadow: 0 0 20px rgba(147, 197, 253, 0.1);
+            border: 4px solid rgba(147, 197, 253, 0.3);
         }
 
         .desc-box h3 {
-            font-size: 24px;
-            color: #fff;
+            font-size: 26px;
             margin-bottom: 5px;
         }
 
         .desc-box p {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--primary);
-            font-weight: 500;
-            letter-spacing: 1px;
+            font-weight: 600;
             text-transform: uppercase;
         }
 
         @media(max-width: 768px) {
             .media, .media.right { flex-direction: column; text-align: center; }
-            .hero { padding-top: 60px; }
+            .hero { padding-top: 80px; }
         }
     </style>
 </head>
 <body>
 
     <section class="hero reveal">
-        <h1>Gogenix & Gogenix Weser</h1>
+        <span class="specialty-badge">Official UniPlat</span>
+        <h1>GoGenix Weser</h1>
         <p>
-            Welcome to the official hub of <strong>gogenixwebb.xyz</strong>. 
-            Gogenix is a digital innovation powerhouse dedicated to building seamless developer experiences 
-            and strategic advisory systems. Founded and led by Abhinibesh Gupta, we bridge the gap 
-            between complex technology and human-centric design.
+            <strong>Gogenix Weser</strong> is a centralized digital strategy hub designed to orchestrate technical innovation and corporate advisory. 
+            Operated via <em>gogenixwebb.xyz</em>, our specialty lies in building robust technical frameworks and providing 
+            senior-level advisory services that empower modern digital ventures.
         </p>
-        <div style="height: 2px; width: 50px; background: var(--primary); margin: 0 auto;"></div>
+        <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px;"></div>
     </section>
 
     <div class="wrapper">
         <div class="media left reveal">
-            <img src="abhi_team1.png" alt="Abhinibesh Gupta - Founder of Gogenix">
+            <img src="abhi_team1.png" alt="Abhinibesh Gupta - Founder of Gogenix Weser">
             <div class="desc-box">
                 <h3>Abhinibesh Gupta</h3>
-                <p>Founder & Lead Developer</p>
+                <p>Founder & Lead Architect</p>
             </div>
         </div>
 
         <div class="media right reveal">
-            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Advisor">
+            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Gogenix Weser Advisor">
             <div class="desc-box">
                 <h3>Harsh Wardhan Jaiswal</h3>
                 <p>Senior Advisory Associate</p>
@@ -189,7 +206,7 @@
         </div>
 
         <div class="media left reveal">
-            <img src="antarasharmawebb.png" alt="Antara Sharma - Marketing">
+            <img src="antarasharmawebb.png" alt="Antara Sharma - Gogenix Weser">
             <div class="desc-box">
                 <h3>Antara Sharma</h3>
                 <p>Marketing Head</p>
@@ -197,7 +214,7 @@
         </div>
 
         <div class="media right reveal">
-            <img src="ayan_team.png" alt="Ayan Banerjee - Technical Head">
+            <img src="ayan_team.png" alt="Ayan Banerjee - Gogenix Weser">
             <div class="desc-box">
                 <h3>Ayan Banerjee</h3>
                 <p>Technical Head</p>
@@ -205,7 +222,7 @@
         </div>
 
         <div class="media left reveal">
-            <img src="hrithik_team.png" alt="Hritik Verma - Operations">
+            <img src="hrithik_team.png" alt="Hritik Verma - Gogenix Weser">
             <div class="desc-box">
                 <h3>Hritik Verma</h3>
                 <p>Operations Head</p>
@@ -214,18 +231,13 @@
     </div>
 
     <script>
-        // Intersection Observer for Scroll Animations
-        const observerOptions = {
-            threshold: 0.1
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.15 });
 
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
