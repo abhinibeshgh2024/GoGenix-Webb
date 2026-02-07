@@ -1,171 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>The Team | GoGenix Webb</title>
-  <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
-<meta name="robots" content="index, follow">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-87E4YGDHXJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gogenix WeSer | About</title>
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+    
+    <meta name="description" content="Official page for Gogenix (Gogenix Weser). Founded by Abhinibesh Gupta, Gogenix is a forward-thinking platform at gogenixwebb.xyz.">
+    <meta name="keywords" content="Gogenix, Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Team">
+    <meta name="author" content="Abhinibesh Gupta">
+    <meta name="robots" content="index, follow">
 
-  gtag('config', 'G-87E4YGDHXJ');
-</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://gogenixwebb.xyz/#organization",
+          "name": "Gogenix",
+          "alternateName": "Gogenix Weser",
+          "url": "https://gogenixwebb.xyz",
+          "logo": "https://gogenixwebb.xyz/favicon.png",
+          "founder": {
+            "@type": "Person",
+            "name": "Abhinibesh Gupta"
+          },
+          "description": "Gogenix is a digital ecosystem specializing in innovative developer solutions and advisory services."
+        },
+        {
+          "@type": "AboutPage",
+          "@id": "https://gogenixwebb.xyz/about#webpage",
+          "url": "https://gogenixwebb.xyz/about",
+          "name": "About Gogenix and The Team",
+          "isPartOf": { "@id": "https://gogenixwebb.xyz/#website" }
+        }
+      ]
+    }
+    </script>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
-}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-87E4YGDHXJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-87E4YGDHXJ');
+    </script>
 
-body{
-  background:linear-gradient(135deg,#0b102a,#14091f);
-  color:#fff;
-  min-height:100vh;
-}
+    <style>
+        :root {
+            --primary: #93c5fd;
+            --accent: #c7d2fe;
+            --bg: #0b102a;
+            --glass: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.15);
+        }
 
-/* ================= HEADER ================= */
-header{
-  text-align:center;
-  padding:50px 20px 30px;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
 
-header h1{
-  font-size:30px;
-  letter-spacing:1px;
-  color:#93c5fd;
-  margin-bottom:8px;
-}
+        body {
+            background: linear-gradient(135deg, #0b102a, #14091f);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-header h2{
-  font-size:15px;
-  font-weight:400;
-  color:#cbd5f5;
-}
+        /* Hero / About Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-/* ================= WRAPPER ================= */
-.wrapper{
-  max-width:1100px;
-  margin:0 auto 80px;
-  padding:0 20px;
-}
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
 
-/* ================= MEDIA CARD ================= */
-.media{
-  display:flex;
-  align-items:center;
-  gap:26px;
-  margin:40px 0;
-  padding:22px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:22px;
-}
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
 
-/* alternate layout */
-.media.right{
-  flex-direction:row-reverse;
-}
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
 
-/* ================= CIRCULAR IMAGE ================= */
-.media img{
-  width:160px;
-  height:160px;
-  object-fit:cover;
-  border-radius:50%;
-  border:3px solid rgba(147,197,253,0.45);
-  flex-shrink:0;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* ================= TEXT ================= */
-.desc-box{
-  flex:1;
-}
+        /* Team Section */
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
 
-.desc-box h3{
-  font-size:22px;
-  margin-bottom:6px;
-  color:#e5e7eb;
-}
+        .media {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 60px 0;
+            padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            transition: transform 0.3s ease;
+        }
 
-.desc-box p{
-  font-size:14px;
-  color:#c7d2fe;
-  letter-spacing:.5px;
-}
+        .media:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:768px){
-  .media,
-  .media.right{
-    flex-direction:column;
-    text-align:center;
-  }
+        .media.right { flex-direction: row-reverse; text-align: right; }
 
-  .media img{
-    width:140px;
-    height:140px;
-  }
-}
-</style>
+        .media img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid rgba(147, 197, 253, 0.4);
+            box-shadow: 0 0 20px rgba(147, 197, 253, 0.1);
+        }
+
+        .desc-box h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .desc-box p {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media(max-width: 768px) {
+            .media, .media.right { flex-direction: column; text-align: center; }
+            .hero { padding-top: 60px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <h1>THE PEOPLE BEHIND THE STARTUP</h1>
-  <h2>Founder, Advisor and Heads</h2>
-</header>
+    <section class="hero reveal">
+        <h1>Gogenix & Gogenix Weser</h1>
+        <p>
+            Welcome to the official hub of <strong>gogenixwebb.xyz</strong>. 
+            Gogenix is a digital innovation powerhouse dedicated to building seamless developer experiences 
+            and strategic advisory systems. Founded and led by Abhinibesh Gupta, we bridge the gap 
+            between complex technology and human-centric design.
+        </p>
+        <div style="height: 2px; width: 50px; background: var(--primary); margin: 0 auto;"></div>
+    </section>
 
-<div class="wrapper">
+    <div class="wrapper">
+        <div class="media left reveal">
+            <img src="abhi_team1.png" alt="Abhinibesh Gupta - Founder of Gogenix">
+            <div class="desc-box">
+                <h3>Abhinibesh Gupta</h3>
+                <p>Founder & Lead Developer</p>
+            </div>
+        </div>
 
-  <div class="media left">
-    <img src="abhi_team1.png">
-    <div class="desc-box">
-      <h3>Abhinibesh Gupta</h3>
-      <p>Founder and Developer</p>
+        <div class="media right reveal">
+            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Advisor">
+            <div class="desc-box">
+                <h3>Harsh Wardhan Jaiswal</h3>
+                <p>Senior Advisory Associate</p>
+            </div>
+        </div>
+
+        <div class="media left reveal">
+            <img src="antarasharmawebb.png" alt="Antara Sharma - Marketing">
+            <div class="desc-box">
+                <h3>Antara Sharma</h3>
+                <p>Marketing Head</p>
+            </div>
+        </div>
+
+        <div class="media right reveal">
+            <img src="ayan_team.png" alt="Ayan Banerjee - Technical Head">
+            <div class="desc-box">
+                <h3>Ayan Banerjee</h3>
+                <p>Technical Head</p>
+            </div>
+        </div>
+
+        <div class="media left reveal">
+            <img src="hrithik_team.png" alt="Hritik Verma - Operations">
+            <div class="desc-box">
+                <h3>Hritik Verma</h3>
+                <p>Operations Head</p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="media right">
-    <img src="wardhwebb.png">
-    <div class="desc-box">
-      <h3>Harsh Wardhan Jaiswal</h3>
-      <p>Senior Advisory Associate</p>
-    </div>
-  </div>
+    <script>
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-  <div class="media left">
-    <img src="antarasharmawebb.png">
-    <div class="desc-box">
-      <h3>Antara Sharma</h3>
-      <p>Marketing Head</p>
-    </div>
-  </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-  <div class="media right">
-    <img src="ayan_team.png">
-    <div class="desc-box">
-      <h3>Ayan Banerjee</h3>
-      <p>Technical Head</p>
-    </div>
-  </div>
-
-  <div class="media left">
-    <img src="hrithik_team.png">
-    <div class="desc-box">
-      <h3>Hritik Verma</h3>
-      <p>Operations Head</p>
-    </div>
-  </div>
-
-</div>
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
 
 </body>
 </html>
