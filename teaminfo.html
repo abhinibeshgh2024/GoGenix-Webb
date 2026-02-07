@@ -7,7 +7,7 @@
     <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
     
     <meta name="description" content="Official platform of Gogenix Weser, founded by Abhinibesh Gupta. A centralized hub for digital strategy, technical development, and corporate advisory.">
-    <meta name="keywords" content="Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Founder, Digital Strategy">
+    <meta name="keywords" content="Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Founder, Digital Strategy, Casual Gaming">
     <meta name="author" content="Abhinibesh Gupta">
     <meta name="robots" content="index, follow">
 
@@ -32,7 +32,7 @@
               "https://github.com/your-github"
             ]
           },
-          "description": "GoGenix Weser is an integrated digital ecosystem providing high-level technical infrastructure and strategic advisory services."
+          "description": "GoGenix Weser is an integrated digital ecosystem providing high-level technical infrastructure, casual gaming experiences, and strategic advisory services."
         },
         {
           "@type": "WebSite",
@@ -76,10 +76,36 @@
             line-height: 1.6;
         }
 
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 60px;
+            margin-bottom: -20px;
+        }
+
+        .neon-logo {
+            width: 140px; /* Adjust size as needed */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(147, 197, 253, 0.6));
+            animation: neonPulse 3s infinite ease-in-out;
+            transition: transform 0.3s ease;
+        }
+
+        .neon-logo:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(147, 197, 253, 0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(147, 197, 253, 0.8)); }
+        }
+
         /* Hero / Specialty Section */
         .hero {
             text-align: center;
-            padding: 120px 20px 60px;
+            padding: 40px 20px 60px;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -92,17 +118,6 @@
             letter-spacing: 2px;
         }
 
-        .hero .specialty-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border: 1px solid var(--primary);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--primary);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
         .hero p {
             font-size: 1.2rem;
             color: var(--accent);
@@ -110,7 +125,7 @@
             margin: 0 auto 40px;
         }
 
-        /* Scroll Reveal Animation */
+        /* Scroll Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -122,13 +137,14 @@
             transform: translateY(0);
         }
 
-        /* Team Section */
+        /* Team Section Wrapper */
         .wrapper {
             max-width: 900px;
             margin: 0 auto 100px;
             padding: 0 20px;
         }
 
+        /* Team Member Cards */
         .media {
             display: flex;
             align-items: center;
@@ -145,6 +161,7 @@
         .media:hover {
             border-color: var(--primary);
             background: rgba(255, 255, 255, 0.09);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .media.right { flex-direction: row-reverse; text-align: right; }
@@ -160,6 +177,7 @@
         .desc-box h3 {
             font-size: 26px;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .desc-box p {
@@ -167,22 +185,26 @@
             color: var(--primary);
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         @media(max-width: 768px) {
             .media, .media.right { flex-direction: column; text-align: center; }
-            .hero { padding-top: 80px; }
+            .logo-container { padding-top: 40px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="logo-container reveal">
+        <img src="UniPlat.-removebg-preview.png" alt="Gogenix Weser Logo" class="neon-logo">
+    </div>
+
     <section class="hero reveal">
-        
         <h1>GoGenix Weser</h1>
         <p>
             <strong>GoGenix Weser</strong> is a centralized digital strategy hub designed to orchestrate technical innovation and corporate advisory. 
-            Our specialty lies in building robust technical tools and providing casual gaming jamm that empower modern digital ventures.
+            Our specialty lies in building robust technical tools and providing engaging casual gaming experiences that empower and entertain modern digital ventures.
         </p>
         <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px;"></div>
     </section>
@@ -197,7 +219,7 @@
         </div>
 
         <div class="media right reveal">
-            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Gogenix Weser Advisor">
+            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Senior Advisor">
             <div class="desc-box">
                 <h3>Harsh Wardhan Jaiswal</h3>
                 <p>Senior Advisory Associate</p>
@@ -205,7 +227,7 @@
         </div>
 
         <div class="media left reveal">
-            <img src="antarasharmawebb.png" alt="Antara Sharma - Gogenix Weser">
+            <img src="antarasharmawebb.png" alt="Antara Sharma - Marketing Head">
             <div class="desc-box">
                 <h3>Antara Sharma</h3>
                 <p>Marketing Head</p>
@@ -213,7 +235,7 @@
         </div>
 
         <div class="media right reveal">
-            <img src="ayan_team.png" alt="Ayan Banerjee - Gogenix Weser">
+            <img src="ayan_team.png" alt="Ayan Banerjee - Technical Head">
             <div class="desc-box">
                 <h3>Ayan Banerjee</h3>
                 <p>Technical Head</p>
@@ -221,7 +243,7 @@
         </div>
 
         <div class="media left reveal">
-            <img src="hrithik_team.png" alt="Hritik Verma - Gogenix Weser">
+            <img src="hrithik_team.png" alt="Hritik Verma - Operations Head">
             <div class="desc-box">
                 <h3>Hritik Verma</h3>
                 <p>Operations Head</p>
@@ -230,13 +252,18 @@
     </div>
 
     <script>
+        // JS for Scroll Animations
+        const observerOptions = {
+            threshold: 0.15
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.15 });
+        }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
