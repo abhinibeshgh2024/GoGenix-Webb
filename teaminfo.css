@@ -1,169 +1,246 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;900");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gogenix Weser | About</title>
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+    
+    <meta name="description" content="Official platform of Gogenix Weser, founded by Abhinibesh Gupta. A centralized hub for digital strategy, technical development, and corporate advisory.">
+    <meta name="keywords" content="Gogenix Weser, Abhinibesh Gupta, gogenixwebb.xyz, Startup Founder, Digital Strategy">
+    <meta name="author" content="Abhinibesh Gupta">
+    <meta name="robots" content="index, follow">
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://gogenixwebb.xyz/#organization",
+          "name": "Gogenix Weser",
+          "url": "https://gogenixwebb.xyz",
+          "logo": "https://gogenixwebb.xyz/favicon.png",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://gogenixwebb.xyz/#founder",
+            "name": "Abhinibesh Gupta",
+            "jobTitle": "Founder & CEO",
+            "url": "https://gogenixwebb.xyz/about",
+            "sameAs": [
+              "https://linkedin.com/in/your-profile",
+              "https://github.com/your-github"
+            ]
+          },
+          "description": "Gogenix Weser is an integrated digital ecosystem providing high-level technical infrastructure and strategic advisory services."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gogenixwebb.xyz/#website",
+          "url": "https://gogenixwebb.xyz",
+          "name": "Gogenix Weser Official",
+          "publisher": { "@id": "https://gogenixwebb.xyz/#organization" }
+        }
+      ]
+    }
+    </script>
 
-/* BODY */
-body {
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(180deg, #050b2c, #0a1f44, #000814);
-  color: #ffffff;
-  overflow-x: hidden;
-}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-87E4YGDHXJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-87E4YGDHXJ');
+    </script>
 
-/* HEADER */
-header {
-  text-align: center;
-  padding: 40px 20px;
-}
+    <style>
+        :root {
+            --primary: #93c5fd;
+            --accent: #c7d2fe;
+            --bg: #0b102a;
+            --glass: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.15);
+        }
 
-header h1 {
-  font-size: 26px;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
 
-header h2 {
-  font-size: 16px;
-  font-weight: 400;
-  opacity: 0.85;
-}
+        body {
+            background: linear-gradient(135deg, #0b102a, #14091f);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-/* WRAPPER */
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  padding-bottom: 80px;
-}
+        /* Hero / Specialty Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-/* MEDIA ROW */
-.media {
-  display: flex;
-  align-items: center;
-  gap: 16px;               /* FAIR GAP */
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-  position: relative;
-  animation: fadeUp 0.9s ease both;
-}
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-/* LEFT / RIGHT */
-.media.left {
-  justify-content: flex-start;
-}
+        .hero .specialty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
 
-.media.right {
-  justify-content: flex-end;
-  flex-direction: row-reverse;
-}
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--accent);
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
 
-/* IMAGE */
-.media img {
-  width: 320px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 14px;
-  z-index: 2;
-}
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
 
-/* DESCRIPTION STICKER */
-.desc-box {
-  width: 340px;
-  padding: 24px 26px;      /* BREATHABLE PADDING */
-  backdrop-filter: blur(10px);
-  background: rgba(16, 42, 92, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
-  border-radius: 0 18px 18px 0;
-  z-index: 1;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* RIGHT SIDE STICKER SHAPE */
-.media.right .desc-box {
-  border-radius: 18px 0 0 18px;
-}
+        /* Team Section */
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
 
-/* TEXT */
-.desc-box h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-}
+        .media {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 50px 0;
+            padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            transition: all 0.4s ease;
+        }
 
-.desc-box p {
-  font-size: 14px;
-  line-height: 1.6;       /* TEXT BREATHING */
-  opacity: 0.9;
-}
+        .media:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.09);
+        }
 
-/* HOVER LAYER */
-.layer {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  border-radius: 14px;
-  transition: 0.5s ease;
-  z-index: 3;
-}
+        .media.right { flex-direction: row-reverse; text-align: right; }
 
-.layer p {
-  color: #0a1f44;
-  font-size: 16px;
-  letter-spacing: 1px;
-  transform: scale(0.85);
-  transition: 0.5s ease;
-}
+        .media img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid rgba(147, 197, 253, 0.3);
+        }
 
-.media:hover .layer {
-  opacity: 1;
-}
+        .desc-box h3 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
 
-.media:hover .layer p {
-  transform: scale(1);
-}
+        .desc-box p {
+            font-size: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
 
-/* SCROLL FADE */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(35px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+        @media(max-width: 768px) {
+            .media, .media.right { flex-direction: column; text-align: center; }
+            .hero { padding-top: 80px; }
+        }
+    </style>
+</head>
+<body>
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .media,
-  .media.right {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+    <section class="hero reveal">
+        <span class="specialty-badge">Official Hub</span>
+        <h1>Gogenix Weser</h1>
+        <p>
+            <strong>Gogenix Weser</strong> is a centralized digital strategy hub designed to orchestrate technical innovation and corporate advisory. 
+            Operated via <em>gogenixwebb.xyz</em>, our specialty lies in building robust technical frameworks and providing 
+            senior-level advisory services that empower modern digital ventures.
+        </p>
+        <div style="height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px;"></div>
+    </section>
 
-  .media img {
-    width: 90%;
-    height: auto;
-  }
+    <div class="wrapper">
+        <div class="media left reveal">
+            <img src="abhi_team1.png" alt="Abhinibesh Gupta - Founder of Gogenix Weser">
+            <div class="desc-box">
+                <h3>Abhinibesh Gupta</h3>
+                <p>Founder & Lead Architect</p>
+            </div>
+        </div>
 
-  .desc-box {
-    width: 90%;
-    border-radius: 0 0 18px 18px;
-  }
+        <div class="media right reveal">
+            <img src="wardhwebb.png" alt="Harsh Wardhan Jaiswal - Gogenix Weser Advisor">
+            <div class="desc-box">
+                <h3>Harsh Wardhan Jaiswal</h3>
+                <p>Senior Advisory Associate</p>
+            </div>
+        </div>
 
-  .media.right .desc-box {
-    border-radius: 0 0 18px 18px;
-  }
-}
+        <div class="media left reveal">
+            <img src="antarasharmawebb.png" alt="Antara Sharma - Gogenix Weser">
+            <div class="desc-box">
+                <h3>Antara Sharma</h3>
+                <p>Marketing Head</p>
+            </div>
+        </div>
+
+        <div class="media right reveal">
+            <img src="ayan_team.png" alt="Ayan Banerjee - Gogenix Weser">
+            <div class="desc-box">
+                <h3>Ayan Banerjee</h3>
+                <p>Technical Head</p>
+            </div>
+        </div>
+
+        <div class="media left reveal">
+            <img src="hrithik_team.png" alt="Hritik Verma - Gogenix Weser">
+            <div class="desc-box">
+                <h3>Hritik Verma</h3>
+                <p>Operations Head</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+</body>
+</html>
