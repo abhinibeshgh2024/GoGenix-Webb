@@ -1,840 +1,389 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-  <!-- Google tag (gtag.js) -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-
-<script>
-
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag(){dataLayer.push(arguments);}
-
-  gtag('js', new Date());
-
-
-
-  gtag('config', 'G-QXVCXKPVBC');
-
-</script>
-
-<meta charset="UTF-8">
-
-<title>GoGenix Webb | GenixTab</title>
-
-<meta name="robots" content="index, follow">
-
-  <link rel="icon" type="image/jpeg" sizes="48x48" href="favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
-
-<style>
-
-*{
-
-  margin:0;
-
-  padding:0;
-
-  box-sizing:border-box;
-
-  font-family:"Segoe UI", sans-serif;
-
-}
-
-
-
-body{
-
-  background:linear-gradient(135deg,#0b102a,#14091f);
-
-  color:#fff;
-
-  min-height:100vh;
-
-  animation:bodyFade 1.2s ease forwards;
-
-}
-
-
-
-@keyframes bodyFade{
-
-  from{opacity:0}
-
-  to{opacity:1}
-
-}
-
-
-
-/* ================= HEADER ================= */
-
-header{
-
-  padding:24px 24px 10px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  z-index:2000;
-
-  position:relative;
-
-}
-
-
-
-header img{
-
-  width:200px;
-
-}
-
-
-
-/* ================= NAVBAR ================= */
-
-.navbar{
-
-  display:flex;
-
-  justify-content:center;
-
-  margin-top:10px;
-
-  z-index:9999;
-
-  position:relative;
-
-  animation:navSlide 1s ease forwards;
-
-}
-
-
-
-@keyframes navSlide{
-
-  from{opacity:0; transform:translateY(-20px)}
-
-  to{opacity:1; transform:translateY(0)}
-
-}
-
-
-
-.navbar ul{
-
-  display:flex;
-
-  flex-wrap: wrap;
-
-  gap:22px;
-
-  padding:14px 26px;
-
-  border-radius:30px;
-
-  background:rgba(255,255,255,0.08);
-
-  border:1px solid rgba(255,255,255,0.25);
-
-  backdrop-filter:blur(14px);
-
-  list-style:none;
-
-}
-
-
-
-/* ================= NAV ITEMS ================= */
-
-.nav-item{
-
-  position:relative;
-
-}
-
-
-
-.nav-btn{
-
-  background:none;
-
-  border:none;
-
-  color:#fff;
-
-  font-size:15px;
-
-  cursor:pointer;
-
-  padding:8px 14px;
-
-  transition:color .3s ease, text-shadow .3s ease;
-
-}
-
-
-
-.nav-btn:hover{
-
-  color:#c9a4ff;
-
-  text-shadow:0 0 12px rgba(160,120,255,.6);
-
-}
-
-
-
-/* ================= DROPDOWN ================= */
-
-.dropdown{
-
-  position:absolute;
-
-  top:135%;
-
-  left:50%;
-
-  transform:translateX(-50%) scale(.95);
-
-  min-width:180px;
-
-  max-width:90vw;
-
-  background:rgba(15,8,40,0.96);
-
-  border-radius:14px;
-
-  padding:8px 0;
-
-  display:none;
-
-  max-height:260px;
-
-  overflow-y:auto;
-
-  box-shadow:0 18px 40px rgba(0,0,0,.65);
-
-  z-index:10000;
-
-  animation:dropFade .35s ease forwards;
-
-}
-
-
-
-@keyframes dropFade{
-
-  from{opacity:0; transform:translateX(-50%) scale(.92)}
-
-  to{opacity:1; transform:translateX(-50%) scale(1)}
-
-}
-
-
-
-.dropdown a{
-
-  display:block;
-
-  padding:11px 20px;
-
-  color:#fff;
-
-  text-decoration:none;
-
-  font-size:14px;
-
-  transition:background .25s ease, padding-left .25s ease;
-
-}
-
-
-
-.dropdown a:hover{
-
-  background:rgba(255,255,255,0.08);
-
-  padding-left:26px;
-
-}
-
-
-
-/* scrollbar */
-
-.dropdown::-webkit-scrollbar{width:6px}
-
-.dropdown::-webkit-scrollbar-thumb{
-
-  background:#6f55ff;
-
-  border-radius:6px;
-
-}
-
-
-
-/* ================= TITLE ================= */
-
-.page-title{
-
-  text-align:center;
-
-  margin:90px 20px 30px;
-
-  font-size:22px;
-
-  letter-spacing:.5px;
-
-  z-index:1;
-
-  position:relative;
-
-  animation:titleUp 1.1s ease forwards;
-
-}
-
-
-
-@keyframes titleUp{
-
-  from{opacity:0; transform:translateY(25px)}
-
-  to{opacity:1; transform:translateY(0)}
-
-}
-
-
-
-/* ================= ABOUT ================= */
-
-.about{
-
-  max-width:900px;
-
-  margin:0 auto 80px;
-
-  padding:32px;
-
-  background:rgba(255,255,255,0.06);
-
-  border:1px solid rgba(255,255,255,0.18);
-
-  border-radius:22px;
-
-  backdrop-filter:blur(14px);
-
-  line-height:1.75;
-
-  font-size:15px;
-
-  color:#e5e7eb;
-
-  z-index:1;
-
-  position:relative;
-
-  animation:fadeSoft 1.3s ease forwards;
-
-}
-
-
-
-/* ================= FOOTER ================= */
-
-footer{
-
-  text-align:center;
-
-  padding:22px;
-
-  opacity:.85;
-
-  animation:fadeSoft 1.5s ease forwards;
-
-}
-
-
-
-@keyframes fadeSoft{
-
-  from{opacity:0}
-
-  to{opacity:.85}
-
-}
-
-
-
-/* logo animation */
-
-.logo-animated {
-
-  animation: floatY 4.5s ease-in-out infinite,
-
-             softGlow 4s ease-in-out infinite;
-
-}
-
-
-
-/* Vertical gentle movement */
-
-@keyframes floatY {
-
-  0%   { transform: translateY(0); }
-
-  50%  { transform: translateY(-6px); }
-
-  100% { transform: translateY(0); }
-
-}
-
-
-
-/* Light glow fade in & out */
-
-@keyframes softGlow {
-
-  0% { filter: drop-shadow(0 0 0px rgba(139,92,246,0.15)); }
-
-  50% { filter: drop-shadow(0 0 16px rgba(139,92,246,0.55)); }
-
-  100% { filter: drop-shadow(0 0 0px rgba(139,92,246,0.15)); }
-
-}
-
-
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:768px){
-
-  header img{width:150px;}
-
-  .navbar ul{flex-direction:column; padding:12px; gap:12px;}
-
-  .dropdown{
-
-    left:0 !important;
-
-    transform:translateX(0);
-
-    max-width:95vw;
-
-  }
-
-}
-
-/* Analytics Container */
-  .analytics-box {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* 2-Column Grid Layout */
-  .count-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Ek row mein do columns */
-    gap: 20px;
-    margin-top: 20px;
-  }
-
-  /* Individual Box Styling */
-  .count-box {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 25px 15px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-
-  .count-box:hover {
-    transform: translateY(-5px);
-    background: rgba(139, 92, 246, 0.15); /* Light Purple Glow on hover */
-    border-color: rgba(139, 92, 246, 0.4);
-  }
-
-  /* Number on Top */
-  .count-box span {
-    display: block;
-    font-size: 36px; /* Bada number */
-    font-weight: 800;
-    color: #c9a4ff; /* Glow color */
-    line-height: 1;
-    margin-bottom: 8px; /* Gap between number and text */
-  }
-
-  /* Text at Bottom */
-  .count-box small {
-    display: block;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 600;
-  }
-
-  /* Mobile Responsive: Ek ke niche ek ho jayega small screens par */
-  @media (max-width: 480px) {
-    .count-grid {
-      grid-template-columns: 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GoGenix Webb | GenixTab GWTv1.0</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green: #34A853;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+      --accent-purple: #c9a4ff;
     }
-  }
 
-.tools-container {
-    padding: 60px 20px;
-    background-color: #0f172a;
-    text-align: center;
-}
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.section-title {
-    font-size: 2.5rem;
-    color: #38bdf8;
-    margin-bottom: 40px;
-}
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+    /* --- TRANSPARENT HEADER WITH 180px LOGO --- */
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: absolute; 
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: transparent; 
+    }
 
-.feature-card {
-    background: #1e293b;
-    padding: 35px;
-    border-radius: 20px;
-    border: 1px solid #334155;
-    transition: 0.3s;
-}
+    .logo-container img {
+      width: 180px; 
+      height: 180px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
+    }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    border-color: #38bdf8;
-}
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding-top: 220px; 
+    }
 
-.card-icon i {
-    font-size: 3rem;
-    color: #38bdf8;
-    margin-bottom: 15px;
-}
+    /* --- NAVBAR: UNIPLAT STYLE --- */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      z-index: 2000;
+    }
 
-.feature-card h3 {
-    color: #fff;
-    margin-bottom: 10px;
-}
+    .navbar ul {
+      display: flex;
+      gap: 10px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      background: var(--glass);
+      border: 1px solid var(--ms-border);
+      backdrop-filter: blur(20px);
+      list-style: none;
+    }
 
-.feature-card p {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-}
+    .nav-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 10px 18px;
+      transition: 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-.tool-link {
-    text-decoration: none;
-    color: #38bdf8;
-    font-weight: bold;
-    border: 1px solid #38bdf8;
-    padding: 8px 20px;
-    border-radius: 50px;
-    transition: 0.3s;
-}
+    .nav-btn:hover { color: #fff; }
 
-.tool-link:hover {
-    background: #38bdf8;
-    color: #0f172a;
-}
+    /* --- DROPDOWN OVERHAUL --- */
+    .dropdown {
+      position: absolute;
+      top: 110%;
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid var(--ms-border);
+      border-radius: 18px;
+      padding: 10px;
+      display: none;
+      min-width: 200px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
 
-</style>
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
 
+    .dropdown a:hover {
+      background: var(--glass);
+      color: var(--google-blue);
+      padding-left: 20px;
+    }
+
+    /* --- TEXT STYLES --- */
+    .version-badge {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--google-blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .brand-text {
+      text-align: center;
+      font-size: clamp(12px, 3.5vw, 38px); 
+      font-weight: 800;
+      margin-bottom: 40px;
+      white-space: nowrap; 
+      display: flex;
+      justify-content: center;
+      gap: 1.5vw;
+    }
+
+    .brand-text span:nth-child(1) { color: var(--google-blue); }
+    .brand-text span:nth-child(2) { color: var(--google-red); }
+    .brand-text span:nth-child(3) { color: var(--google-yellow); }
+    .brand-text span:nth-child(4) { color: var(--google-green); }
+
+    /* --- ABOUT SECTION --- */
+    .about-box {
+      max-width: 850px;
+      margin: 0 auto 60px;
+      padding: 40px;
+      background: var(--glass);
+      border: 1px solid var(--ms-border);
+      border-radius: 30px;
+      line-height: 1.8;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* --- TRENDING TOOLS GRID --- */
+    .tools-section { padding: 40px 5%; text-align: center; }
+    .section-title { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: #64748b; margin-bottom: 40px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      padding: 40px 30px;
+      border-radius: 25px;
+      border: 1px solid var(--ms-border);
+      transition: 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--google-blue);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .card-icon i { font-size: 40px; color: var(--google-blue); margin-bottom: 20px; }
+    .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
+    .feature-card p { font-size: 14px; color: #64748b; margin-bottom: 25px; }
+
+    .tool-link {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px 30px;
+      border: 1px solid var(--ms-border);
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+
+    .tool-link:hover { background: #fff; color: #000; }
+
+    /* --- ANALYTICS DASHBOARD --- */
+    .analytics-box {
+      max-width: 1000px;
+      width: 90%;
+      margin: 40px auto;
+      padding: 50px 20px;
+      background: rgba(255,255,255,0.01);
+      border-radius: 30px;
+      border: 1px solid var(--ms-border);
+    }
+
+    .count-grid {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .stat-item { text-align: center; flex: 1; }
+    .stat-item span { display: block; font-size: clamp(24px, 4vw, 42px); font-weight: 800; margin-bottom: 5px; color: var(--accent-purple); }
+    .stat-item small { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--ms-border);
+      font-size: 10px;
+      color: #475569;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 200px; }
+      .navbar ul { flex-direction: row; font-size: 10px; }
+      .nav-btn { padding: 8px 10px; font-size: 11px; }
+      .count-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+      .brand-text { font-size: 4.5vw; }
+    }
+  </style>
 </head>
-
-
 
 <body>
 
+  <header>
+    <div class="logo-container">
+      <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
+    </div>
+  </header>
 
+  <main>
+    <div class="version-badge">GenixTab GWTv1.0</div>
 
-<header>
+    <nav class="navbar">
+      <ul>
+        <li style="position:relative;">
+          <button class="nav-btn" onclick="toggle('commons')">Commons ▾</button>
+          <div class="dropdown" id="commons">
+            <a href="whiteboard.html"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
+            <a href="indexrb.html"><i class="fa-solid fa-file-invoice"></i> Resume Builder</a>
+            <a href="chart.html"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
+            <a href="filo.html"><i class="fa-solid fa-file-export"></i> File Converter</a>
+            <a href="qr.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+            <a href="invoice.html"><i class="fas fa-file-invoice-dollar"></i> Invoice Gen</a>
+            <a href="speed.html"><i class="fa-solid fa-signal"></i> NetoMeter</a>
+          </div>
+        </li>
+        <li style="position:relative;">
+          <button class="nav-btn" onclick="toggle('programming')">Dev Suite ▾</button>
+          <div class="dropdown" id="programming">
+            <a href="codex.html"><i class="fa-solid fa-code"></i> HTML / CSS</a>
+            <a href="fronto.html"><i class="fa-solid fa-code"></i> HTML / CSS / JS</a>
+            <a href="#"><i class="fa-solid fa-cube"></i> UI / UX Studio</a>
+          </div>
+        </li>
+        <li style="position:relative;">
+          <button class="nav-btn" onclick="toggle('specials')">Specials ▾</button>
+          <div class="dropdown" id="specials">
+            <a href="unigallery.html"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
+            <a href="videocreator.html"><i class="fa-solid fa-video"></i> VideoCreator</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
 
-  <img src="WEBB-removebg-preview.png" class="logo-animated" alt="Webb Logo">
+    <h1 class="brand-text">
+      <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
+    </h1>
 
-  <img src="UniPlat.-removebg-preview.png" class="logo-animated" alt="United Platform">
+    <section class="about-box">
+      <p><b>GenixTab</b> is a high-performance digital ecosystem designed to streamline productivity, technical execution, and creative workflows. Engineered for scalability, GWTv1.0 combines modern <b>Glassmorphism</b> with corporate-grade clarity to provide a sustainable workspace for the disciplined professional.</p>
+    </section>
 
-</header>
-
-
-
-<nav class="navbar">
-
-  <ul>
-
-    <li class="nav-item">
-
-      <button class="nav-btn" onclick="toggle('commons')">Commons ▾</button>
-
-      <div class="dropdown" id="commons">
-
-        <a href="whiteboard.html"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
-
-        <a href="indexrb.html"><i class="fa-solid fa-file"></i> Resume Builder</a>
-
-        <a href="chart.html"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
-
-        <a href="filo.html"><i class="fa-solid fa-file"></i> File Converter</a>
-
-        <a href="qr.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
-
-        <a href="invoice.html"><i class="fas fa-file-invoice-dollar"></i> Invoice Generator</a>
-
-        <a href="speed.html"><i class="fa-solid fa-signal"></i> NetoMeter</a>
-
+    <section class="tools-section">
+      <h2 class="section-title">Trending Modules</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+          <h3>Resume Builder</h3>
+          <p>ATS-friendly resumes built with professional precision.</p>
+          <a href="indexrb.html" class="tool-link">Initialize</a>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Data Visualizer</h3>
+          <p>Transform raw metrics into interactive graphical insights.</p>
+          <a href="chart.html" class="tool-link">Create</a>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3>Invoicing</h3>
+          <p>Corporate-grade billing systems for instant generation.</p>
+          <a href="invoice.html" class="tool-link">Generate</a>
+        </div>
       </div>
+    </section>
+
+    <section class="analytics-box">
+      <div class="count-grid">
+        <div class="stat-item">
+          <span>7</span>
+          <small>Commons</small>
+        </div>
+        <div class="stat-item">
+          <span>3</span>
+          <small>Programming</small>
+        </div>
+        <div class="stat-item">
+          <span>2</span>
+          <small>Specials</small>
+        </div>
+        <div class="stat-item">
+          <span>12</span>
+          <small>Total Suite</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 GOGENIX WEBB | UNIPLAT SYSTEM GWTv1.0
+  </footer>
+
+  <script>
+    function toggle(id){
+      const el = document.getElementById(id);
+      const isVisible = el.style.display === "block";
       
-
-    </li>
-
-    
-
-    <li class="nav-item">
-
-      <button class="nav-btn" onclick="toggle('programming')">Programming ▾</button>
-
-      <div class="dropdown" id="programming">
-
-        <a href="codex.html"><i class="fa-solid fa-code"></i> HTML / CSS</a>
-
-        <a href="fronto.html"><i class="fa-solid fa-code"></i> HTML / CSS / JS</a>
-
-        <a href="#"><i class="fa-solid fa-cube"></i> UI / UX <sup style="color:goldenrod;">(Coming Soon)</sup></a>
-
-        <a href="#"><i class="fa-solid fa-cube"></i> AI Solutions <sup style="color:goldenrod;">(Coming Soon)</sup></a>
-
-      </div>
-
-    </li>
-
-
-
-    <li class="nav-item">
-
-      <button class="nav-btn" onclick="toggle('specials')">Specials ▾</button>
-
-      <div class="dropdown" id="specials">
-
-        <a href="unigallery.html"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
-          <a href="videocreator.html"><i class="fa-solid fa-video"></i> VideoCreator<sup style="color:goldenrod;">(Coming Soon)</sup></a>
-
-      </div>
-
-    </li>
-
-
-
-     <li class="nav-item">
-
-      <button class="nav-btn" onclick="toggle('about team')"><a href="teaminfo.html" style="text-decoration: none; color: inherit;">About</a></button>
-
-    </li>
-
-  </ul>
-
-</nav>
-
-
-
-<h1 class="page-title">Welcome to GenixTab <p style="color:goldenrod">GWTv1.0</p></h1>
-
-
-
-<section class="about">
-
-<p><b>GenixTab</b> aka WebbTab is a high-performance digital ecosystem designed to streamline productivity, technical execution, and creative workflows within a single, disciplined environment. Built for professionals who value precision and efficiency, it eliminates digital fragmentation through three specialized modules:
-
-</p>
-  <p><b>The Commons:</b> Your operational core featuring a Professional Resume Builder, Data Visualizer (Charts), Whiteboard, Invoice Generator, and NetoMeter (Network Speed Analysis).
-
-  </p><p><b>The Programming Suite:</b> A dedicated technical environment for HTML, CSS, and JavaScript development, engineered for students and developers seeking a clean, dependable practice space.
-
-  </p><p><b>The Specials:</b> A curated zone for creative exploration, including an Art Gallery designed for visual presentation and inspiration.
-
-Engineered for scalability and long-term usability, Webb Tab combines a modern glass-morphism aesthetic with corporate-grade clarity. It is not just a utility—it is a sustainable workspace for those who prioritize order and technical discipline in their daily digital operations.</p>
-</section>
-  <section id="features" class="tools-container">
-    <h2 class="section-title">Today's Trending Tools</h2>
-    
-    <div class="features-grid">
-        
-        <div class="feature-card">
-            <div class="card-icon">
-                <i class="fas fa-user-tie"></i>
-            </div>
-            <h3>Resume Builder</h3>
-            <p>Professional and ATS-friendly resumes on your fingertips.</p>
-            <a href="indexrb.html" class="tool-link">Start Building</a>
-        </div>
-
-        <div class="feature-card">
-            <div class="card-icon">
-                <i class="fas fa-chart-bar"></i>
-            </div>
-            <h3>Interactive Charts</h3>
-            <p>Visualize your data in a graphical representation.</p>
-            <a href="chart.html" class="tool-link">Create Chart</a>
-        </div>
-
-        <div class="feature-card">
-            <div class="card-icon">
-                <i class="fas fa-file-invoice-dollar"></i>
-            </div>
-            <h3>Invoice Generator</h3>
-            <p>Regular Invoices made instantly on your fingertips.</p>
-            <a href="invoice.html" class="tool-link">Create Bill</a>
-        </div>
-
-    </div>
-</section>
-
-   <div class="analytics-box">
-
-    <h2 style="text-align:center;">GenixTab Info</h2>
-
-
-
-    <!-- COUNTS -->
-
-    <div class="count-grid">
-
-        <div class="count-box">
-
-            <span id="dailyCount">7</span>
-
-            <small>Common Tools</small>
-
-        </div>
-
-        <div class="count-box">
-
-            <span id="weeklyCount">2</span>
-
-            <small>Programming-based Tools</small>
-
-        </div>
-
-        <div class="count-box">
-
-            <span id="monthlyCount">1</span>
-
-            <small>Special Tools</small>
-
-        </div>
-
-        <div class="count-box">
-
-            <span id="yearlyCount">10</span>
-
-            <small>Total Tools</small>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<footer>
-
-  © 2026 GoGenix Webb. All rights reserved.
-
-</footer>
-
-
-
-<script>
-
-function toggle(id){
-
-  document.querySelectorAll('.dropdown').forEach(d=>{
-
-    if(d.id!==id) d.style.display="none";
-
-  });
-
-  const el=document.getElementById(id);
-
-  el.style.display = el.style.display==="block" ? "none" : "block";
-
-}
-
-
-
-// Close dropdown when clicking outside
-
-document.addEventListener("click",e=>{
-
-  if(!e.target.classList.contains("nav-btn")){
-
-    document.querySelectorAll(".dropdown")
-
-      .forEach(d=>d.style.display="none");
-
-  }
-
-});
-
-</script>
-
-
+      document.querySelectorAll('.dropdown').forEach(d => d.style.display = "none");
+      el.style.display = isVisible ? "none" : "block";
+    }
+
+    document.addEventListener("click", e => {
+      if(!e.target.closest('.nav-btn') && !e.target.closest('.dropdown')){
+        document.querySelectorAll(".dropdown").forEach(d => d.style.display = "none");
+      }
+    });
+  </script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
