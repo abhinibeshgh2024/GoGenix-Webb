@@ -1,141 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GoGenix | Ultimate Resume Builder</title>
-  <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="stylerb.css">
-  <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green: #34A853;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+      --accent-purple: #c9a4ff;
+    }
+
+    * { 
+      margin: 0; padding: 0; box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- UNIFIED 180px HEADER --- */
+    header {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    header img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .container {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto 50px;
+      padding: 0 30px;
+      flex-grow: 1;
+    }
+
+    /* --- LEFT PANEL: CONTROL DECK --- */
+    .form-section {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--ms-border);
+      border-radius: 30px;
+      padding: 35px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .form-section::-webkit-scrollbar { width: 5px; }
+    .form-section::-webkit-scrollbar-thumb { background: var(--ms-border); border-radius: 10px; }
+
+    h2 { 
+      font-size: 12px; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      color: var(--google-blue); 
+      margin: 30px 0 15px;
+      border-bottom: 1px solid var(--ms-border);
+      padding-bottom: 8px;
+    }
+
+    label { display: block; font-size: 11px; color: #64748b; margin-bottom: 5px; font-weight: 600; }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--ms-border);
+      border-radius: 12px;
+      padding: 12px 15px;
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus { outline: none; border-color: var(--google-blue); background: rgba(66, 133, 244, 0.05); }
+
+    button {
+      background: var(--glass);
+      border: 1px solid var(--ms-border);
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.3s;
+      margin-top: 5px;
+    }
+
+    button:hover { background: #fff; color: #000; border-color: #fff; }
+
+    .download {
+      background: var(--google-blue);
+      color: #fff;
+      width: 100%;
+      padding: 18px;
+      font-size: 13px;
+      margin-top: 40px;
+      border: none;
+    }
+
+    /* --- RIGHT PANEL: LIVE PREVIEW --- */
+    .preview-section {
+      background: #ffffff; /* Real paper feel */
+      color: #000;
+      border-radius: 5px;
+      padding: 50px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      min-height: 29.7cm; /* A4 Ratio */
+      transform-origin: top center;
+    }
+
+    .resume-header {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 25px;
+      margin-bottom: 25px;
+    }
+
+    #profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #f1f5f9;
+      border: 2px solid #eee;
+    }
+
+    .preview-section h3 {
+      background: #f1f5f9;
+      padding: 5px 15px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 20px 0 10px;
+    }
+
+    .preview-section ul { list-style: none; padding-left: 15px; }
+    .preview-section li { margin-bottom: 8px; font-size: 13px; }
+
+    /* --- MOBILE --- */
+    @media (max-width: 1000px) {
+      .container { grid-template-columns: 1fr; }
+      .form-section { position: relative; top: 0; max-height: none; }
+      .preview-section { transform: scale(0.9); }
+    }
+  </style>
 </head>
 <body>
 
-<header class="top-header">
-  <img src="WEBB-removebg-preview.png" width="190px" height="180px" style="align-items: center; justify-content:center" ></img>
+<header>
+  <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
 </header>
 
 <div class="container">
 
-<!-- ================= INPUT PANEL ================= -->
-<div class="form-section glass">
+  <div class="form-section">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <span style="font-size: 10px; letter-spacing: 3px; color: var(--google-blue); font-weight: 900;">GENIX RB v2.0</span>
+    </div>
 
-<h2>Basic Details</h2>
-<label>Name</label><input id="name">
-<label>Email</label><input id="email">
-<label>Phone</label><input id="phone">
-<label>Profile Photo</label>
-<input type="file" accept="image/*" onchange="previewPhoto(event)">
+    <h2>Personal Identity</h2>
+    <label>Full Name</label><input id="name" placeholder="John Doe">
+    <label>Email Address</label><input id="email" placeholder="john@example.com">
+    <label>Phone Number</label><input id="phone" placeholder="+91 00000 00000">
+    <label>Profile Avatar</label>
+    <input type="file" accept="image/*" onchange="previewPhoto(event)">
 
-<!-- ===== EDUCATION ===== -->
-<h2>Education</h2>
-<div id="edu-section"></div>
-<button onclick="addEducationRow()">➕ Add Education</button>
+    <h2>Academics</h2>
+    <div id="edu-section"></div>
+    <button onclick="addEducationRow()"><i class="fa fa-plus"></i> Add Degree</button>
 
-<!-- ===== EXPERIENCE ===== -->
-<h2>Experience</h2>
-<div id="exp-section"></div>
-<button onclick="addExperienceRow()">➕ Add Experience</button>
+    <h2>Professional Path</h2>
+    <div id="exp-section"></div>
+    <button onclick="addExperienceRow()"><i class="fa fa-plus"></i> Add Role</button>
 
-<!-- ===== SKILLS ===== -->
-<h2>Skills</h2>
-<div id="skill-section"></div>
-<button onclick="addSkillRow()">➕ Add Skill</button>
+    <h2>Technical Stack</h2>
+    <div id="skill-section"></div>
+    <button onclick="addSkillRow()"><i class="fa fa-plus"></i> Add Skill</button>
 
-<!-- ===== PROJECTS ===== -->
-<h2>Projects</h2>
-<div id="proj-section"></div>
-<button onclick="addProjectRow()">➕ Add Project</button>
+    <h2>Projects & Research</h2>
+    <div id="proj-section"></div>
+    <button onclick="addProjectRow()"><i class="fa fa-plus"></i> Add Project</button>
+    
+    <div id="pub-section"></div>
+    <button onclick="addPublicationRow()"><i class="fa fa-plus"></i> Add Publication</button>
 
-<!-- ===== PUBLICATIONS ===== -->
-<h2>Publications</h2>
-<div id="pub-section"></div>
-<button onclick="addPublicationRow()">➕ Add Publication</button>
+    <h2>Styling Controls</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div><label>Accents</label><input type="color" id="headingColor" value="#1e3a8a"></div>
+      <div><label>Paper</label><input type="color" id="bgColor" value="#ffffff"></div>
+    </div>
 
-<!-- ===== CERTIFICATIONS ===== -->
-<h2>Certifications</h2>
-<div id="cert-section"></div>
-<button onclick="addCertificationRow()">➕ Add Certification</button>
-
-<!-- ===== COLOR PALETTE ===== -->
-<h2>Color Palette</h2>
-<label>Header Color</label><input type="color" id="headingColor" value="#1e3a8a">
-<label>Text Color</label><input type="color" id="textColor" value="#000000">
-<label>Background Color</label><input type="color" id="bgColor" value="#ffffff">
-
-<!-- ===== DOWNLOAD ===== -->
-<button class="download" onclick="downloadPDF()">⬇ Download Resume</button>
-
-</div>
-
-<!-- ================= PREVIEW ================= -->
-<div class="preview-section invoice" id="resume">
-
-<div class="invoice-header">
-  <img id="profile-pic">
-  <div>
-    <h2 id="p-name">Your Name</h2>
-    <p id="p-email"></p>
-    <p id="p-phone"></p>
+    <button class="download" onclick="downloadPDF()">
+      <i class="fa fa-download"></i> Finalize & Download PDF
+    </button>
   </div>
-</div>
 
-<section>
-  <h3>Education</h3>
-  <ul id="p-education"></ul>
-</section>
+  <div class="preview-section" id="resume">
+    <div class="resume-header">
+      <img id="profile-pic" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ccc' d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E">
+      <div>
+        <h1 id="p-name" style="margin:0; font-size: 28px;">Your Name</h1>
+        <p id="p-email" style="color: #64748b; font-size: 13px; margin-top: 5px;"></p>
+        <p id="p-phone" style="color: #64748b; font-size: 13px;"></p>
+      </div>
+    </div>
 
-<section>
-  <h3>Experience</h3>
-  <ul id="p-experience"></ul>
-</section>
+    <section>
+      <h3>Education</h3>
+      <ul id="p-education"></ul>
+    </section>
 
-<section>
-  <h3>Skills</h3>
-  <ul id="p-skills"></ul>
-</section>
+    <section>
+      <h3>Experience</h3>
+      <ul id="p-experience"></ul>
+    </section>
 
-<section>
-  <h3>Projects</h3>
-  <ul id="p-projects"></ul>
-</section>
+    <section>
+      <h3>Skills</h3>
+      <ul id="p-skills"></ul>
+    </section>
 
-<section>
-  <h3>Publications</h3>
-  <ul id="p-publications"></ul>
-</section>
+    <section>
+      <h3>Major Projects</h3>
+      <ul id="p-projects"></ul>
+    </section>
 
-<section>
-  <h3>Certifications</h3>
-  <ul id="p-certifications"></ul>
-</section>
+    <section>
+      <h3>Research & Publications</h3>
+      <ul id="p-publications"></ul>
+    </section>
 
-</div>
+    <section>
+      <h3>Certifications</h3>
+      <ul id="p-certifications"></ul>
+    </section>
+  </div>
+
 </div>
 
 <script src="scriptrb.js"></script>
+<script>
+  // Small tweak for live preview syncing (Placeholder)
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const targetId = 'p-' + e.target.id;
+      const targetEl = document.getElementById(targetId);
+      if(targetEl) targetEl.innerText = e.target.value;
+    });
+  });
+
+  function previewPhoto(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+      document.getElementById('profile-pic').src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
