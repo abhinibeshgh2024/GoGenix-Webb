@@ -2,16 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QXVCXKPVBC');
-  </script>
-  
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GoGenix Webb | UniPlat 2.0</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,60 +14,66 @@
       --google-red: #EA4335;
       --google-yellow: #FBBC05;
       --google-green: #34A853;
-      --ms-border: rgba(255, 255, 255, 0.08);
+      --ms-border: rgba(255, 255, 255, 0.1);
       --glass: rgba(255, 255, 255, 0.03);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
+    /* Prevent horizontal scrolling and force fit */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       background-color: var(--bg-dark);
       background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
       color: #ffffff;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* --- HEADER: SAME AS BODY + OPACITY --- */
+    /* --- FIXED RATIO HEADER --- */
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Centering the single logo */
       align-items: center;
-      padding: 10px 6%;
+      padding: 1.5vw 5vw;
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: transparent; /* Same as body but with opacity */
+      background: rgba(8, 8, 8, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--ms-border);
     }
 
-    .logo img, .right-logo img {
-      height: 180px; /* Big and Clear */
-      width: 180px;
+    .logo img {
+      height: 5vw; /* Scales perfectly with screen width */
+      min-height: 40px;
+      width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
     }
 
     .version-badge {
-      display: block;
       text-align: center;
-      margin: 20px 0;
-      font-size: 11px;
-      letter-spacing: 3px;
+      margin: 2vw 0;
+      font-size: 0.8vw;
+      min-size: 10px;
+      letter-spacing: 0.3vw;
       color: var(--google-blue);
       font-weight: 900;
       text-transform: uppercase;
     }
 
-    nav { padding: 40px 20px; text-align: center; }
+    /* --- ALIGNMENT & SCALE ENGINE --- */
+    nav {
+      padding: 2vw 5vw;
+      text-align: center;
+    }
 
-    /* --- MULTI-COLOR GOOGLE/MS TEXT --- */
     .brand-text {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: 3.5vw; /* Fluid typography */
       font-weight: 800;
-      margin-bottom: 50px;
-      letter-spacing: -2px;
+      margin-bottom: 3vw;
+      letter-spacing: -0.1vw;
     }
 
     .brand-text span:nth-child(1) { color: var(--google-blue); }
@@ -84,87 +81,78 @@
     .brand-text span:nth-child(3) { color: var(--google-yellow); }
     .brand-text span:nth-child(4) { color: var(--google-green); }
 
-    /* --- INNOVATIVE CAPSULE BUTTONS --- */
+    /* CAPSULE BUTTONS: FIXED SIDE-BY-SIDE */
     .nav-button-container {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 2vw;
+      flex-wrap: nowrap; /* Forces side-by-side even on mobile */
     }
 
     .capsule-btn {
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 15px;
-      padding: 15px 40px;
-      width: 280px; /* Bigger width for the "capsule" look */
-      border-radius: 100px; /* Perfect rounded ends */
+      justify-content: center;
+      gap: 1vw;
+      padding: 1.2vw 3vw;
+      width: 22vw; /* Proportionate width */
+      border-radius: 100px;
       background: var(--glass);
       border: 1px solid var(--ms-border);
       backdrop-filter: blur(10px);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: 0.4s ease;
     }
 
     .capsule-btn img {
-      width: 45px;
-      height: 45px;
-      object-fit: contain;
+      width: 3vw;
+      height: 3vw;
+      min-width: 20px;
+      min-height: 20px;
     }
 
     .capsule-btn span {
       color: #fff;
       font-weight: 600;
-      font-size: 16px;
-      letter-spacing: 1px;
+      font-size: 1.1vw; /* Text scales with screen */
     }
 
     .capsule-btn:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
       border-color: var(--google-blue);
-      box-shadow: 0 0 30px rgba(66, 133, 244, 0.2);
+      background: rgba(66, 133, 244, 0.1);
     }
 
-    /* --- USER VISITING DASHBOARD --- */
+    /* --- STATS DASHBOARD --- */
     .visitor-dashboard {
-      max-width: 1100px;
-      margin: 80px auto 20px;
-      padding: 40px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-      border-radius: 30px;
+      max-width: 80vw;
+      margin: 5vw auto;
+      padding: 3vw;
+      background: rgba(255,255,255,0.02);
+      border-radius: 2vw;
       border: 1px solid var(--ms-border);
-      text-align: center;
-    }
-
-    .visitor-dashboard h2 {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: #64748b;
-      margin-bottom: 30px;
     }
 
     .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      display: flex; /* Linear row for all resolutions */
+      justify-content: space-around;
+      align-items: center;
     }
 
+    .stat-item { text-align: center; }
+
     .stat-item h3 {
-      font-size: 32px;
+      font-size: 2.5vw;
       font-weight: 800;
-      margin-bottom: 5px;
+      margin-bottom: 0.5vw;
     }
 
     .stat-item p {
-      font-size: 12px;
+      font-size: 0.8vw;
       color: #94a3b8;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    /* Specific Stat Colors */
     .stat-blue { color: var(--google-blue); }
     .stat-red { color: var(--google-red); }
     .stat-yellow { color: var(--google-yellow); }
@@ -173,26 +161,26 @@
     /* --- FOOTER --- */
     .footer-box {
       text-align: center;
-      padding: 60px 20px;
+      padding: 4vw 5vw;
       border-top: 1px solid var(--ms-border);
     }
 
     .footer-logo {
-      width: 250px;
-      margin-bottom: 20px;
-      filter: brightness(1.2);
+      width: 15vw;
+      margin-bottom: 2vw;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 2vw;
     }
 
     .social-icon {
-      width: 50px;
-      height: 50px;
+      width: 3.5vw;
+      height: 3.5vw;
+      min-width: 35px;
+      min-height: 35px;
       border-radius: 50%;
       background: var(--glass);
       display: flex;
@@ -201,24 +189,22 @@
       color: #fff;
       text-decoration: none;
       border: 1px solid var(--ms-border);
-      transition: 0.3s;
     }
 
-    .social-icon:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 11px;
+    footer p {
+      font-size: 0.7vw;
       color: #475569;
+      padding: 2vw;
+      text-align: center;
     }
 
-    @media (max-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-      .capsule-btn { width: 100%; max-width: 320px; }
+    /* Mobile specific overrides to keep font readable but layout identical */
+    @media (max-width: 600px) {
+      .brand-text { font-size: 6vw; }
+      .capsule-btn span { font-size: 2.5vw; }
+      .stat-item h3 { font-size: 4vw; }
+      .stat-item p { font-size: 1.5vw; }
+      footer p { font-size: 2vw; }
     }
   </style>
 </head>
@@ -228,9 +214,6 @@
   <header>
     <div class="logo">
       <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
-    </div>
-    <div class="right-logo">
-      <img src="UniPlat.-removebg-preview.png" alt="United Platform">
     </div>
   </header>
 
@@ -255,7 +238,6 @@
   </nav>
 
   <section class="visitor-dashboard">
-    <h2>Global Interaction Insights</h2>
     <div class="stats-grid">
         <div class="stat-item">
             <h3 class="stat-blue">320</h3>
@@ -263,7 +245,7 @@
         </div>
         <div class="stat-item">
             <h3 class="stat-red">20+</h3>
-            <p>Cities Joined</p>
+            <p>Cities</p>
         </div>
         <div class="stat-item">
             <h3 class="stat-yellow">15+</h3>
@@ -285,7 +267,7 @@
 </div>
 
 <footer>
-    <p>© 2026 GOGENIX WEBB | A GO-GENIX WESER VENTURE</p>
+    <p>© 2026 GOGENIX WEBB | UNIFIED PLATFORM SYSTEM</p>
 </footer>
 
 </body>
