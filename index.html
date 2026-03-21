@@ -18,216 +18,207 @@
 
   <style>
     :root {
-      --ms-dark: #050505;
-      --ms-card: rgba(255, 255, 255, 0.03);
+      --bg-dark: #080808;
       --google-blue: #4285F4;
       --google-red: #EA4335;
       --google-yellow: #FBBC05;
       --google-green: #34A853;
-      --glass-border: rgba(255, 255, 255, 0.1);
+      --ms-border: rgba(255, 255, 255, 0.08);
+      --glass: rgba(255, 255, 255, 0.03);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background-color: var(--ms-dark);
-      background-image: radial-gradient(circle at 50% -10%, #1e293b 0%, #050505 100%);
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
       color: #ffffff;
-      font-family: 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
 
-    /* --- HEADER: BIG & CLEAR LOGOS --- */
+    /* --- HEADER: SAME AS BODY + OPACITY --- */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 25px 6%;
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--glass-border);
+      padding: 20px 6%;
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(5, 5, 5, 0.7);
+      background: rgba(8, 8, 8, 0.85); /* Same as body but with opacity */
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--ms-border);
     }
 
     .logo img, .right-logo img {
-      height: 65px; /* Increased size for clarity */
+      height: 70px; /* Big and Clear */
       width: auto;
-      display: block;
       object-fit: contain;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
-      transition: transform 0.4s ease;
-    }
-
-    .logo img:hover, .right-logo img:hover {
-      transform: scale(1.05);
-    }
-
-    /* --- VERSION TAG --- */
-    .version-tag {
-      text-align: center;
-      margin-top: 20px;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
     }
 
     .version-badge {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--google-blue);
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      font-size: 11px;
+      letter-spacing: 3px;
       color: var(--google-blue);
-      padding: 5px 15px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-weight: 900;
       text-transform: uppercase;
-      display: inline-block;
-      box-shadow: 0 0 15px rgba(66, 133, 244, 0.2);
     }
 
-    /* --- MAIN NAVIGATION --- */
-    nav { padding: 60px 20px 40px; text-align: center; }
+    nav { padding: 40px 20px; text-align: center; }
 
-    .page-title {
-      font-size: clamp(2rem, 6vw, 3.2rem);
+    /* --- MULTI-COLOR GOOGLE/MS TEXT --- */
+    .brand-text {
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 40px;
-      background: linear-gradient(to bottom, #fff 30%, #64748b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 50px;
+      letter-spacing: -2px;
     }
 
+    .brand-text span:nth-child(1) { color: var(--google-blue); }
+    .brand-text span:nth-child(2) { color: var(--google-red); }
+    .brand-text span:nth-child(3) { color: var(--google-yellow); }
+    .brand-text span:nth-child(4) { color: var(--google-green); }
+
+    /* --- INNOVATIVE CAPSULE BUTTONS --- */
     .nav-button-container {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       flex-wrap: wrap;
     }
 
-    .img-nav-btn {
-      position: relative;
+    .capsule-btn {
       text-decoration: none;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 40px;
-      width: 240px;
-      border-radius: 35px;
-      background: var(--ms-card);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      gap: 15px;
+      padding: 15px 40px;
+      width: 280px; /* Bigger width for the "capsule" look */
+      border-radius: 100px; /* Perfect rounded ends */
+      background: var(--glass);
+      border: 1px solid var(--ms-border);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .img-nav-btn img {
-      width: 90px;
-      height: auto;
-      margin-bottom: 20px;
+    .capsule-btn img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
     }
 
-    .img-nav-btn span {
-      font-weight: 700;
-      color: #94a3b8;
-      letter-spacing: 2px;
-      font-size: 14px;
+    .capsule-btn span {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 1px;
     }
 
-    .img-nav-btn:hover {
-      transform: translateY(-10px);
+    .capsule-btn:hover {
+      transform: scale(1.05);
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--google-blue);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 0 30px rgba(66, 133, 244, 0.2);
     }
 
-    /* --- INTEGRATED DASHBOARD SECTION --- */
-    .dashboard-section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+    /* --- USER VISITING DASHBOARD --- */
+    .visitor-dashboard {
+      max-width: 1100px;
+      margin: 80px auto 20px;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+      border-radius: 30px;
+      border: 1px solid var(--ms-border);
+      text-align: center;
     }
 
-    .dashboard-grid {
+    .visitor-dashboard h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
 
-    .dash-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 30px;
-      transition: 0.3s;
+    .stat-item h3 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 5px;
     }
 
-    .dash-card:hover {
-      border-color: rgba(255,255,255,0.3);
-      transform: scale(1.02);
+    .stat-item p {
+      font-size: 12px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .dash-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dash-card i { color: var(--google-green); }
+    /* Specific Stat Colors */
+    .stat-blue { color: var(--google-blue); }
+    .stat-red { color: var(--google-red); }
+    .stat-yellow { color: var(--google-yellow); }
+    .stat-green { color: var(--google-green); }
 
     /* --- FOOTER --- */
     .footer-box {
-      padding: 80px 20px;
       text-align: center;
-      border-top: 1px solid var(--glass-border);
-      margin-top: 60px;
+      padding: 60px 20px;
+      border-top: 1px solid var(--ms-border);
     }
 
-    .footer-logo-center {
-      width: 320px; /* Large Footer Logo */
-      height: auto;
-      margin-bottom: 30px;
-      filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+    .footer-logo {
+      width: 250px;
+      margin-bottom: 20px;
+      filter: brightness(1.2);
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    .social-btn {
-      width: 55px;
-      height: 55px;
-      border-radius: 18px;
-      background: var(--ms-card);
-      border: 1px solid var(--glass-border);
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--glass);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 22px;
-      transition: 0.4s;
       text-decoration: none;
+      border: 1px solid var(--ms-border);
+      transition: 0.3s;
     }
 
-    .social-btn:hover {
-      transform: translateY(-5px);
-      background: var(--google-blue);
+    .social-icon:hover {
+      background: #fff;
+      color: #000;
     }
 
     footer {
-      padding: 30px;
       text-align: center;
+      padding: 30px;
       font-size: 11px;
       color: #475569;
-      letter-spacing: 1px;
     }
 
-    @media (max-width: 600px) {
-      header { padding: 15px 4%; }
-      .logo img, .right-logo img { height: 45px; }
-      .img-nav-btn { width: 100%; }
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      .capsule-btn { width: 100%; max-width: 320px; }
     }
   </style>
 </head>
@@ -243,55 +234,59 @@
     </div>
   </header>
 
-  <div class="version-tag">
-    <span class="version-badge">UniPlat 2.0</span>
-  </div>
+  <div class="version-badge">UniPlat 2.0</div>
 
   <nav>
-    <h1 class="page-title">Productivity Without Barriers.</h1>
+    <h1 class="brand-text">
+      <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
+    </h1>
     
     <div class="nav-button-container">
-      <a href="webbtab.html" class="img-nav-btn">
+      <a href="webbtab.html" class="capsule-btn">
         <img src="UniPlat.-removebg-preview.png" alt="GenixTab">
         <span>GenixTab</span>
       </a>
 
-      <a href="webbgames.html" class="img-nav-btn">
+      <a href="webbgames.html" class="capsule-btn">
         <img src="N-removebg-preview.png" alt="WebbJamm">
         <span>WebbJamm</span>
       </a>
     </div>
   </nav>
 
-  <section class="dashboard-section">
-    <div class="dashboard-grid">
-      <div class="dash-card">
-        <h3><i class="fas fa-bolt"></i> Quick Start</h3>
-        <p style="color: #94a3b8; font-size: 14px;">Access your most used tools instantly without navigation lag.</p>
-      </div>
-      <div class="dash-card">
-        <h3><i class="fas fa-shield-alt"></i> Privacy Mode</h3>
-        <p style="color: #94a3b8; font-size: 14px;">No data logging enabled. Your session is temporary and secure.</p>
-      </div>
+  <section class="visitor-dashboard">
+    <h2>Global Interaction Insights</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <h3 class="stat-blue">320</h3>
+            <p>Active Users</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="stat-red">20+</h3>
+            <p>Cities Joined</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="stat-yellow">15+</h3>
+            <p>Countries</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="stat-green">2</h3>
+            <p>Main Tabs</p>
+        </div>
     </div>
   </section>
 
   <div class="footer-box">
-    <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Logo" class="footer-logo-center">
-    
+    <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Footer Logo" class="footer-logo">
     <div class="social-links">
-        <a href="https://www.linkedin.com/company/gogenixwebb" class="social-btn" target="_blank">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://www.instagram.com/gogenix_weser/" class="social-btn" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
+        <a href="https://linkedin.com/..." class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://instagram.com/..." class="social-icon"><i class="fab fa-instagram"></i></a>
     </div>
-  </div>
+</div>
 
-  <footer>
-    <p>© 2026 GOGENIX WEBB | UNIPLAT 2.0 BY GOGENIX WESER</p>
-  </footer>
+<footer>
+    <p>© 2026 GOGENIX WEBB | A GO-GENIX WESER VENTURE</p>
+</footer>
 
 </body>
 </html>
