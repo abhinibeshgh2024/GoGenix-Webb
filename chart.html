@@ -1,69 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Webb | Chart Maker</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QXVCXKPVBC');
+    </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-  <meta charset="UTF-8">
-  <title>Webb | Chart Maker</title>
-  <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="chart.css">
-  <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #080808;
+            --google-blue: #4285F4;
+            --google-red: #EA4335;
+            --google-yellow: #FBBC05;
+            --google-green: #34A853;
+            --ms-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 0% 0%, #1e293b, #080808);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- UNIFIED HEADER --- */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            z-index: 1000;
+        }
+
+        header img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: -10px;
+        }
+
+        header h1 {
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--google-blue);
+            font-weight: 900;
+        }
+
+        header p { font-size: 10px; color: #475569; letter-spacing: 2px; margin-top: 5px; }
+
+        /* --- LAYOUT --- */
+        .container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 25px;
+            max-width: 1300px;
+            width: 95%;
+            margin: 0 auto 50px;
+            flex-grow: 1;
+        }
+
+        .panel {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--ms-border);
+            border-radius: 35px;
+            padding: 35px;
+            height: fit-content;
+        }
+
+        h2 { 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: #64748b; 
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--ms-border);
+            padding-bottom: 10px;
+        }
+
+        /* --- INPUT STYLING --- */
+        label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 8px; font-weight: 700; }
+        
+        input, select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--ms-border);
+            border-radius: 14px;
+            padding: 14px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--google-blue); outline: none; background: rgba(66,133,244,0.05); }
+
+        .data-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+        /* --- BUTTONS --- */
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 100px;
+            border: 1px solid var(--ms-border);
+            background: var(--glass);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 10px;
+        }
+
+        button:hover { background: #fff; color: #000; transform: translateY(-2px); }
+
+        .btn-generate { background: var(--google-blue); border: none; margin-top: 15px; }
+        .btn-download { background: #fff; color: #000; border: none; }
+
+        /* --- PREVIEW AREA --- */
+        .chart-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.01);
+            min-height: 500px;
+            position: relative;
+        }
+
+        #chartCanvas { max-width: 100% !important; height: auto !important; }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #334155;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .chart-box { min-height: 350px; }
+        }
+    </style>
 </head>
 <body>
 
-<header class="header glass">
-  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
-  <h1>Webb Chart Maker</h1>
-  <p>Simple • Accurate • Professional</p>
+<header>
+    <img src="WEBB-removebg-preview.png" alt="Webb Logo">
+    <h1>Webb Chart Maker</h1>
+    <p>Visualizing Intelligence • GoGenix Protocol</p>
 </header>
 
 <main class="container">
 
-  <!-- INPUT SECTION -->
-  <section class="glass panel">
-    <h2>Chart Settings</h2>
+    <aside class="panel">
+        <h2>Configuration</h2>
 
-    <label>Chart Title</label>
-    <input id="chartTitle" placeholder="Enter chart title">
+        <label>Identity / Title</label>
+        <input id="chartTitle" placeholder="Monthly Analytics">
 
-    <label>Chart Type</label>
-    <select id="chartType">
-      <option value="bar">Bar Chart</option>
-      <option value="line">Line Chart</option>
-      <option value="pie">Pie Chart</option>
-    </select>
+        <label>Visualization Type</label>
+        <select id="chartType">
+            <option value="bar">Dynamic Bar Chart</option>
+            <option value="line">Progressive Line Chart</option>
+            <option value="pie">Proportional Pie Chart</option>
+            <option value="doughnut">Doughnut Analytics</option>
+        </select>
 
-    <h3>Chart Data</h3>
-    <div id="rows"></div>
+        <h2>Dataset</h2>
+        <div id="rows">
+            <div class="data-row">
+                <input placeholder="Label (e.g. Jan)" class="label-input">
+                <input type="number" placeholder="Value" class="value-input">
+            </div>
+        </div>
 
-    <button onclick="addRow()">➕ Add Row</button>
-    <button onclick="generateChart()">📊 Generate Chart</button>
-  </section>
+        <button onclick="addRow()"><i class="fa fa-plus"></i> Add Entry</button>
+        <button class="btn-generate" onclick="generateChart()"><i class="fa fa-chart-line"></i> Sync & Generate</button>
+        
+        <div style="margin-top: 30px;">
+            <button class="btn-download" onclick="downloadPDF()"><i class="fa fa-file-pdf"></i> Export as PDF</button>
+        </div>
+    </aside>
 
-  <!-- CHART PREVIEW -->
-  <section class="glass panel chart-box" id="printArea">
-    <canvas id="chartCanvas"></canvas>
-  </section>
-
-  <!-- ACTION -->
-  <section class="glass panel">
-    <button onclick="downloadPDF()">⬇ Download PDF</button>
-  </section>
+    <section class="panel chart-box" id="printArea">
+        <canvas id="chartCanvas"></canvas>
+    </section>
 
 </main>
 
-<footer class="footer glass">
-  Built with discipline & correctness
+<footer>
+    © 2026 GOGENIX WEBB | ANALYTICS ENGINE
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Minimal logic to bridge with your chart.js file
+    function addRow() {
+        const row = document.createElement('div');
+        row.className = 'data-row';
+        row.innerHTML = `
+            <input placeholder="Label" class="label-input">
+            <input type="number" placeholder="Value" class="value-input">
+        `;
+        document.getElementById('rows').appendChild(row);
+    }
+
+    // Chart.js Default Config for Genix Style
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.borderColor = 'rgba(255,255,255,0.1)';
+
+    // Note: Your generateChart() and downloadPDF() functions in chart.js 
+    // will now trigger within this UI.
+</script>
 <script src="chart.js"></script>
 </body>
 </html>
