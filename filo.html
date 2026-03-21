@@ -1,85 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Webb | File Converter</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<title>Webb | File Converter</title><meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-<link rel="stylesheet" href="filo.css">
-     <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+      --accent: #c9a4ff;
+    }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* --- UNIFIED HEADER --- */
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    header img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 14px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--google-blue);
+      font-weight: 900;
+      margin-top: -15px;
+    }
+
+    header p { font-size: 11px; color: #475569; letter-spacing: 2px; margin-top: 8px; }
+
+    /* --- TOOLS GRID --- */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 20px auto 60px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .tool {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--ms-border);
+      border-radius: 30px;
+      padding: 30px;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(66, 133, 244, 0.3);
+    }
+
+    .tool h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool h3 i { color: var(--google-blue); font-size: 16px; }
+
+    /* --- INPUTS & BUTTONS --- */
+    input[type="file"] {
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed var(--ms-border);
+      padding: 15px;
+      border-radius: 15px;
+      width: 100%;
+      color: #64748b;
+      font-size: 12px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    select {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--ms-border);
+      color: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+
+    button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 16px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+
+    button:hover { background: var(--google-blue); color: #fff; }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: auto;
+      padding: 40px;
+      color: #334155;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    #alertBox {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2000;
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 600px) {
+      .tools { grid-template-columns: 1fr; }
+      header img { width: 140px; height: 140px; }
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-     <img src="WEBB-removebg-preview.png" width="200px" height="190px" style="align-items: center; justify-content:center" ></img>
-     <h2>Webb File Converter</h2>
-    <p>Secure • Browser-Based • Professional Utilities</p>
-</header>
 
 <div id="alertBox"></div>
 
+<header>
+  <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
+  <h2>Webb File Converter</h2>
+  <p>Secure • Browser-Based • Professional Utilities</p>
+</header>
+
 <main class="container">
-<div class="tools">
+  <div class="tools">
 
-<!-- JPG → PNG -->
-<div class="tool">
-<h3>JPG → PNG</h3>
-<input type="file" id="jpgToPng" accept="image/jpeg">
-<button onclick="jpgToPng()">Convert & Download</button>
-</div>
+    <div class="tool">
+      <h3><i class="fa fa-image"></i> JPG → PNG</h3>
+      <input type="file" id="jpgToPng" accept="image/jpeg">
+      <button onclick="handleConvert('jpgToPng')">Convert & Download</button>
+    </div>
 
-<!-- PNG → JPG -->
-<div class="tool">
-<h3>PNG → JPG</h3>
-<input type="file" id="pngToJpg" accept="image/png">
-<button onclick="pngToJpg()">Convert & Download</button>
-</div>
+    <div class="tool">
+      <h3><i class="fa fa-file-image"></i> PNG → JPG</h3>
+      <input type="file" id="pngToJpg" accept="image/png">
+      <button onclick="handleConvert('pngToJpg')">Convert & Download</button>
+    </div>
 
-<!-- Image → PDF -->
-<div class="tool">
-<h3>Image → PDF</h3>
-<input type="file" id="imgToPdf" accept="image/*">
-<button onclick="imageToPdf()">Convert & Download</button>
-</div>
+    <div class="tool">
+      <h3><i class="fa fa-file-pdf"></i> Image → PDF</h3>
+      <input type="file" id="imgToPdf" accept="image/*">
+      <button onclick="handleConvert('imageToPdf')">Convert & Download</button>
+    </div>
 
-<!-- MERGE PDF (2 INPUTS) -->
-<div class="tool">
-<h3>Merge PDFs</h3>
-<input type="file" id="mergePdf1" accept="application/pdf">
-<input type="file" id="mergePdf2" accept="application/pdf">
-<button onclick="mergeTwoPdfs()">Merge & Download</button>
-</div>
+    <div class="tool">
+      <h3><i class="fa fa-layer-group"></i> Merge PDFs</h3>
+      <input type="file" id="mergePdf1" accept="application/pdf" style="margin-bottom: 5px;">
+      <input type="file" id="mergePdf2" accept="application/pdf">
+      <button onclick="handleConvert('mergeTwoPdfs')">Merge & Download</button>
+    </div>
 
-<!-- COMPRESS PDF -->
-<div class="tool">
-<h3>Compress PDF</h3>
-<input type="file" id="compressPdf" accept="application/pdf">
-<select id="compressLevel">
-    <option value="2">2× Compression</option>
-    <option value="4">4× Compression</option>
-</select>
-<button onclick="compressPdf()">Compress & Download</button>
-</div>
+    <div class="tool">
+      <h3><i class="fa fa-compress-arrows-alt"></i> Compress PDF</h3>
+      <input type="file" id="compressPdf" accept="application/pdf">
+      <select id="compressLevel">
+        <option value="2">Standard (2× Compression)</option>
+        <option value="4">High (4× Compression)</option>
+      </select>
+      <button onclick="handleConvert('compressPdf')">Optimize & Download</button>
+    </div>
 
-</div>
+  </div>
 </main>
 
 <footer>
-Ease of File Conversioon without barriers
+  Ease of File Conversion without barriers • © 2026 GOGENIX
 </footer>
 
+<script>
+  // UI wrapper to show "Processing" state
+  function handleConvert(functionName) {
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.innerText = "PROCESSING...";
+    btn.style.opacity = "0.7";
+    btn.disabled = true;
+
+    // Call the original function from filo.js
+    if (typeof window[functionName] === "function") {
+      window[functionName]();
+    }
+
+    // Reset after a short delay (usually conversion triggers a download anyway)
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.opacity = "1";
+      btn.disabled = false;
+    }, 2000);
+  }
+</script>
 <script src="filo.js"></script>
 </body>
 </html>
