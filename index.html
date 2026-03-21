@@ -18,62 +18,78 @@
       --glass: rgba(255, 255, 255, 0.03);
     }
 
-    /* Prevent horizontal scrolling and force fit */
+    /* Reset and tap-highlight removal */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; /* Removes blue flash on click */
+    }
+
     html, body {
-      margin: 0;
-      padding: 0;
       width: 100%;
-      height: 100%;
+      min-height: 100vh; /* Ensures content fills the screen height */
       background-color: var(--bg-dark);
       background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
       color: #ffffff;
       font-family: 'Segoe UI', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column; /* Allows footer to push to bottom */
     }
 
-    /* --- FIXED RATIO HEADER --- */
+    /* --- FULLY TRANSPARENT HEADER --- */
     header {
       display: flex;
-      justify-content: center; /* Centering the single logo */
+      justify-content: center;
       align-items: center;
-      padding: 1.5vw 5vw;
-      position: sticky;
+      padding: 20px;
+      position: absolute; /* No overlapping panels, floats over BG */
+      width: 100%;
       top: 0;
       z-index: 1000;
-      background: rgba(8, 8, 8, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--ms-border);
+      background: transparent; 
     }
 
     .logo img {
-      height: 5vw; /* Scales perfectly with screen width */
-      min-height: 40px;
-      width: auto;
+      width: 180px;  /* Fixed size as requested */
+      height: 180px; /* Fixed size as requested */
       object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
+    }
+
+    /* Main Container to fill mobile space */
+    main {
+      flex-grow: 1; /* Pushes footer down */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centers content vertically in the space */
+      padding-top: 200px; /* Offset for the 180px logo */
     }
 
     .version-badge {
       text-align: center;
-      margin: 2vw 0;
-      font-size: 0.8vw;
-      min-size: 10px;
-      letter-spacing: 0.3vw;
+      font-size: 10px;
+      letter-spacing: 4px;
       color: var(--google-blue);
       font-weight: 900;
       text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
-    /* --- ALIGNMENT & SCALE ENGINE --- */
     nav {
-      padding: 2vw 5vw;
       text-align: center;
+      padding: 0 5%;
     }
 
+    /* ONE LINE TEXT FOR ALL DEVICES */
     .brand-text {
-      font-size: 3.5vw; /* Fluid typography */
+      font-size: clamp(14px, 3.2vw, 40px);
       font-weight: 800;
-      margin-bottom: 3vw;
-      letter-spacing: -0.1vw;
+      margin-bottom: 40px;
+      white-space: nowrap; /* Forces one line */
+      display: flex;
+      justify-content: center;
+      gap: 8px;
     }
 
     .brand-text span:nth-child(1) { color: var(--google-blue); }
@@ -81,12 +97,11 @@
     .brand-text span:nth-child(3) { color: var(--google-yellow); }
     .brand-text span:nth-child(4) { color: var(--google-green); }
 
-    /* CAPSULE BUTTONS: FIXED SIDE-BY-SIDE */
     .nav-button-container {
       display: flex;
       justify-content: center;
-      gap: 2vw;
-      flex-wrap: nowrap; /* Forces side-by-side even on mobile */
+      gap: 15px;
+      margin-bottom: 50px;
     }
 
     .capsule-btn {
@@ -94,64 +109,52 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1vw;
-      padding: 1.2vw 3vw;
-      width: 22vw; /* Proportionate width */
-      border-radius: 100px;
+      gap: 10px;
+      padding: 12px 25px;
+      min-width: 160px;
+      border-radius: 50px;
       background: var(--glass);
       border: 1px solid var(--ms-border);
       backdrop-filter: blur(10px);
-      transition: 0.4s ease;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .capsule-btn img {
-      width: 3vw;
-      height: 3vw;
-      min-width: 20px;
-      min-height: 20px;
+      width: 25px;
+      height: 25px;
     }
 
     .capsule-btn span {
       color: #fff;
       font-weight: 600;
-      font-size: 1.1vw; /* Text scales with screen */
+      font-size: 14px;
     }
 
     .capsule-btn:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.05);
       border-color: var(--google-blue);
-      background: rgba(66, 133, 244, 0.1);
+      box-shadow: 0 10px 20px rgba(66, 133, 244, 0.2);
     }
 
-    /* --- STATS DASHBOARD --- */
+    /* --- VISITOR DASHBOARD: ADJUSTED FOR MOBILE SPACE --- */
     .visitor-dashboard {
-      max-width: 80vw;
-      margin: 5vw auto;
-      padding: 3vw;
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 30px;
       background: rgba(255,255,255,0.02);
-      border-radius: 2vw;
+      border-radius: 20px;
       border: 1px solid var(--ms-border);
     }
 
     .stats-grid {
-      display: flex; /* Linear row for all resolutions */
+      display: flex;
       justify-content: space-around;
       align-items: center;
     }
 
     .stat-item { text-align: center; }
-
-    .stat-item h3 {
-      font-size: 2.5vw;
-      font-weight: 800;
-      margin-bottom: 0.5vw;
-    }
-
-    .stat-item p {
-      font-size: 0.8vw;
-      color: #94a3b8;
-      text-transform: uppercase;
-    }
+    .stat-item h3 { font-size: clamp(20px, 5vw, 32px); font-weight: 800; margin-bottom: 5px; }
+    .stat-item p { font-size: 10px; color: #94a3b8; text-transform: uppercase; }
 
     .stat-blue { color: var(--google-blue); }
     .stat-red { color: var(--google-red); }
@@ -161,26 +164,25 @@
     /* --- FOOTER --- */
     .footer-box {
       text-align: center;
-      padding: 4vw 5vw;
+      padding: 40px 20px;
       border-top: 1px solid var(--ms-border);
+      margin-top: auto; /* Sticky to bottom */
     }
 
     .footer-logo {
-      width: 15vw;
-      margin-bottom: 2vw;
+      width: 180px;
+      margin-bottom: 20px;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 2vw;
+      gap: 15px;
     }
 
     .social-icon {
-      width: 3.5vw;
-      height: 3.5vw;
-      min-width: 35px;
-      min-height: 35px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       background: var(--glass);
       display: flex;
@@ -189,22 +191,19 @@
       color: #fff;
       text-decoration: none;
       border: 1px solid var(--ms-border);
+      transition: 0.3s;
     }
 
-    footer p {
-      font-size: 0.7vw;
-      color: #475569;
-      padding: 2vw;
-      text-align: center;
-    }
+    .social-icon:hover { background: #fff; color: #000; }
 
-    /* Mobile specific overrides to keep font readable but layout identical */
+    footer { padding: 20px; text-align: center; font-size: 10px; color: #475569; }
+
+    /* MOBILE: Force content to expand and fill space */
     @media (max-width: 600px) {
-      .brand-text { font-size: 6vw; }
-      .capsule-btn span { font-size: 2.5vw; }
-      .stat-item h3 { font-size: 4vw; }
-      .stat-item p { font-size: 1.5vw; }
-      footer p { font-size: 2vw; }
+      main { justify-content: space-evenly; } /* Distributes space between items */
+      .brand-text { font-size: 3.5vw; }
+      .nav-button-container { flex-direction: row; gap: 10px; }
+      .capsule-btn { padding: 10px 15px; min-width: 140px; }
     }
   </style>
 </head>
@@ -217,46 +216,48 @@
     </div>
   </header>
 
-  <div class="version-badge">UniPlat 2.0</div>
+  <main>
+    <div class="version-badge">UniPlat 2.0</div>
 
-  <nav>
-    <h1 class="brand-text">
-      <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
-    </h1>
-    
-    <div class="nav-button-container">
-      <a href="webbtab.html" class="capsule-btn">
-        <img src="UniPlat.-removebg-preview.png" alt="GenixTab">
-        <span>GenixTab</span>
-      </a>
+    <nav>
+      <h1 class="brand-text">
+        <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
+      </h1>
+      
+      <div class="nav-button-container">
+        <a href="webbtab.html" class="capsule-btn">
+          <img src="UniPlat.-removebg-preview.png" alt="GenixTab">
+          <span>GenixTab</span>
+        </a>
 
-      <a href="webbgames.html" class="capsule-btn">
-        <img src="N-removebg-preview.png" alt="WebbJamm">
-        <span>WebbJamm</span>
-      </a>
-    </div>
-  </nav>
+        <a href="webbgames.html" class="capsule-btn">
+          <img src="N-removebg-preview.png" alt="WebbJamm">
+          <span>WebbJamm</span>
+        </a>
+      </div>
+    </nav>
 
-  <section class="visitor-dashboard">
-    <div class="stats-grid">
-        <div class="stat-item">
-            <h3 class="stat-blue">320</h3>
-            <p>Active Users</p>
-        </div>
-        <div class="stat-item">
-            <h3 class="stat-red">20+</h3>
-            <p>Cities</p>
-        </div>
-        <div class="stat-item">
-            <h3 class="stat-yellow">15+</h3>
-            <p>Countries</p>
-        </div>
-        <div class="stat-item">
-            <h3 class="stat-green">2</h3>
-            <p>Main Tabs</p>
-        </div>
-    </div>
-  </section>
+    <section class="visitor-dashboard">
+      <div class="stats-grid">
+          <div class="stat-item">
+              <h3 class="stat-blue">320</h3>
+              <p>Users</p>
+          </div>
+          <div class="stat-item">
+              <h3 class="stat-red">20+</h3>
+              <p>Cities</p>
+          </div>
+          <div class="stat-item">
+              <h3 class="stat-yellow">15+</h3>
+              <p>Countries</p>
+          </div>
+          <div class="stat-item">
+              <h3 class="stat-green">2</h3>
+              <p>Tabs</p>
+          </div>
+      </div>
+    </section>
+  </main>
 
   <div class="footer-box">
     <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Footer Logo" class="footer-logo">
@@ -264,11 +265,11 @@
         <a href="https://linkedin.com/..." class="social-icon"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://instagram.com/..." class="social-icon"><i class="fab fa-instagram"></i></a>
     </div>
-</div>
+  </div>
 
-<footer>
+  <footer>
     <p>© 2026 GOGENIX WEBB | UNIFIED PLATFORM SYSTEM</p>
-</footer>
+  </footer>
 
 </body>
 </html>
