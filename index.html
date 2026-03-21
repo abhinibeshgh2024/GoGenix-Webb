@@ -12,78 +12,95 @@
   </script>
   
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <meta name="description" content="GoGenix Webb - Your ultimate destination for free digital tools.">
-  <meta name="robots" content="index, follow">
-  <title>GoGenix Webb | Home</title>
+  <title>GoGenix Webb | UniPlat 2.0</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     :root {
-      --ms-dark: #0a0a0a;
+      --ms-dark: #050505;
       --ms-card: rgba(255, 255, 255, 0.03);
       --google-blue: #4285F4;
       --google-red: #EA4335;
       --google-yellow: #FBBC05;
       --google-green: #34A853;
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background-color: var(--ms-dark);
-      background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #0a0a0a 80%);
+      background-image: radial-gradient(circle at 50% -10%, #1e293b 0%, #050505 100%);
       color: #ffffff;
       font-family: 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* --- HEADER: FIXING LOGO SQUEEZE --- */
+    /* --- HEADER: BIG & CLEAR LOGOS --- */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 5%;
-      backdrop-filter: blur(12px);
+      padding: 25px 6%;
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--glass-border);
       position: sticky;
       top: 0;
       z-index: 1000;
+      background: rgba(5, 5, 5, 0.7);
     }
 
     .logo img, .right-logo img {
-      height: 45px; /* Control height only */
-      width: auto;   /* Allow width to scale naturally */
+      height: 65px; /* Increased size for clarity */
+      width: auto;
       display: block;
-      object-fit: contain; /* Prevents stretching */
-      transition: transform 0.3s ease;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+      transition: transform 0.4s ease;
     }
 
-    /* --- INNOVATIVE BUTTONS --- */
-    nav {
-      padding: 100px 20px 60px;
-      text-align: center;
+    .logo img:hover, .right-logo img:hover {
+      transform: scale(1.05);
     }
+
+    /* --- VERSION TAG --- */
+    .version-tag {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .version-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--google-blue);
+      color: var(--google-blue);
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(66, 133, 244, 0.2);
+    }
+
+    /* --- MAIN NAVIGATION --- */
+    nav { padding: 60px 20px 40px; text-align: center; }
 
     .page-title {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-size: clamp(2rem, 6vw, 3.2rem);
       font-weight: 800;
-      background: linear-gradient(to right, #ffffff, #64748b);
+      letter-spacing: -1px;
+      margin-bottom: 40px;
+      background: linear-gradient(to bottom, #fff 30%, #64748b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 50px;
     }
 
     .nav-button-container {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
     }
 
@@ -93,140 +110,124 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 45px 35px;
-      width: 220px;
-      border-radius: 30px;
+      padding: 40px;
+      width: 240px;
+      border-radius: 35px;
       background: var(--ms-card);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(20px);
       transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    /* Animated Glow Border */
-    .img-nav-btn::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      padding: 2px;
-      border-radius: 30px;
-      background: linear-gradient(45deg, var(--google-blue), var(--google-red), var(--google-yellow), var(--google-green));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .img-nav-btn:hover::before { opacity: 1; }
-
     .img-nav-btn img {
-      width: 85px;  /* Fixed width */
-      height: auto; /* Auto height to prevent squeezing */
-      margin-bottom: 25px;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 90px;
+      height: auto;
+      margin-bottom: 20px;
     }
 
     .img-nav-btn span {
-      color: #94a3b8;
       font-weight: 700;
+      color: #94a3b8;
       letter-spacing: 2px;
-      font-size: 13px;
-      text-transform: uppercase;
+      font-size: 14px;
     }
 
     .img-nav-btn:hover {
-      transform: translateY(-15px) scale(1.03);
+      transform: translateY(-10px);
       background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+      border-color: var(--google-blue);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
-    .img-nav-btn:hover img {
-      transform: scale(1.15) rotate(5deg);
+    /* --- INTEGRATED DASHBOARD SECTION --- */
+    .dashboard-section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    .img-nav-btn:hover span {
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    /* --- ABOUT SECTION --- */
-    .about-section { padding: 40px 5%; }
-    .about-card {
-      background: var(--ms-card);
+    .dash-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
       border: 1px solid var(--glass-border);
-      padding: 50px;
-      border-radius: 32px;
-      max-width: 850px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 30px;
+      transition: 0.3s;
     }
 
-    /* --- FOOTER: FIXING FOOTER LOGO --- */
+    .dash-card:hover {
+      border-color: rgba(255,255,255,0.3);
+      transform: scale(1.02);
+    }
+
+    .dash-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dash-card i { color: var(--google-green); }
+
+    /* --- FOOTER --- */
     .footer-box {
-      padding: 100px 20px;
+      padding: 80px 20px;
       text-align: center;
       border-top: 1px solid var(--glass-border);
+      margin-top: 60px;
     }
 
     .footer-logo-center {
-      width: 100%;
-      max-width: 280px; /* Bigger and fixed max-width */
-      height: auto;     /* Maintains aspect ratio */
+      width: 320px; /* Large Footer Logo */
+      height: auto;
       margin-bottom: 30px;
-      opacity: 0.8;
-      transition: 0.5s ease;
-    }
-
-    .footer-logo-center:hover {
-      opacity: 1;
-      transform: scale(1.05);
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 25px;
-      margin-top: 35px;
+      gap: 20px;
     }
 
     .social-btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 20px; /* Modern Squircle shape */
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
       background: var(--ms-card);
       border: 1px solid var(--glass-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #94a3b8;
-      font-size: 24px;
+      color: #fff;
+      font-size: 22px;
+      transition: 0.4s;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .social-btn:hover {
-      transform: translateY(-10px) rotate(8deg);
-      color: #fff;
+      transform: translateY(-5px);
+      background: var(--google-blue);
     }
 
-    .social-btn.linkedin:hover { background: #0077b5; box-shadow: 0 15px 30px rgba(0, 119, 181, 0.4); }
-    .social-btn.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); box-shadow: 0 15px 30px rgba(214, 36, 159, 0.4); }
-
     footer {
-      padding: 40px;
-      background: #050505;
-      color: #475569;
-      font-size: 12px;
+      padding: 30px;
       text-align: center;
+      font-size: 11px;
+      color: #475569;
       letter-spacing: 1px;
     }
 
     @media (max-width: 600px) {
-      header { padding: 10px 5%; }
-      .logo img, .right-logo img { height: 35px; }
-      .img-nav-btn { width: 100%; max-width: 280px; }
+      header { padding: 15px 4%; }
+      .logo img, .right-logo img { height: 45px; }
+      .img-nav-btn { width: 100%; }
     }
   </style>
 </head>
@@ -242,8 +243,12 @@
     </div>
   </header>
 
+  <div class="version-tag">
+    <span class="version-badge">UniPlat 2.0</span>
+  </div>
+
   <nav>
-    <h1 class="page-title">Digital Utilities. Redefined.</h1>
+    <h1 class="page-title">Productivity Without Barriers.</h1>
     
     <div class="nav-button-container">
       <a href="webbtab.html" class="img-nav-btn">
@@ -258,10 +263,16 @@
     </div>
   </nav>
 
-  <section class="about-section">
-    <div class="about-card">
-      <h2 style="color: var(--google-blue); margin-bottom: 15px;">Productivity First.</h2>
-      <p>GoGenix Webb is a unified platform built for <b>high-performance utility</b>. By removing the friction of sign-ups and premium paywalls, we’ve created a direct path to the tools you need.</p>
+  <section class="dashboard-section">
+    <div class="dashboard-grid">
+      <div class="dash-card">
+        <h3><i class="fas fa-bolt"></i> Quick Start</h3>
+        <p style="color: #94a3b8; font-size: 14px;">Access your most used tools instantly without navigation lag.</p>
+      </div>
+      <div class="dash-card">
+        <h3><i class="fas fa-shield-alt"></i> Privacy Mode</h3>
+        <p style="color: #94a3b8; font-size: 14px;">No data logging enabled. Your session is temporary and secure.</p>
+      </div>
     </div>
   </section>
 
@@ -269,17 +280,17 @@
     <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Logo" class="footer-logo-center">
     
     <div class="social-links">
-        <a href="https://www.linkedin.com/company/gogenixwebb" class="social-btn linkedin" target="_blank">
+        <a href="https://www.linkedin.com/company/gogenixwebb" class="social-btn" target="_blank">
             <i class="fab fa-linkedin-in"></i>
         </a>
-        <a href="https://www.instagram.com/gogenix_weser/" class="social-btn instagram" target="_blank">
+        <a href="https://www.instagram.com/gogenix_weser/" class="social-btn" target="_blank">
             <i class="fab fa-instagram"></i>
         </a>
     </div>
   </div>
 
   <footer>
-    <p>© 2026 GOGENIX WEBB | POWERED BY GOGENIX WESER</p>
+    <p>© 2026 GOGENIX WEBB | UNIPLAT 2.0 BY GOGENIX WESER</p>
   </footer>
 
 </body>
