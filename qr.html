@@ -1,220 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Webb | QR Generator</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<title>Webb | QR Generator</title>
   <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
-<meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
 
-body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-}
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-/* ===== HEADER ===== */
-header{
-  background:transparent;
-  text-align:center;
-  padding:18px 10px;
-}
+    /* --- UNIFIED HEADER --- */
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+    }
 
-header img{
-  width:120px;
-  margin-bottom:6px;
-}
+    header img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
 
-header h1{
-  font-size:26px;
-  font-weight:600;
-}
+    header h1 {
+      font-size: 14px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--google-blue);
+      font-weight: 900;
+      margin-top: -15px;
+    }
 
-header p{
-  font-size:14px;
-  opacity:0.85;
-}
+    header p { font-size: 11px; color: #475569; letter-spacing: 2px; margin-top: 8px; }
 
-/* ===== MAIN ===== */
-.main{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:18px;
-}
+    /* --- MAIN CONTAINER --- */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto 60px;
+      background: var(--glass);
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--ms-border);
+      border-radius: 40px;
+      padding: 40px;
+      text-align: center;
+    }
 
-/* ===== GLASS ===== */
-.glass{
-  width:100%;
-  max-width:900px;
-  padding:22px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(14px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
+    /* --- INPUT BOX --- */
+    .input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
 
-/* ===== INPUT ===== */
-.input-box{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+    label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #64748b;
+      font-weight: 800;
+      text-align: left;
+      padding-left: 10px;
+    }
 
-.input-box label{
-  font-weight:600;
-}
+    textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--ms-border);
+      border-radius: 20px;
+      padding: 20px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      min-height: 120px;
+      transition: 0.3s;
+    }
 
-.input-box textarea{
-  resize:none;
-  min-height:110px;
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  font-size:15px;
-  outline:none;
-}
+    textarea:focus {
+      border-color: var(--google-blue);
+      background: rgba(66, 133, 244, 0.05);
+    }
 
-.input-box button{
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  background:#ffffff;
-  font-weight:600;
-  cursor:pointer;
-}
+    .generate-btn {
+      background: var(--google-blue);
+      color: #fff;
+      border: none;
+      padding: 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-/* ===== QR AREA ===== */
-.qr-area{
-  margin-top:24px;
-  text-align:center;
-}
+    .generate-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(66, 133, 244, 0.3);
+    }
 
-#qrBox{
-  background:#fff;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  border-radius:16px;
-  min-width:240px;
-  min-height:240px;
-}
+    /* --- QR DISPLAY --- */
+    .qr-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
 
-.download-btn{
-  margin-top:16px;
-  padding:12px 26px;
-  border-radius:12px;
-  border:none;
-  background:#ffffff;
-  font-weight:600;
-  cursor:pointer;
-}
+    #qrBox {
+      background: #fff;
+      padding: 25px;
+      border-radius: 24px;
+      display: inline-flex;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      transition: 0.5s ease;
+    }
 
-/* ===== FOOTER ===== */
-.footer{
-  margin-top:18px;
-  text-align:center;
-  font-size:13px;
-  opacity:0.8;
-}
-</style>
+    #qrBox canvas, #qrBox img {
+      max-width: 220px;
+      height: auto;
+    }
+
+    .download-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .download-btn:hover {
+      background: #e2e8f0;
+      transform: scale(1.05);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      margin-top: 30px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #334155;
+      text-transform: uppercase;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <img src="WEBB-removebg-preview.png">
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
   <h1>Webb QR Generator</h1>
   <p>Universal • Scannable • Reliable</p>
 </header>
 
-<div class="main">
-<div class="glass">
-
+<main class="container">
   <div class="input-box">
-    <label>Enter Any Text / URL / Data</label>
-    <textarea id="qrInput" placeholder="Website link, paragraph, phone number, email, anything..."></textarea>
-    <button onclick="generateQR()">Generate QR</button>
+    <label><i class="fa fa-keyboard"></i> Data Input Protocol</label>
+    <textarea id="qrInput" placeholder="Enter URL, Text, or Contact Details..."></textarea>
+    <button class="generate-btn" onclick="generateQR()">Sync & Generate QR</button>
   </div>
 
   <div class="qr-area">
-    <div id="qrBox"></div>
-    <br>
-    <button class="download-btn" onclick="downloadQR()">Download QR</button>
+    <div id="qrBox">
+      <i class="fa fa-qrcode" style="font-size: 100px; color: #eee; padding: 60px;"></i>
+    </div>
+    <button class="download-btn" id="dlBtn" onclick="downloadQR()" style="display: none;">
+      <i class="fa fa-download"></i> Export PNG
+    </button>
   </div>
 
   <div class="footer">
     Built with discipline & correctness
   </div>
-
-</div>
-</div>
+</main>
 
 <script>
-let qrInstance=null;
+  let qrInstance = null;
 
-function generateQR(){
-  const data=document.getElementById("qrInput").value.trim();
-  if(!data){
-    alert("Please enter some text or link");
-    return;
+  function generateQR() {
+    const data = document.getElementById("qrInput").value.trim();
+    if (!data) {
+      alert("Encryption Error: No data provided.");
+      return;
+    }
+
+    const qrBox = document.getElementById("qrBox");
+    qrBox.innerHTML = ""; // Clear placeholder
+    
+    // High error correction 'H' ensures it works even if slightly damaged/obstructed
+    qrInstance = new QRCode(qrBox, {
+      text: data,
+      width: 220,
+      height: 220,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Show download button
+    document.getElementById('dlBtn').style.display = "inline-block";
   }
 
-  const qrBox=document.getElementById("qrBox");
-  qrBox.innerHTML="";
+  function downloadQR() {
+    // We target the canvas generated by QRCode.js for the cleanest export
+    const canvas = document.querySelector("#qrBox canvas");
+    const img = document.querySelector("#qrBox img");
+    
+    let downloadUrl;
 
-  qrInstance=new QRCode(qrBox,{
-    text:data,
-    width:220,
-    height:220,
-    correctLevel:QRCode.CorrectLevel.H
-  });
-}
+    if (canvas) {
+      downloadUrl = canvas.toDataURL("image/png");
+    } else if (img) {
+      downloadUrl = img.src;
+    } else {
+      alert("Process Error: Generate QR first.");
+      return;
+    }
 
-function downloadQR(){
-  const img=document.querySelector("#qrBox img");
-  if(!img){
-    alert("Generate QR first");
-    return;
-  }
-
-  const canvas=document.createElement("canvas");
-  const ctx=canvas.getContext("2d");
-
-  canvas.width=img.width;
-  canvas.height=img.height;
-
-  const image=new Image();
-  image.onload=()=>{
-    ctx.drawImage(image,0,0);
-    const link=document.createElement("a");
-    link.download="Webb_QR.png";
-    link.href=canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "Webb_QR_Genix.png";
+    link.href = downloadUrl;
+    document.body.appendChild(link);
     link.click();
-  };
-  image.src=img.src;
-}
+    document.body.removeChild(link);
+  }
 </script>
 
 </body>
