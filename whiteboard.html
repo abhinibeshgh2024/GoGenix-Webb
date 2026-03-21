@@ -1,132 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Webb | Whiteboard</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<title>Webb | Whiteboard</title>
   <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
-<meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.05);
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; touch-action: none; }
 
-body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-}
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* Prevent scrolling while drawing */
+    }
 
-/* ===== HEADER ===== */
-header{
-  background:transparent;
-  text-align:center;
-  padding:18px 10px;
-}
+    /* --- HEADER --- */
+    header { padding: 15px; text-align: center; }
+    header img { width: 140px; margin-bottom: 5px; }
+    header h1 { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--google-blue); }
 
-header img{
-  width:120px;
-  margin-bottom:6px;
-}
+    /* --- TOOLBAR --- */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px;
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid var(--ms-border);
+      border-bottom: 1px solid var(--ms-border);
+      z-index: 100;
+    }
 
-header h1{
-  font-size:26px;
-  font-weight:600;
-}
+    .tool-group { display: flex; gap: 5px; border-right: 1px solid var(--ms-border); padding-right: 10px; margin-right: 5px; }
 
-header p{
-  font-size:14px;
-  opacity:0.85;
-}
+    button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--ms-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-/* ===== MAIN ===== */
-.main{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:18px;
-}
+    button.active { background: var(--google-blue); border-color: transparent; }
+    button:hover { background: rgba(255,255,255,0.15); }
 
-/* ===== GLASS ===== */
-.glass{
-  width:100%;
-  max-width:1100px;
-  padding:18px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(14px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
+    input[type="color"] { width: 40px; height: 38px; border: none; background: none; cursor: pointer; }
 
-/* ===== TOOLS ===== */
-.tools{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:14px;
-}
+    /* --- BOARD --- */
+    .main-canvas-area {
+      flex: 1;
+      position: relative;
+      background: #fff;
+      margin: 15px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
 
-.tools button,
-.tools input{
-  padding:9px 14px;
-  border-radius:10px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-}
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
 
-.tools button{
-  background:#ffffff;
-}
+    #gridCanvas { opacity: 0.1; pointer-events: none; }
 
-.tools input[type="color"]{
-  width:48px;
-  height:40px;
-  padding:4px;
-}
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #475569;
+      text-transform: uppercase;
+    }
 
-.tools input[type="range"]{
-  width:140px;
-}
-
-/* ===== BOARD ===== */
-.board-wrap{
-  background:rgba(0,0,0,0.35);
-  padding:14px;
-  border-radius:15px;
-}
-
-canvas{
-  width:100%;
-  height:450px;
-  background:#fff;
-  border-radius:12px;
-  cursor:crosshair;
-}
-
-.footer{
-  text-align:center;
-  margin-top:10px;
-  font-size:13px;
-  opacity:0.8;
-}
-</style>
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .tool-group { border: none; padding: 0; margin: 0; }
+      header img { width: 100px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -134,138 +118,185 @@ canvas{
 <header>
   <img src="WEBB-removebg-preview.png">
   <h1>Webb Whiteboard</h1>
-  <p>Clean • Interactive • Reliable</p>
 </header>
 
-<div class="main">
-<div class="glass" id="exportArea">
-
-  <div class="tools">
-    <button onclick="setTool('pen')">Pen</button>
-    <button onclick="setTool('marker')">Marker</button>
-    <button onclick="setTool('eraser')">Eraser</button>
-    <button onclick="setTool('rect')">Rectangle</button>
-    <button onclick="setTool('circle')">Circle</button>
-
-    <input type="color" id="colorPicker">
-    <input type="range" id="thickness" min="1" max="30" value="3">
-
-    <input type="file" id="mediaInput" accept="image/*" hidden>
-    <button onclick="document.getElementById('mediaInput').click()">Insert Image</button>
-
-    <button onclick="clearBoard()">Clear</button>
-    <button onclick="exportPDF()">Export PDF</button>
+<div class="toolbar">
+  <div class="tool-group">
+    <button onclick="setTool('pen', this)" class="active"><i class="fa fa-pen"></i></button>
+    <button onclick="setTool('marker', this)"><i class="fa fa-highlighter"></i></button>
+    <button onclick="setTool('eraser', this)"><i class="fa fa-eraser"></i></button>
+  </div>
+  
+  <div class="tool-group">
+    <button onclick="setTool('rect', this)"><i class="fa fa-square"></i></button>
+    <button onclick="setTool('circle', this)"><i class="fa fa-circle"></i></button>
+    <button onclick="toggleGrid()"><i class="fa fa-th"></i></button>
   </div>
 
-  <div class="board-wrap">
-    <canvas id="board"></canvas>
-  </div>
+  <input type="color" id="colorPicker" value="#000000">
+  <input type="range" id="thickness" min="1" max="25" value="3" style="width:80px">
 
-  <div class="footer">
-    Built with discipline & correctness
-  </div>
-
+  <button onclick="clearBoard()"><i class="fa fa-trash"></i></button>
+  <button onclick="exportPDF()" style="background: #fff; color: #000; font-weight: 800;">EXPORT PDF</button>
 </div>
-</div>
+
+<div class="main-canvas-area" id="exportArea">
+  <canvas id="gridCanvas"></canvas>
+  <canvas id="mainCanvas"></canvas>
+  <canvas id="tempCanvas"></canvas> </div>
+
+<footer>Built with discipline & correctness</footer>
 
 <script>
-const canvas = document.getElementById("board");
-const ctx = canvas.getContext("2d");
+  const mainCanvas = document.getElementById("mainCanvas");
+  const tempCanvas = document.getElementById("tempCanvas");
+  const gridCanvas = document.getElementById("gridCanvas");
+  
+  const ctx = mainCanvas.getContext("2d");
+  const tctx = tempCanvas.getContext("2d");
+  const gctx = gridCanvas.getContext("2d");
 
-canvas.width = canvas.offsetWidth;
-canvas.height = 450;
+  let drawing = false;
+  let tool = "pen";
+  let startX, startY;
+  let color = "#000000";
+  let thickness = 3;
+  let gridVisible = false;
 
-let drawing=false;
-let tool="pen";
-let startX,startY;
-let color="#000000";
-let thickness=3;
+  function resize() {
+    const parent = mainCanvas.parentElement;
+    [mainCanvas, tempCanvas, gridCanvas].forEach(c => {
+      c.width = parent.clientWidth;
+      c.height = parent.clientHeight;
+    });
+    if(gridVisible) drawGrid();
+  }
 
-/* CONTROLS */
-document.getElementById("colorPicker").oninput=e=>color=e.target.value;
-document.getElementById("thickness").oninput=e=>thickness=e.target.value;
+  window.addEventListener('resize', resize);
+  resize();
 
-function setTool(t){ tool=t; }
+  /* CONTROLS */
+  document.getElementById("colorPicker").oninput = e => color = e.target.value;
+  document.getElementById("thickness").oninput = e => thickness = e.target.value;
 
-/* DRAW */
-canvas.addEventListener("mousedown",e=>{
-  drawing=true;
-  startX=e.offsetX;
-  startY=e.offsetY;
+  function setTool(t, btn) {
+    tool = t;
+    document.querySelectorAll('.toolbar button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
 
-  if(tool==="pen" || tool==="marker"){
+  function toggleGrid() {
+    gridVisible = !gridVisible;
+    gridVisible ? drawGrid() : gctx.clearRect(0,0,gridCanvas.width, gridCanvas.height);
+  }
+
+  function drawGrid() {
+    gctx.clearRect(0,0,gridCanvas.width, gridCanvas.height);
+    gctx.strokeStyle = "#000";
+    gctx.lineWidth = 0.5;
+    for(let i=0; i<gridCanvas.width; i+=30) {
+      gctx.beginPath(); gctx.moveTo(i,0); gctx.lineTo(i, gridCanvas.height); gctx.stroke();
+    }
+    for(let i=0; i<gridCanvas.height; i+=30) {
+      gctx.beginPath(); gctx.moveTo(0,i); gctx.lineTo(gridCanvas.width, i); gctx.stroke();
+    }
+  }
+
+  /* UNIFIED INPUT (Mouse & Touch) */
+  function getPos(e) {
+    const rect = mainCanvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  }
+
+  function startDrawing(e) {
+    drawing = true;
+    const pos = getPos(e);
+    startX = pos.x;
+    startY = pos.y;
     ctx.beginPath();
-    ctx.moveTo(startX,startY);
-  }
-});
-
-canvas.addEventListener("mousemove",e=>{
-  if(!drawing) return;
-
-  if(tool==="pen"){
-    ctx.globalAlpha=1;
-    ctx.strokeStyle=color;
-    ctx.lineWidth=thickness;
-    ctx.lineTo(e.offsetX,e.offsetY);
-    ctx.stroke();
+    ctx.moveTo(startX, startY);
+    e.preventDefault();
   }
 
-  if(tool==="marker"){
-    ctx.globalAlpha=0.3;
-    ctx.strokeStyle=color;
-    ctx.lineWidth=thickness*2;
-    ctx.lineTo(e.offsetX,e.offsetY);
-    ctx.stroke();
-    ctx.globalAlpha=1;
+  function draw(e) {
+    if (!drawing) return;
+    const pos = getPos(e);
+    tctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height); // Clear preview
+
+    if (tool === "pen" || tool === "marker") {
+      ctx.globalAlpha = tool === "marker" ? 0.3 : 1;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = tool === "marker" ? thickness * 3 : thickness;
+      ctx.lineCap = "round";
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    } 
+    else if (tool === "rect") {
+      tctx.strokeStyle = color;
+      tctx.lineWidth = thickness;
+      tctx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
+    } 
+    else if (tool === "circle") {
+      tctx.strokeStyle = color;
+      tctx.lineWidth = thickness;
+      const r = Math.hypot(pos.x - startX, pos.y - startY);
+      tctx.beginPath();
+      tctx.arc(startX, startY, r, 0, Math.PI * 2);
+      tctx.stroke();
+    } 
+    else if (tool === "eraser") {
+      ctx.clearRect(pos.x - 15, pos.y - 15, 30, 30);
+    }
   }
 
-  if(tool==="eraser"){
-    ctx.clearRect(e.offsetX-10,e.offsetY-10,20,20);
+  function stopDrawing(e) {
+    if (!drawing) return;
+    const pos = getPos(e);
+    
+    // Bake temporary shape into main canvas
+    if (tool === "rect") {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = thickness;
+      ctx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
+    } else if (tool === "circle") {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = thickness;
+      const r = Math.hypot(pos.x - startX, pos.y - startY);
+      ctx.beginPath();
+      ctx.arc(startX, startY, r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    
+    tctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+    drawing = false;
   }
-});
 
-canvas.addEventListener("mouseup",e=>{
-  drawing=false;
+  // Event Listeners
+  [tempCanvas].forEach(c => {
+    c.addEventListener("mousedown", startDrawing);
+    c.addEventListener("mousemove", draw);
+    window.addEventListener("mouseup", stopDrawing);
+    
+    c.addEventListener("touchstart", startDrawing);
+    c.addEventListener("touchmove", draw);
+    c.addEventListener("touchend", stopDrawing);
+  });
 
-  if(tool==="rect"){
-    ctx.strokeStyle=color;
-    ctx.lineWidth=thickness;
-    ctx.strokeRect(startX,startY,e.offsetX-startX,e.offsetY-startY);
+  function clearBoard() {
+    ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
   }
 
-  if(tool==="circle"){
-    ctx.strokeStyle=color;
-    ctx.lineWidth=thickness;
-    ctx.beginPath();
-    const r=Math.hypot(e.offsetX-startX,e.offsetY-startY);
-    ctx.arc(startX,startY,r,0,Math.PI*2);
-    ctx.stroke();
+  function exportPDF() {
+    const element = document.getElementById("exportArea");
+    html2pdf().from(element).set({
+      margin: 0,
+      filename: "Webb_Board_Export.pdf",
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "in", format: "a4", orientation: "landscape" }
+    }).save();
   }
-});
-
-/* IMAGE INSERT */
-document.getElementById("mediaInput").addEventListener("change",e=>{
-  const img=new Image();
-  img.onload=()=>{
-    ctx.drawImage(img,50,50,200,150);
-  };
-  img.src=URL.createObjectURL(e.target.files[0]);
-});
-
-/* CLEAR */
-function clearBoard(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-}
-
-/* EXPORT */
-function exportPDF(){
-  html2pdf().from(document.getElementById("exportArea")).set({
-    margin:0.4,
-    filename:"Webb_Whiteboard.pdf",
-    html2canvas:{scale:2},
-    jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
-  }).save();
-}
 </script>
 
 </body>
