@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -8,178 +10,256 @@
     gtag('js', new Date());
     gtag('config', 'G-QXVCXKPVBC');
   </script>
+  
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <meta charset="UTF-8">
-  <meta name="description" content="GoGenix Webb - Your ultimate destination for free digital tools. Create professional invoices, amazing charts, generate QR codes, and test website speed instantly. Code and run your programs without any barriers. Explore Art Gallery for free AI-generated images and download in any provided format. Fast, secure, and easy to use.">
+  <meta name="description" content="GoGenix Webb - Free digital tools. Invoices, charts, QR codes, and website speed tests. No barriers, just productivity.">
   <meta name="robots" content="index, follow">
   <title>GoGenix Webb | Home</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="stylehome.css">
 
   <style>
-    /* --- CUSTOM IMAGE BUTTON STYLES --- */
+    :root {
+      --ms-dark: #0a0a0a;
+      --ms-card: rgba(255, 255, 255, 0.03);
+      --google-blue: #4285F4;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green: #34A853;
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--ms-dark);
+      background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #0a0a0a 80%);
+      color: #ffffff;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .logo img, .right-logo img {
+      height: 50px;
+      transition: 0.3s;
+    }
+
+    /* --- INNOVATIVE BUTTONS --- */
+    nav {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 40px;
+    }
+
     .nav-button-container {
       display: flex;
       justify-content: center;
-      gap: 50px;
-      margin-top: 30px;
+      gap: 30px;
       flex-wrap: wrap;
-      padding: 20px;
     }
 
     .img-nav-btn {
+      position: relative;
       text-decoration: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      background: rgba(255, 255, 255, 0.03);
-      padding: 20px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      width: 180px;
-      backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      width: 220px;
+      border-radius: 28px;
+      background: var(--ms-card);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Animated Rainbow Border on Hover */
+    .img-nav-btn::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      padding: 2px;
+      border-radius: 28px;
+      background: linear-gradient(45deg, var(--google-blue), var(--google-red), var(--google-yellow), var(--google-green));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .img-nav-btn:hover::before {
+      opacity: 1;
     }
 
     .img-nav-btn img {
-      width: 80px; /* Logos size adjustment */
+      width: 80px;
       height: 80px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-      transition: 0.4s ease;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .img-nav-btn span {
-      color: #fff;
+      color: #94a3b8;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      font-size: 14px;
+      letter-spacing: 2px;
+      font-size: 13px;
       text-transform: uppercase;
       transition: 0.3s;
     }
 
-    /* Hover States */
     .img-nav-btn:hover {
-      transform: translateY(-15px);
-      background: rgba(56, 189, 248, 0.08);
-      border-color: #38bdf8;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.2);
+      transform: translateY(-12px);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
     .img-nav-btn:hover img {
-      filter: drop-shadow(0 0 15px #38bdf8);
-      transform: scale(1.15) rotate(5deg);
+      transform: scale(1.2) rotate(3deg);
+      filter: drop-shadow(0 0 15px rgba(66, 133, 244, 0.4));
     }
 
     .img-nav-btn:hover span {
-      color: #38bdf8;
-      text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+      color: #fff;
     }
 
-    /* Mobile Adjustment */
-    @media (max-width: 600px) {
-      .nav-button-container { gap: 20px; }
-      .img-nav-btn { width: 140px; padding: 15px; }
-      .img-nav-btn img { width: 60px; height: 60px; }
-      .img-nav-btn span { font-size: 12px; }
+    /* --- ABOUT SECTION --- */
+    .about-section {
+      padding: 60px 5%;
     }
-/* ============================================================
-   GOGENIX WEBB - FOOTER ULTRA-MODERN STYLING
-   ============================================================ */
 
-.footer-box {
-    text-align: center;
-    margin-top: 30px;      /* Section aur Footer ke beech ka gap kam kiya */
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .about-card {
+      background: var(--ms-card);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-/* Footer Image (Unified Platform Logo) */
-.footer-logo-center {
-    display: block;
-    width: 250px;           /* Bada size (Pehle 150px tha) */
-    height: auto;
-    margin: 0 auto -10px auto; /* Niche ka gap minus mein kiya taaki text upar aaye */
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+    .about-card h2 {
+      margin-bottom: 20px;
+      color: var(--google-blue);
+    }
 
-.footer-logo-center:hover {
-    transform: scale(1.08); /* Hover pe halka sa zoom */
-    filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
-}
+    /* --- ANALYTICS --- */
+    .analytics-box {
+      text-align: center;
+      margin: 50px 0;
+    }
 
-/* "Follow Us" Heading */
-.footer-box h4 {
-    margin: 0;             /* Har taraf se gap khatam */
-    padding: 0;
-    color: #fff;
-    font-size: 18px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
+    .count-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 0 5%;
+      margin-top: 30px;
+    }
 
-/* Social Links Container */
-.social-links {
-    margin-top: 15px;      /* Text aur Links ke beech perfect gap */
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-}
+    .count-box {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+    }
 
-.social-links a {
-    color: #94a3b8;        /* Professional greyish color */
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+    .count-box span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--google-green);
+    }
 
-.social-links a i {
-    font-size: 18px;       /* Icon ka size */
-}
+    /* --- FOOTER & SOCIALS --- */
+    .footer-box {
+      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02));
+      padding: 80px 20px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
 
-.social-links a:hover {
-    color: #38bdf8;        /* Neon Blue color on hover */
-    transform: translateY(-3px);
-}
-
-/* Bottom Copyright Section */
-footer {
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Patli subtle line */
-}
-
-footer p {
-    color: #64748b;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-}
-
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 600px) {
     .footer-logo-center {
-        width: 180px;      /* Mobile pe size adjust kiya */
-        margin-bottom: -5px;
+      width: 220px;
+      margin-bottom: 40px;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+      transition: 0.4s;
     }
-    
-    .footer-box h4 {
-        font-size: 15px;
+
+    .footer-logo-center:hover {
+      opacity: 1;
+      filter: none;
     }
 
     .social-links {
-        gap: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
     }
-}
+
+    .social-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: var(--ms-card);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 22px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-8px);
+      color: #fff;
+    }
+
+    /* Brand Specific Glows */
+    .social-btn.linkedin:hover { background: #0077b5; box-shadow: 0 10px 20px rgba(0, 119, 181, 0.3); }
+    .social-btn.instagram:hover { background: #e1306c; box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3); }
+
+    footer {
+      padding: 30px;
+      font-size: 13px;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    /* MOBILE ADJUSTMENTS */
+    @media (max-width: 600px) {
+      .page-title { font-size: 1.8rem; }
+      .img-nav-btn { width: 160px; padding: 25px 15px; }
+      .img-nav-btn img { width: 60px; height: 60px; }
+    }
   </style>
 </head>
 
@@ -187,16 +267,15 @@ footer p {
 
   <header>
     <div class="logo">
-      <img src="WEBB-removebg-preview.png" alt="G4G Webb Logo">
+      <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
     </div>
-
     <div class="right-logo">
       <img src="UniPlat.-removebg-preview.png" alt="United Platform">
     </div>
   </header>
 
   <nav>
-    <h1 class="page-title">No Signups, No Premium, Only Productivity</h1>
+    <h1 class="page-title">Minimalist Tools. Maximum Power.</h1>
     
     <div class="nav-button-container">
       <a href="webbtab.html" class="img-nav-btn">
@@ -215,66 +294,52 @@ footer p {
     <div class="about-card">
       <h2>About GoGenix Webb</h2>
       <p>
-        GoGenix Webb is a unified platform built to deliver essential internet utility tools in a simple, structured, and distraction-free environment. Designed with a <b>productivity-first mindset</b>, the platform eliminates unnecessary barriers such as <b>sign-ups, subscriptions, or premium locks</b>, allowing users to focus purely on functionality and efficiency.
-        At its core, GoGenix Webb serves as a centralized workspace for practical web utilities that are reliable, fast, and purpose-driven. Every component is developed to support seamless access, clean navigation, and consistent performance across devices.
+        GoGenix Webb is a unified platform built for <b>high-performance utility</b>. By removing the friction of sign-ups and premium paywalls, we’ve created a direct path to the tools you need.
       </p>
-      <p>
-        <b>No sign-ups. No premium tiers. No interruptions.</b>
-        Just straightforward tools engineered for real-world productivity.
-        GoGenix Webb stands for <b>clarity, accessibility, and long-term usability</b>, bringing essential internet utilities together under one unified platform.
+      <p style="margin-top: 15px; opacity: 0.8;">
+        Built on Microsoft's design philosophy and powered by open-web accessibility, our mission is long-term usability for creators and developers alike.
       </p>
     </div>
   </section>
 
   <div class="analytics-box">
-    <h2>Website Analytics</h2>
     <div class="count-grid">
         <div class="count-box">
             <span id="dailyCount">207</span>
-            <small>Visitors</small>
+            <small>Global Visitors</small>
         </div>
         <div class="count-box">
-            <span id="weeklyCount">13</span>
-            <small>User Countries</small>
+            <span id="weeklyCount" style="color: var(--google-blue);">13</span>
+            <small>Countries Reached</small>
         </div>
         <div class="count-box">
-            <span id="monthlyCount">19</span>
-            <small>User Cities</small>
+            <span id="monthlyCount" style="color: var(--google-red);">19</span>
+            <small>Active Cities</small>
         </div>
         <div class="count-box">
-            <span id="yearlyCount">1</span>
-            <small>Updates</small>
+            <span id="yearlyCount" style="color: var(--google-yellow);">V1.2</span>
+            <small>Stable Release</small>
         </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
- <div class="footer-box">
-    <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Unified Platform Logo" class="footer-logo-center">
+  <div class="footer-box">
+    <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Logo" class="footer-logo-center">
     
-    <h4>Follow Us</h4>
     <div class="social-links">
-        <a href="https://www.linkedin.com/company/gogenixwebb" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://www.instagram.com/gogenix_weser/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://www.linkedin.com/company/gogenixwebb" class="social-btn linkedin" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.instagram.com/gogenix_weser/" class="social-btn instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
     </div>
-</div>
+  </div>
 
-<footer>
-    <p>© 2026 GoGenix Webb. United Platform by GoGenix WeSer. All rights reserved.</p>
-</footer>
+  <footer>
+    <p>© 2026 GoGenix Webb. A GoGenix WeSer United Platform. Built with Purpose.</p>
+  </footer>
 
   <script src="scripthome.js"></script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
