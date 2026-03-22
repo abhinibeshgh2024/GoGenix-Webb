@@ -2,297 +2,339 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebbJamm | Elite Tic-Tac-Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WebbJamm | Pro Arena</title>
     <style>
         :root {
-            --primary: #38bdf8;
-            --secondary: #c084fc;
-            --bg: #0b0f1a;
-            --card: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --primary: #00d2ff;
+            --secondary: #9d50bb;
+            --accent: #ff007a;
+            --bg: #05070a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.12);
         }
 
         * { 
-            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent; outline: none;
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at top right, #1e293b, #0b0f1a);
+            background: radial-gradient(circle at center, #10141d 0%, #05070a 100%);
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
-            user-select: none;
-            -webkit-user-select: none;
+            overflow: hidden; /* Arena feel */
         }
 
-        nav {
-            width: 100%; padding: 20px 0;
-            display: flex; justify-content: center; align-items: center;
-            background: transparent; margin-bottom: 10px;
+        /* --- STARDUST BACKGROUND --- */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(white 1px, transparent 0);
+            background-size: 50px 50px;
+            opacity: 0.05;
+            z-index: -1;
         }
 
-        .logo-small { width: 140px; filter: drop-shadow(0 0 10px var(--primary)); }
+        header {
+            padding: 20px;
+            text-align: center;
+            z-index: 10;
+        }
 
-        .setup-container {
-            background: var(--card); border: 1px solid var(--border);
-            padding: 20px; border-radius: 20px; backdrop-filter: blur(10px);
-            width: 90%; max-width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .logo { 
+            width: 180px; 
+            filter: drop-shadow(0 0 15px var(--primary)); 
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+
+        /* --- MATCH SETUP --- */
+        .setup-arena {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            text-align: center;
+            animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .config-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        
+        label { display: block; font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+
+        select {
+            width: 100%; padding: 14px; border-radius: 15px;
+            background: #161b22; border: 1px solid var(--border);
+            color: #fff; font-weight: 700; font-size: 14px;
+            transition: 0.3s; appearance: none;
+        }
+        select:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 210, 255, 0.3); }
+
+        .btn-start {
+            width: 100%; padding: 18px; 
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff; border: none; border-radius: 18px;
+            font-weight: 900; font-size: 16px; letter-spacing: 1px;
+            cursor: pointer; transition: 0.4s;
+            text-transform: uppercase;
+        }
+        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(157, 80, 187, 0.4); }
+
+        /* --- THE BOARD ARENA --- */
+        .game-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .status-display {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: rgba(0, 210, 255, 0.1);
+            padding: 10px 30px;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .board-container {
+            position: relative;
+            background: var(--glass);
+            padding: 15px;
+            border-radius: 35px;
+            border: 1px solid var(--border);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            /* This ensures a big board */
+            width: min(85vh, 90vw);
+            max-width: 600px;
+            aspect-ratio: 1;
+        }
+
+        #board {
+            display: grid;
+            gap: 12px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cell {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2rem, 10vw, 4rem);
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #fff;
+        }
+
+        .cell:hover { background: rgba(255, 255, 255, 0.07); transform: scale(0.98); }
+        .cell.taken { cursor: default; }
+
+        .win-glow {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.3), rgba(157, 80, 187, 0.3)) !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 30px var(--primary);
+            animation: winPulse 1s infinite alternate;
+        }
+
+        @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+        /* --- OVERLAYS --- */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 7, 10, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 35px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
             text-align: center;
         }
 
-        .setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .overlay h2 { font-size: 40px; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to right, #fff, #64748b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        select {
-            width: 100%; padding: 10px; border-radius: 10px;
-            background: #1e293b; border: 1px solid var(--border);
-            color: #fff; cursor: pointer; font-weight: 600; font-size: 14px;
+        .action-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-action { padding: 12px 25px; border-radius: 12px; border: 1px solid var(--border); background: var(--glass); color: #fff; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-action:hover { background: #fff; color: #000; }
+
+        @media (max-width: 600px) {
+            .board-container { padding: 8px; border-radius: 20px; }
+            #board { gap: 8px; }
+            .cell { border-radius: 12px; }
+            .logo { width: 140px; }
         }
-
-        .toss-btn { 
-            width: 100%; padding: 15px; background: var(--primary); 
-            color: #000; border: none; margin-top: 15px; 
-            border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s;
-        }
-        .toss-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--primary); }
-
-        .status-msg { height: 40px; margin: 15px 0; font-size: 1.1rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
-
-        .board-wrapper { 
-            position: relative; margin: 5px auto; border-radius: 24px;
-            overflow: hidden; background: rgba(255,255,255,0.02);
-            padding: 10px; border: 1px solid var(--border);
-        }
-
-        #game-board { display: none; gap: 10px; margin: 0 auto; max-width: 95vw; }
-
-        .cell {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 15px; aspect-ratio: 1;
-            display: flex; align-items: center; justify-content: center;
-            font-size: clamp(1.8rem, 8vw, 2.8rem); cursor: pointer;
-            transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .cell:hover { background: rgba(255,255,255,0.08); }
-
-        #winner-flash {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 15, 26, 0.95); backdrop-filter: blur(12px);
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; font-size: 1.8rem; font-weight: 900;
-            color: #fff; text-align: center; z-index: 100;
-            opacity: 0; pointer-events: none; transition: 0.4s; transform: scale(0.9);
-        }
-        #winner-flash.show { opacity: 1; transform: scale(1); pointer-events: auto; }
-
-        .win-cell { 
-            background: rgba(56, 189, 248, 0.2) !important; 
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 15px var(--primary);
-        }
-
-        .controls { display: none; gap: 12px; width: 90%; max-width: 400px; margin-top: 15px; }
-        .controls button {
-            flex: 1; padding: 12px; border-radius: 10px;
-            font-weight: 700; cursor: pointer; transition: 0.3s; background: transparent;
-        }
-        .btn-restart { border: 1px solid var(--primary); color: var(--primary); }
-        .btn-reset { border: 1px solid #ef4444; color: #ef4444; }
-
-        .back-link { 
-            margin: 30px 0; color: #64748b; text-decoration: none; 
-            font-size: 12px; font-weight: 600; letter-spacing: 1px;
-        }
-        /* Hover State */
-.back-link:hover {
-    color: var(--primary); /* Hover karte hi Cyan Blue ho jayega */
-    text-shadow: 0 0 8px rgba(56, 189, 248, 0.5); /* Thoda glow bhi aayega */
-    transform: translateY(-2px); /* Halksa upar uthega animation ke liye */
-}
-
-        @media (max-width: 480px) { #game-board { gap: 6px; } .cell { border-radius: 10px; } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="webbgames.html"><img src="N-removebg-preview.png" alt="Logo" class="logo-small"></a>
-    </nav>
+    <header>
+        <img src="N-removebg-preview.png" alt="WebbJamm Logo" class="logo">
+    </header>
 
-    <div class="setup-container" id="setup">
-        <h2 style="font-size: 16px; color: var(--secondary); letter-spacing: 2px;">MATCH CONFIG</h2>
-        
-        <div class="setup-grid">
+    <div class="setup-arena" id="setup-screen">
+        <h2 style="font-size: 14px; letter-spacing: 4px; color: var(--primary); margin-bottom: 10px;">PRO ARENA v2.0</h2>
+        <div class="config-row">
             <div style="grid-column: span 2;">
-                <label>Game Mode</label>
-                <select id="game-mode" onchange="toggleP2Selection()">
-                    <option value="human">🆚 VS HUMAN</option>
-                    <option value="cpu">🤖 VS CPU (AI)</option>
+                <label>Battle Type</label>
+                <select id="mode">
+                    <option value="human">LOCAL MULTIPLAYER (1v1)</option>
+                    <option value="cpu">ARTIFICIAL INTEL (vs CPU)</option>
                 </select>
             </div>
             <div>
-                <label>Grid Size</label>
-                <select id="grid-size">
-                    <option value="3">3 x 3</option>
-                    <option value="4">4 x 4</option>
+                <label>Arena Size</label>
+                <select id="size">
+                    <option value="3">CLASSIC (3x3)</option>
+                    <option value="4">EXTENDED (4x4)</option>
+                    <option value="5">ULTIMATE (5x5)</option>
                 </select>
             </div>
             <div>
-                <label>Player 1 Emoji</label>
-                <select id="p1-emoji">
-                    <option value="❌">❌ Cross</option>
-                    <option value="🔥">🔥 Fire</option>
-                    <option value="👻">👻 Ghost</option>
-                    <option value="💎">💎 Diamond</option>
-                    <option value="🦁">🦁 Lion</option>
-                </select>
-            </div>
-            <div id="p2-box">
-                <label>Player 2 Emoji</label>
-                <select id="p2-emoji">
-                    <option value="⭕">⭕ Circle</option>
-                    <option value="⚡">⚡ Thunder</option>
-                    <option value="💀">💀 Skull</option>
-                    <option value="👑">👑 Crown</option>
-                    <option value="🐯">🐯 Tiger</option>
+                <label>Skin</label>
+                <select id="theme">
+                    <option value="neon">NEON (❌, ⭕)</option>
+                    <option value="element">ELEMENTS (🔥, ❄️)</option>
+                    <option value="cyber">CYBER (🤖, 👾)</option>
                 </select>
             </div>
         </div>
-        <button class="toss-btn" onclick="startToss()">START MATCH</button>
+        <button class="btn-start" onclick="initArena()">Initialize Match</button>
     </div>
 
-    <div class="status-msg" id="status">Prepare for Battle</div>
-
-    <div class="board-wrapper">
-        <div id="winner-flash">
-            <div id="flash-text">WINNER!</div>
-            <button class="toss-btn" style="width: auto; padding: 10px 30px; margin-top: 15px;" onclick="restartGrid()">REMATCH</button>
+    <div class="game-view" id="game-screen">
+        <div class="status-display" id="status-text">INITIALIZING...</div>
+        
+        <div class="board-container">
+            <div id="board"></div>
+            
+            <div class="overlay" id="end-overlay">
+                <h2 id="result-text">MATCH OVER</h2>
+                <div class="action-btns">
+                    <button class="btn-action" onclick="resetBoard()">REMATCH</button>
+                    <button class="btn-action" onclick="location.reload()">LOBBY</button>
+                </div>
+            </div>
         </div>
-        <div id="game-board"></div>
-    </div>
 
-    <div class="controls" id="controls">
-        <button class="btn-restart" onclick="restartGrid()">RESTART</button>
-        <button class="btn-reset" onclick="location.reload()">NEW SETTINGS</button>
+        <p style="margin-top: 30px; font-size: 10px; color: #475569; letter-spacing: 1px;">WEBJAMM PRO ENGINE • RANCHI SECURE</p>
     </div>
-
-    <a href="webbgames.html" class="back-link">← BACK TO WEBBJAMM</a>
 
     <script>
-        let board = [], size = 3, gameActive = false;
-        let p1Sign, p2Sign, currentPlayer, isCPU;
-        const allEmojis = ["🍕", "🛸", "🌈", "🎈", "🏀", "🎮", "👾", "🦊"];
+        let board = [], size = 3, isActive = false;
+        let p1, p2, turn, isCPU;
 
-        function toggleP2Selection() {
-            const p2Box = document.getElementById('p2-box');
-            p2Box.style.opacity = document.getElementById('game-mode').value === 'cpu' ? '0.3' : '1';
-            p2Box.style.pointerEvents = document.getElementById('game-mode').value === 'cpu' ? 'none' : 'auto';
-        }
+        const themes = {
+            neon: ["❌", "⭕"],
+            element: ["🔥", "❄️"],
+            cyber: ["🤖", "👾"]
+        };
 
-        function startToss() {
-            const status = document.getElementById('status');
-            isCPU = document.getElementById('game-mode').value === 'cpu';
-            p1Sign = document.getElementById('p1-emoji').value;
+        function initArena() {
+            size = parseInt(document.getElementById('size').value);
+            isCPU = document.getElementById('mode').value === 'cpu';
+            const themeKeys = document.getElementById('theme').value;
+            [p1, p2] = themes[themeKeys];
             
-            if(isCPU) {
-                p2Sign = allEmojis[Math.floor(Math.random() * allEmojis.length)];
-            } else {
-                p2Sign = document.getElementById('p2-emoji').value;
-                if(p1Sign === p2Sign) { alert("Dono same emoji nahi le sakte!"); return; }
-            }
-
-            status.innerText = "TOSSING...";
-            setTimeout(() => {
-                currentPlayer = Math.random() > 0.5 ? p1Sign : p2Sign;
-                status.innerText = `${currentPlayer} WON THE TOSS!`;
-                setTimeout(initGame, 1000);
-            }, 800);
-        }
-
-        function initGame() {
-            size = parseInt(document.getElementById('grid-size').value);
-            const boardEl = document.getElementById('game-board');
+            turn = p1;
             board = Array(size * size).fill("");
             
-            boardEl.style.display = "grid";
-            boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-            const availableWidth = Math.min(window.innerWidth - 40, 400);
-            boardEl.style.width = availableWidth + "px";
-            boardEl.innerHTML = "";
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'flex';
+            
+            buildGrid();
+            updateStatus();
+            isActive = true;
+        }
 
-            for (let i = 0; i < size * size; i++) {
+        function buildGrid() {
+            const grid = document.getElementById('board');
+            grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            grid.innerHTML = "";
+            
+            for(let i=0; i < size*size; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
-                cell.onclick = () => handleMove(i);
-                boardEl.appendChild(cell);
+                cell.setAttribute('data-index', i);
+                cell.onclick = () => playerMove(i);
+                grid.appendChild(cell);
             }
-
-            document.getElementById('setup').style.display = "none";
-            document.getElementById('controls').style.display = "flex";
-            updateStatus();
-            gameActive = true;
-            if(isCPU && currentPlayer === p2Sign) setTimeout(cpuMove, 600);
         }
 
-        function handleMove(index) {
-            if (board[index] !== "" || !gameActive || (isCPU && currentPlayer === p2Sign)) return;
-            makeMove(index);
+        function playerMove(i) {
+            if(!isActive || board[i] !== "" || (isCPU && turn === p2)) return;
+            executeMove(i);
         }
 
-        function makeMove(index) {
-            board[index] = currentPlayer;
+        function executeMove(i) {
+            board[i] = turn;
             const cells = document.querySelectorAll('.cell');
-            cells[index].innerText = currentPlayer;
-
-            const winData = checkWin();
-            if (winData) {
-                highlightWinner(winData);
-                showFlash(`${currentPlayer}\nDOMINATED!`);
-                gameActive = false;
+            cells[i].innerText = turn;
+            cells[i].classList.add('taken');
+            
+            const winLine = checkWinner();
+            if(winLine) {
+                endGame(`${turn} VICTORIOUS`, winLine);
+                return;
+            }
+            
+            if(!board.includes("")) {
+                endGame("DRAW", null);
                 return;
             }
 
-            if (!board.includes("")) {
-                showFlash("LEGENDARY DRAW!");
-                gameActive = false;
-                return;
-            }
-
-            currentPlayer = currentPlayer === p1Sign ? p2Sign : p1Sign;
+            turn = (turn === p1) ? p2 : p1;
             updateStatus();
 
-            if (isCPU && gameActive && currentPlayer === p2Sign) {
-                setTimeout(cpuMove, 600);
+            if(isCPU && turn === p2) {
+                setTimeout(cpuBrain, 600);
             }
         }
 
-        function cpuMove() {
-            if(!gameActive) return;
-            // 1. Try to win
-            let move = findBestMove(p2Sign) || findBestMove(p1Sign);
-            // 2. Or take middle
-            if(move === null && board[Math.floor(board.length/2)] === "") move = Math.floor(board.length/2);
-            // 3. Or random
-            if(move === null) {
-                const available = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
-                move = available[Math.floor(Math.random() * available.length)];
-            }
-            makeMove(move);
+        function cpuBrain() {
+            if(!isActive) return;
+            // 1. Can CPU Win? 2. Can CPU Block? 3. Random
+            let move = findBest(p2) || findBest(p1) || randomMove();
+            executeMove(move);
         }
 
-        function findBestMove(sign) {
+        function findBest(sign) {
             const lines = getLines();
-            for (let line of lines) {
+            for(let line of lines) {
                 const vals = line.map(idx => board[idx]);
                 const emptyIdx = line.find(idx => board[idx] === "");
-                if (vals.filter(v => v === sign).length === size - 1 && emptyIdx !== undefined) return emptyIdx;
+                if(vals.filter(v => v === sign).length === size-1 && emptyIdx !== undefined) return emptyIdx;
             }
             return null;
+        }
+
+        function randomMove() {
+            const available = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+            return available[Math.floor(Math.random() * available.length)];
         }
 
         function getLines() {
@@ -314,40 +356,41 @@
             return lines;
         }
 
-        function checkWin() {
+        function checkWinner() {
             const lines = getLines();
-            for (let line of lines) {
-                if (line.every(idx => board[idx] === currentPlayer)) return line;
+            for(let line of lines) {
+                if(line.every(idx => board[idx] === turn)) return line;
             }
             return null;
         }
 
         function updateStatus() {
-            const name = isCPU && currentPlayer === p2Sign ? "🤖 CPU" : `👤 PLAYER (${currentPlayer})`;
-            document.getElementById('status').innerText = `TURN: ${name}`;
+            const label = (isCPU && turn === p2) ? "CPU THINKING..." : `TURN: ${turn}`;
+            document.getElementById('status-text').innerText = label;
         }
 
-        function highlightWinner(indices) {
-            const cells = document.querySelectorAll('.cell');
-            indices.forEach(idx => cells[idx].classList.add('win-cell'));
+        function endGame(msg, line) {
+            isActive = false;
+            if(line) {
+                const cells = document.querySelectorAll('.cell');
+                line.forEach(idx => cells[idx].classList.add('win-glow'));
+            }
+            setTimeout(() => {
+                document.getElementById('result-text').innerText = msg;
+                document.getElementById('end-overlay').style.display = 'flex';
+            }, 800);
         }
 
-        function showFlash(msg) {
-            const flash = document.getElementById('winner-flash');
-            document.getElementById('flash-text').innerText = msg;
-            flash.classList.add('show');
-        }
-
-        function restartGrid() {
+        function resetBoard() {
             board = Array(size * size).fill("");
-            document.getElementById('winner-flash').classList.remove('show');
+            turn = p1;
+            isActive = true;
+            document.getElementById('end-overlay').style.display = 'none';
             document.querySelectorAll('.cell').forEach(c => {
                 c.innerText = "";
-                c.className = 'cell';
+                c.classList.remove('win-glow', 'taken');
             });
-            gameActive = true;
             updateStatus();
-            if(isCPU && currentPlayer === p2Sign) setTimeout(cpuMove, 600);
         }
     </script>
 </body>
