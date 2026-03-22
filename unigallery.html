@@ -1,293 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Webb | Art Gallery</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<title>GoGenix Webb | Art Gallery</title>
   <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
-<meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+      --accent: #c9a4ff;
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
 
-body{
-  background:linear-gradient(135deg,#0b102a,#14091f);
-  color:#fff;
-  min-height:100vh;
-}
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-/* ================= HEADER ================= */
-header{
-  text-align:center;
-  padding:20px;
-}
+    /* --- UNIFIED HEADER --- */
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+    }
 
-header img{
-  width:150px;
-}
+    header img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      animation: float 6s ease-in-out infinite;
+    }
 
-header h1{
-  color:#93c5fd;
-  font-size:28px;
-}
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-/* ================= NAVBAR ================= */
-.nav-wrapper{
-  position:relative;
-  max-width:1100px;
-  margin:15px auto;
-  display:flex;
-  align-items:center;
-}
+    header h1 {
+      font-size: 14px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--google-blue);
+      font-weight: 900;
+      margin-top: -15px;
+    }
 
-.nav-arrow{
-  background:rgba(255,255,255,0.1);
-  border:none;
-  color:#fff;
-  font-size:22px;
-  padding:10px 14px;
-  cursor:pointer;
-  border-radius:12px;
-}
+    header p { font-size: 11px; color: #475569; letter-spacing: 2px; margin-top: 8px; }
 
-.navbar{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  padding:10px;
-  margin:0 10px;
-  align-items:center;
-  justify-content:center;
-}
+    /* --- CATEGORY NAV --- */
+    .nav-wrapper {
+      max-width: 1200px;
+      margin: 0 auto 30px;
+      padding: 0 20px;
+    }
 
-.navbar::-webkit-scrollbar{display:none}
+    .navbar {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+      justify-content: center;
+    }
 
-.navbar button{
-  white-space:nowrap;
-  padding:10px 20px;
-  border:none;
-  border-radius:14px;
-  background:rgba(255,255,255,0.08);
-  color:#fff;
-  cursor:pointer;
-}
+    .navbar::-webkit-scrollbar { display: none; }
 
-.navbar button:hover{
-  background:rgba(139,92,246,0.45);
-}
+    .navbar button {
+      white-space: nowrap;
+      padding: 12px 24px;
+      border: 1px solid var(--ms-border);
+      border-radius: 100px;
+      background: var(--glass);
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
 
-/* ================= MAIN SECTION ================= */
-.section{
-  max-width:1100px;
-  margin:30px auto 60px;
-  padding:30px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(14px);
-  border-radius:22px;
-  text-align:center;
-}
+    .navbar button:hover, .navbar button.active {
+      background: var(--google-blue);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+    }
 
-.section h2{
-  color:#93c5fd;
-  margin-bottom:20px;
-}
+    /* --- GALLERY SECTION --- */
+    .section {
+      max-width: 1300px;
+      margin: 0 auto 100px;
+      padding: 40px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--ms-border);
+      border-radius: 40px;
+    }
 
-/* ================= EXPLORE INTRO ================= */
-.explore{
-  font-size:34px;
-  letter-spacing:2px;
-  animation:fadeUp 1.2s ease forwards;
-}
+    .section-header {
+      text-align: left;
+      margin-bottom: 40px;
+      border-left: 4px solid var(--google-blue);
+      padding-left: 20px;
+    }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
+    .section h2 { font-size: 24px; letter-spacing: 1px; color: #fff; }
+    .section p { font-size: 12px; color: #64748b; margin-top: 5px; }
 
-/* ================= GALLERY ================= */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:16px;
-}
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
 
-.gallery img{
-  width:100%;
-  border-radius:14px;
-  cursor:pointer;
-  transition:.3s;
-}
+    .art-card {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      cursor: pointer;
+      border: 1px solid var(--ms-border);
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-.gallery img:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 18px rgba(139,92,246,.45);
-}
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
 
-/* ================= MODAL ================= */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:3000;
-}
+    .art-card:hover { transform: translateY(-10px); border-color: var(--google-blue); }
+    .art-card:hover img { transform: scale(1.1); filter: brightness(0.7); }
 
-.modal-content{
-  background:#fff;
-  padding:20px;
-  border-radius:18px;
-  max-width:50%;
-  text-align:center;
-  animation:zoom .3s ease;
-}
+    .art-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      opacity: 0;
+      transition: 0.3s;
+    }
 
-@keyframes zoom{
-  from{transform:scale(.85);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
+    .art-card:hover .art-info { opacity: 1; }
 
-.modal img{
-  max-width:100%;
-  max-height:40vh;
-  border-radius:12px;
-}
+    /* --- MODAL --- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5000;
+      padding: 20px;
+    }
 
-.modal-actions{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  margin-top:15px;
-}
+    .modal-content {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
 
-.modal-actions button{
-  padding:8px 16px;
-  border:none;
-  border-radius:10px;
-  background:#111827;
-  color:#fff;
-  cursor:pointer;
-}
+    .modal img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
 
-.modal .close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:26px;
-  color:#fff;
-  cursor:pointer;
-}
-</style>
+    .modal-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .modal-actions button {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 100px;
+      background: #fff;
+      color: #000;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .modal-actions button:hover { background: var(--google-blue); color: #fff; }
+
+    .close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .close:hover { color: var(--google-blue); }
+
+    /* --- MOBILE --- */
+    @media (max-width: 600px) {
+      .navbar { justify-content: flex-start; padding-left: 20px; }
+      .section { padding: 20px; border-radius: 20px; }
+      header img { width: 140px; height: 140px; }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <img src="WEBB-removebg-preview.png">
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
   <h1>Webb Art Gallery</h1>
-  <p>Get free and high quality AI-generated creations on your fingertips</p>
+  <p>High-fidelity AI-generated visions on demand</p>
 </header>
 
-<!-- NAVBAR -->
-<div class="nav-wrapper">
-
+<nav class="nav-wrapper">
   <div class="navbar" id="navbar">
-    <button onclick="loadGallery('culture')">Culture</button>
-    <button onclick="loadGallery('tech')">Tech</button>
-    <button onclick="loadGallery('sports')">Sports</button>
-    <button onclick="loadGallery('nations')">Nations</button>
+    <button class="active" onclick="loadGallery('all', this)">All Works</button>
+    <button onclick="loadGallery('culture', this)">Culture</button>
+    <button onclick="loadGallery('tech', this)">Tech & Future</button>
+    <button onclick="loadGallery('nature', this)">Deep Nature</button>
+    <button onclick="loadGallery('space', this)">Cosmos</button>
+    <button onclick="loadGallery('nations', this)">Nations</button>
   </div>
-</div>
+</nav>
 
 <section class="section">
-  <h2 id="sectionTitle" class="explore">EXPLORE ART GALLERY</h2>
+  <div class="section-header">
+    <h2 id="sectionTitle">CURATED EXHIBIT</h2>
+    <p id="sectionDesc">Browse through our latest high-definition digital generations.</p>
+  </div>
   <div class="gallery" id="gallery"></div>
 </section>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
-  <span class="close" onclick="closeModal()">×</span>
   <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
     <img id="modalImg">
     <div class="modal-actions">
-      <button onclick="downloadImg('png')">PNG</button>
-      <button onclick="downloadImg('jpg')">JPG</button>
-      <button onclick="downloadImg('pdf')">PDF</button>
+      <button onclick="downloadImg('png')"><i class="fa fa-image"></i> PNG</button>
+      <button onclick="downloadImg('jpg')"><i class="fa fa-file-image"></i> JPG</button>
+      <button onclick="downloadImg('pdf')"><i class="fa fa-file-pdf"></i> PDF Document</button>
     </div>
   </div>
 </div>
 
 <script>
-const data={
-  culture:['angkorwat_artgallery_ggwebb.png','chinesetemple_ggwebb_artgallery.png'],
-  tech:['laptopart_ai.png','tech_handshake_ai.png'],
-  sports:['baseball_hit01_ai.png','human_vs_ai_chess.png'],
-  nations:['AMERICAnations.png.png','FRANCEnations.png.png']
+const data = {
+  culture: ['angkorwat_artgallery_ggwebb.png', 'chinesetemple_ggwebb_artgallery.png'],
+  tech: ['laptopart_ai.png', 'tech_handshake_ai.png', 'cyber_city_genix.png'],
+  nature: ['everest_sunset_ai.png', 'amazon_biolume.png'],
+  space: ['mars_colony_2045.png', 'nebula_dream.png'],
+  nations: ['AMERICAnations.png', 'FRANCEnations.png']
 };
 
-let current=[],currentImg="";
+let currentImg = "";
 
-function scrollNav(val){
-  document.getElementById("navbar").scrollLeft+=val;
+function loadGallery(cat, btn) {
+  // UI update
+  document.querySelectorAll('.navbar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const gallery = document.getElementById("gallery");
+  gallery.style.opacity = "0";
+  
+  setTimeout(() => {
+    gallery.innerHTML = "";
+    document.getElementById("sectionTitle").innerText = cat === 'all' ? "CURATED EXHIBIT" : cat.toUpperCase();
+    
+    let items = [];
+    if (cat === 'all') {
+      Object.values(data).forEach(arr => items = items.concat(arr));
+    } else {
+      items = data[cat] || [];
+    }
+
+    items.forEach(src => {
+      const card = document.createElement("div");
+      card.className = "art-card";
+      card.onclick = () => openModal(src);
+      
+      card.innerHTML = `
+        <img src="${src}" alt="Webb Art" onerror="this.src='https://via.placeholder.com/400x500/111/444?text=IMAGE+PENDING'">
+        <div class="art-info">
+          <p style="color:#fff; font-weight:800; font-size:10px; letter-spacing:1px;">WEBB GENERATION</p>
+          <p style="color:var(--google-blue); font-size:9px;">Click to Export</p>
+        </div>
+      `;
+      gallery.appendChild(card);
+    });
+    gallery.style.opacity = "1";
+  }, 200);
 }
 
-function loadGallery(cat){
-  current=data[cat];
-  document.getElementById("sectionTitle").innerText=cat.toUpperCase();
-  render(current);
+function openModal(src) {
+  currentImg = src;
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modalImg");
+  modal.style.display = "flex";
+  modalImg.src = src;
 }
 
-function render(arr){
-  gallery.innerHTML="";
-  arr.forEach(src=>{
-    if(!src) return;
-    let img=document.createElement("img");
-    img.src=src;
-    img.onclick=()=>openModal(src);
-    gallery.appendChild(img);
-  });
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
 
-function openModal(src){
-  currentImg=src;
-  modal.style.display="flex";
-  modalImg.src=src;
-}
-
-function closeModal(){modal.style.display="none"}
-
-function downloadImg(type){
-  if(type==="pdf"){
-    const {jsPDF}=window.jspdf;
-    let doc=new jsPDF();
-    doc.addImage(currentImg,"JPEG",10,10,180,120);
-    doc.save("image.pdf");
-  }else{
-    let a=document.createElement("a");
-    a.href=currentImg;
-    a.download="image."+type;
+function downloadImg(type) {
+  if (type === "pdf") {
+    const { jsPDF } = window.jspdf;
+    let doc = new jsPDF('l', 'mm', 'a4'); // Landscape for art
+    doc.addImage(currentImg, "JPEG", 10, 10, 277, 190);
+    doc.save("Webb_Art_Export.pdf");
+  } else {
+    let a = document.createElement("a");
+    a.href = currentImg;
+    a.download = "Webb_Art_" + Date.now() + "." + type;
     a.click();
   }
 }
+
+// Initial Load
+window.onload = () => {
+  loadGallery('all', document.querySelector('.navbar button'));
+};
 </script>
 
 </body>
 </html>
-
