@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WebbJamm | Pro Arena</title>
+    <title>WebbJamm | Series Arena</title>
     <style>
         :root {
             --primary: #00d2ff;
             --secondary: #9d50bb;
-            --accent: #ff007a;
             --bg: #05070a;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.12);
@@ -16,122 +15,89 @@
 
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
             background: radial-gradient(circle at center, #10141d 0%, #05070a 100%);
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden; /* Arena feel */
+            overflow: hidden; /* Prevents unwanted scrolling */
         }
 
-        /* --- STARDUST BACKGROUND --- */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(white 1px, transparent 0);
-            background-size: 50px 50px;
-            opacity: 0.05;
-            z-index: -1;
+        /* --- HEADER & SCORE --- */
+        header { padding: 15px; text-align: center; flex-shrink: 0; }
+        .logo { width: 120px; filter: drop-shadow(0 0 10px var(--primary)); }
+
+        .scoreboard {
+            display: none;
+            gap: 20px;
+            background: var(--glass);
+            padding: 10px 25px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
         }
 
-        header {
-            padding: 20px;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .logo { 
-            width: 180px; 
-            filter: drop-shadow(0 0 15px var(--primary)); 
-            animation: breathe 4s ease-in-out infinite;
-        }
-
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
-
-        /* --- MATCH SETUP --- */
+        /* --- CONFIG SCREEN --- */
         .setup-arena {
             background: var(--glass);
             backdrop-filter: blur(25px);
             border: 1px solid var(--border);
-            padding: 30px;
+            padding: 25px;
             border-radius: 30px;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            max-width: 450px;
+            margin: auto;
             text-align: center;
-            animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-
-        .config-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        label { display: block; font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
         
-        label { display: block; font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-
         select {
-            width: 100%; padding: 14px; border-radius: 15px;
+            width: 100%; padding: 12px; border-radius: 12px;
             background: #161b22; border: 1px solid var(--border);
-            color: #fff; font-weight: 700; font-size: 14px;
-            transition: 0.3s; appearance: none;
+            color: #fff; font-weight: 700; cursor: pointer;
         }
-        select:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 210, 255, 0.3); }
 
-        .btn-start {
-            width: 100%; padding: 18px; 
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: #fff; border: none; border-radius: 18px;
-            font-weight: 900; font-size: 16px; letter-spacing: 1px;
-            cursor: pointer; transition: 0.4s;
-            text-transform: uppercase;
-        }
-        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(157, 80, 187, 0.4); }
-
-        /* --- THE BOARD ARENA --- */
+        /* --- THE BOARD ARENA (SCROLL FIX) --- */
         .game-view {
             display: none;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Takes available space */
             width: 100%;
-            height: 100%;
-            padding: 20px;
-        }
-
-        .status-display {
-            font-size: 14px;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            background: rgba(0, 210, 255, 0.1);
-            padding: 10px 30px;
-            border-radius: 100px;
-            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 10px;
+            overflow: hidden;
         }
 
         .board-container {
             position: relative;
             background: var(--glass);
-            padding: 15px;
-            border-radius: 35px;
+            padding: 10px;
+            border-radius: 25px;
             border: 1px solid var(--border);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
-            /* This ensures a big board */
-            width: min(85vh, 90vw);
-            max-width: 600px;
+            /* Vital Fix: Fits inside viewport without scrolling */
+            width: min(70vh, 90vw); 
             aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #board {
             display: grid;
-            gap: 12px;
+            gap: 8px;
             width: 100%;
             height: 100%;
         }
@@ -139,258 +105,220 @@
         .cell {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(2rem, 10vw, 4rem);
+            font-size: clamp(1.5rem, 8vh, 3.5rem);
             cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: #fff;
+            transition: 0.2s;
         }
 
-        .cell:hover { background: rgba(255, 255, 255, 0.07); transform: scale(0.98); }
-        .cell.taken { cursor: default; }
-
-        .win-glow {
-            background: linear-gradient(135deg, rgba(0, 210, 255, 0.3), rgba(157, 80, 187, 0.3)) !important;
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 30px var(--primary);
-            animation: winPulse 1s infinite alternate;
-        }
-
-        @keyframes winPulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+        .cell:hover { background: rgba(255,255,255,0.08); }
+        .win-glow { background: var(--primary) !important; color: #000; box-shadow: 0 0 20px var(--primary); }
 
         /* --- OVERLAYS --- */
         .overlay {
             position: absolute;
             inset: 0;
-            background: rgba(5, 7, 10, 0.9);
-            backdrop-filter: blur(15px);
-            border-radius: 35px;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(10px);
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 100;
-            text-align: center;
+            border-radius: 25px;
         }
 
-        .overlay h2 { font-size: 40px; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to right, #fff, #64748b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .action-btns { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-action { padding: 12px 25px; border-radius: 12px; border: 1px solid var(--border); background: var(--glass); color: #fff; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-action:hover { background: #fff; color: #000; }
-
-        @media (max-width: 600px) {
-            .board-container { padding: 8px; border-radius: 20px; }
-            #board { gap: 8px; }
-            .cell { border-radius: 12px; }
-            .logo { width: 140px; }
+        .btn-main {
+            width: 100%; padding: 15px; border-radius: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff; border: none; font-weight: 900; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="N-removebg-preview.png" alt="WebbJamm Logo" class="logo">
+        <img src="N-removebg-preview.png" class="logo">
     </header>
 
+    <div class="scoreboard" id="scoreboard">
+        <span id="p1-score-label">P1: 0</span>
+        <span style="color: var(--secondary)">VS</span>
+        <span id="p2-score-label">P2: 0</span>
+    </div>
+
     <div class="setup-arena" id="setup-screen">
-        <h2 style="font-size: 14px; letter-spacing: 4px; color: var(--primary); margin-bottom: 10px;">PRO ARENA v2.0</h2>
-        <div class="config-row">
+        <h2 style="font-size: 14px; letter-spacing: 3px; color: var(--primary);">MATCH SERIES CONFIG</h2>
+        <div class="config-grid">
             <div style="grid-column: span 2;">
-                <label>Battle Type</label>
-                <select id="mode">
-                    <option value="human">LOCAL MULTIPLAYER (1v1)</option>
-                    <option value="cpu">ARTIFICIAL INTEL (vs CPU)</option>
+                <label>Series Length</label>
+                <select id="series">
+                    <option value="1">SINGLE MATCH</option>
+                    <option value="3">BEST OF 3</option>
+                    <option value="5">BEST OF 5</option>
+                    <option value="7">BEST OF 7</option>
+                    <option value="10">BEST OF 10</option>
                 </select>
             </div>
             <div>
-                <label>Arena Size</label>
+                <label>Grid Size</label>
                 <select id="size">
-                    <option value="3">CLASSIC (3x3)</option>
-                    <option value="4">EXTENDED (4x4)</option>
-                    <option value="5">ULTIMATE (5x5)</option>
+                    <option value="3">3 x 3</option>
+                    <option value="4">4 x 4</option>
+                    <option value="5">5 x 5</option>
                 </select>
             </div>
             <div>
-                <label>Skin</label>
-                <select id="theme">
-                    <option value="neon">NEON (❌, ⭕)</option>
-                    <option value="element">ELEMENTS (🔥, ❄️)</option>
-                    <option value="cyber">CYBER (🤖, 👾)</option>
+                <label>Opponent</label>
+                <select id="mode">
+                    <option value="human">HUMAN</option>
+                    <option value="cpu">AI CPU</option>
                 </select>
             </div>
         </div>
-        <button class="btn-start" onclick="initArena()">Initialize Match</button>
+        <button class="btn-main" onclick="initSeries()">START SERIES</button>
     </div>
 
     <div class="game-view" id="game-screen">
-        <div class="status-display" id="status-text">INITIALIZING...</div>
-        
+        <div id="status-text" style="margin-bottom: 10px; font-weight: 800; color: var(--primary);">TURN: X</div>
         <div class="board-container">
             <div id="board"></div>
-            
-            <div class="overlay" id="end-overlay">
-                <h2 id="result-text">MATCH OVER</h2>
-                <div class="action-btns">
-                    <button class="btn-action" onclick="resetBoard()">REMATCH</button>
-                    <button class="btn-action" onclick="location.reload()">LOBBY</button>
-                </div>
+            <div class="overlay" id="overlay">
+                <h2 id="overlay-msg" style="margin-bottom: 20px;">WINNER!</h2>
+                <button class="btn-main" id="overlay-btn" style="width: auto; padding: 10px 30px;">NEXT MATCH</button>
             </div>
         </div>
-
-        <p style="margin-top: 30px; font-size: 10px; color: #475569; letter-spacing: 1px;">WEBJAMM PRO ENGINE • RANCHI SECURE</p>
     </div>
 
     <script>
         let board = [], size = 3, isActive = false;
-        let p1, p2, turn, isCPU;
+        let p1 = "❌", p2 = "⭕", turn = p1;
+        let p1Score = 0, p2Score = 0, targetWins = 1, isCPU = false;
 
-        const themes = {
-            neon: ["❌", "⭕"],
-            element: ["🔥", "❄️"],
-            cyber: ["🤖", "👾"]
-        };
-
-        function initArena() {
+        function initSeries() {
             size = parseInt(document.getElementById('size').value);
+            targetWins = parseInt(document.getElementById('series').value);
             isCPU = document.getElementById('mode').value === 'cpu';
-            const themeKeys = document.getElementById('theme').value;
-            [p1, p2] = themes[themeKeys];
             
-            turn = p1;
-            board = Array(size * size).fill("");
-            
+            p1Score = 0; p2Score = 0;
+            updateScoreboard();
+
             document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('scoreboard').style.display = 'flex';
             document.getElementById('game-screen').style.display = 'flex';
             
-            buildGrid();
-            updateStatus();
-            isActive = true;
+            startMatch();
         }
 
-        function buildGrid() {
+        function startMatch() {
+            board = Array(size * size).fill("");
+            turn = (p1Score + p2Score) % 2 === 0 ? p1 : p2; // Alternate who starts
+            isActive = true;
+            document.getElementById('overlay').style.display = 'none';
+            renderBoard();
+            updateStatus();
+            if(isCPU && turn === p2) setTimeout(cpuMove, 600);
+        }
+
+        function renderBoard() {
             const grid = document.getElementById('board');
             grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
             grid.innerHTML = "";
-            
-            for(let i=0; i < size*size; i++) {
+            for(let i=0; i<size*size; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
-                cell.setAttribute('data-index', i);
-                cell.onclick = () => playerMove(i);
+                cell.onclick = () => handleMove(i);
                 grid.appendChild(cell);
             }
         }
 
-        function playerMove(i) {
+        function handleMove(i) {
             if(!isActive || board[i] !== "" || (isCPU && turn === p2)) return;
-            executeMove(i);
+            makeMove(i);
         }
 
-        function executeMove(i) {
+        function makeMove(i) {
             board[i] = turn;
-            const cells = document.querySelectorAll('.cell');
-            cells[i].innerText = turn;
-            cells[i].classList.add('taken');
+            document.querySelectorAll('.cell')[i].innerText = turn;
             
-            const winLine = checkWinner();
+            const winLine = checkWin();
             if(winLine) {
-                endGame(`${turn} VICTORIOUS`, winLine);
+                highlight(winLine);
+                endMatch(turn);
                 return;
             }
-            
-            if(!board.includes("")) {
-                endGame("DRAW", null);
-                return;
-            }
+            if(!board.includes("")) { endMatch("DRAW"); return; }
 
             turn = (turn === p1) ? p2 : p1;
             updateStatus();
-
-            if(isCPU && turn === p2) {
-                setTimeout(cpuBrain, 600);
-            }
+            if(isCPU && turn === p2 && isActive) setTimeout(cpuMove, 600);
         }
 
-        function cpuBrain() {
-            if(!isActive) return;
-            // 1. Can CPU Win? 2. Can CPU Block? 3. Random
-            let move = findBest(p2) || findBest(p1) || randomMove();
-            executeMove(move);
+        function endMatch(winner) {
+            isActive = false;
+            if(winner === p1) p1Score++;
+            else if(winner === p2) p2Score++;
+            
+            updateScoreboard();
+            
+            setTimeout(() => {
+                const overlay = document.getElementById('overlay');
+                const msg = document.getElementById('overlay-msg');
+                const btn = document.getElementById('overlay-btn');
+                overlay.style.display = 'flex';
+
+                if(p1Score >= targetWins || p2Score >= targetWins) {
+                    msg.innerText = `SERIES CHAMPION: ${winner}!`;
+                    btn.innerText = "NEW SERIES";
+                    btn.onclick = () => location.reload();
+                } else {
+                    msg.innerText = winner === "DRAW" ? "IT'S A DRAW!" : `${winner} WON MATCH!`;
+                    btn.innerText = "CONTINUE SERIES";
+                    btn.onclick = startMatch;
+                }
+            }, 800);
         }
 
-        function findBest(sign) {
-            const lines = getLines();
-            for(let line of lines) {
-                const vals = line.map(idx => board[idx]);
-                const emptyIdx = line.find(idx => board[idx] === "");
-                if(vals.filter(v => v === sign).length === size-1 && emptyIdx !== undefined) return emptyIdx;
-            }
-            return null;
-        }
-
-        function randomMove() {
+        function cpuMove() {
             const available = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
-            return available[Math.floor(Math.random() * available.length)];
+            const move = available[Math.floor(Math.random() * available.length)];
+            if(move !== undefined) makeMove(move);
         }
 
-        function getLines() {
+        function checkWin() {
             const lines = [];
-            for (let i = 0; i < size; i++) {
-                let row = [], col = [];
-                for (let j = 0; j < size; j++) {
-                    row.push(i * size + j);
-                    col.push(j * size + i);
+            for(let i=0; i<size; i++) {
+                let row=[], col=[];
+                for(let j=0; j<size; j++) {
+                    row.push(i*size+j); col.push(j*size+i);
                 }
                 lines.push(row, col);
             }
-            let d1 = [], d2 = [];
-            for (let i = 0; i < size; i++) {
-                d1.push(i * size + i);
-                d2.push(i * size + (size - 1 - i));
-            }
+            let d1=[], d2=[];
+            for(let i=0; i<size; i++) { d1.push(i*size+i); d2.push(i*size+(size-1-i)); }
             lines.push(d1, d2);
-            return lines;
-        }
 
-        function checkWinner() {
-            const lines = getLines();
             for(let line of lines) {
                 if(line.every(idx => board[idx] === turn)) return line;
             }
             return null;
         }
 
+        function highlight(line) {
+            const cells = document.querySelectorAll('.cell');
+            line.forEach(i => cells[i].classList.add('win-glow'));
+        }
+
+        function updateScoreboard() {
+            document.getElementById('p1-score-label').innerText = `P1: ${p1Score}`;
+            document.getElementById('p2-score-label').innerText = `P2: ${p2Score}`;
+        }
+
         function updateStatus() {
-            const label = (isCPU && turn === p2) ? "CPU THINKING..." : `TURN: ${turn}`;
-            document.getElementById('status-text').innerText = label;
-        }
-
-        function endGame(msg, line) {
-            isActive = false;
-            if(line) {
-                const cells = document.querySelectorAll('.cell');
-                line.forEach(idx => cells[idx].classList.add('win-glow'));
-            }
-            setTimeout(() => {
-                document.getElementById('result-text').innerText = msg;
-                document.getElementById('end-overlay').style.display = 'flex';
-            }, 800);
-        }
-
-        function resetBoard() {
-            board = Array(size * size).fill("");
-            turn = p1;
-            isActive = true;
-            document.getElementById('end-overlay').style.display = 'none';
-            document.querySelectorAll('.cell').forEach(c => {
-                c.innerText = "";
-                c.classList.remove('win-glow', 'taken');
-            });
-            updateStatus();
+            document.getElementById('status-text').innerText = `TURN: ${turn}`;
         }
     </script>
 </body>
