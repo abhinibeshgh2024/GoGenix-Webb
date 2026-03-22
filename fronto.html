@@ -1,216 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Webb | Fronto Editor</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QXVCXKPVBC');
+  </script>
 
-  gtag('config', 'G-QXVCXKPVBC');
-</script>
-<meta charset="UTF-8">
-<meta name="robots" content="index, follow">
-<title>Webb Fronto Editor</title>
-    <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
-<style>
-/* ===== RESET ===== */
-* { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", sans-serif; }
-body { background: linear-gradient(135deg,#0b102a,#14091f); color:#fff; min-height:100vh; overflow-x:hidden; }
+  <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-/* ===== HEADER ===== */
-header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px 0;
-    position: relative;
-    z-index: 2000;
-}
-header img { width: 180px; animation: floatY 4s ease-in-out infinite, softGlow 4s ease-in-out infinite; }
-header h1 { margin-top: 12px; font-size: 26px; color: #93c5fd; }
+  <style>
+    :root {
+      --bg-dark: #080808;
+      --google-blue: #4285F4;
+      --ms-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.05);
+      --editor-bg: #1e1e1e;
+    }
 
-/* Logo Animations */
-@keyframes floatY { 0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);} }
-@keyframes softGlow { 0%,100%{filter:drop-shadow(0 0 0 rgba(139,92,246,0.15));}50%{filter:drop-shadow(0 0 16px rgba(139,92,246,0.55));} }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
-/* ===== SIDE MENU ===== */
-.side-menu {
-    position: fixed;
-    top:0;
-    left:-260px;
-    width:260px;
-    height:100%;
-    background: rgba(15,8,40,0.96);
-    backdrop-filter: blur(14px);
-    border-right:1px solid rgba(255,255,255,0.15);
-    padding:20px;
-    transition: left 0.35s ease;
-    z-index: 1500;
-    overflow-y:auto;
-}
-.side-menu.active { left:0; }
-.side-menu h2 { color:#93c5fd; margin-bottom:12px; }
-.side-menu input { width:100%; padding:6px 10px; border-radius:12px; border:none; margin-bottom:12px; }
-.side-menu .demo-list a { display:block; padding:8px 10px; margin-bottom:6px; text-decoration:none; color:#fff; border-radius:10px; transition:0.25s; }
-.side-menu .demo-list a:hover { background: rgba(255,255,255,0.08); }
-.close-menu-bar { position:absolute; top:12px; right:12px; cursor:pointer; font-size:22px; color:#fff; }
+    body {
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
 
-/* ===== CONTAINER ===== */
-.container {
-    max-width:1200px;
-    margin: 20px auto;
-    padding: 0 15px;
-}
+    /* --- HEADER --- */
+    header { padding: 20px; text-align: center; z-index: 100; }
+    header img { width: 140px; margin-bottom: 5px; filter: drop-shadow(0 0 10px rgba(66,133,244,0.2)); }
+    header h1 { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--google-blue); font-weight: 900; }
 
-/* ===== EDITOR AREA ===== */
-.editor-area {
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-    margin-bottom:20px;
-}
-.editor-block {
-    flex:1 1 300px;
-    display:flex;
-    flex-direction: column;
-    background: rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.18);
-    border-radius:18px;
-    backdrop-filter: blur(14px);
-    padding:12px;
-}
-.editor-block h3 { margin-bottom:8px; color:#93c5fd; font-size:16px; text-align:center; }
-textarea { width:100%; height:250px; background: rgba(0,0,0,0.3); border:none; border-radius:12px; color:#fff; padding:10px; font-family: monospace; resize:none; }
+    /* --- LAYOUT GRID --- */
+    .app-container {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      flex: 1;
+      height: calc(100vh - 120px);
+    }
 
-/* ===== RUN BUTTON ===== */
-#runBtn {
-    display:block;
-    margin:0 auto 20px auto;
-    padding:10px 20px;
-    border:none;
-    border-radius:18px;
-    background:#6f55ff;
-    color:#fff;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
-}
-#runBtn:hover { background:#875eff; }
+    /* --- SIDEBAR --- */
+    .sidebar {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--ms-border);
+      padding: 20px;
+      overflow-y: auto;
+    }
 
-/* ===== OUTPUT ===== */
-#outputFrame {
-    width:100%;
-    height:350px;
-    border:none;
-    border-radius:18px;
-    background: rgba(0,0,0,0.15);
-}
+    .sidebar h2 { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 15px; }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-    .editor-area { flex-direction: column; }
-}
-</style>
+    .snippet-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--ms-border);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .snippet-card:hover { background: var(--google-blue); border-color: transparent; transform: translateX(5px); }
+    .snippet-card i { font-size: 14px; opacity: 0.7; }
+
+    /* --- MAIN EDITOR AREA --- */
+    .main-editor {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    .code-panels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--glass);
+      border: 1px solid var(--ms-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 8px 15px;
+      background: rgba(255,255,255,0.05);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #e2e8f0;
+      padding: 15px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      resize: none;
+      outline: none;
+      line-height: 1.5;
+    }
+
+    /* --- OUTPUT AREA --- */
+    .output-container {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    iframe { width: 100%; height: 100%; border: none; background: white; }
+
+    /* --- MOBILE --- */
+    @media (max-width: 900px) {
+      .app-container { grid-template-columns: 1fr; }
+      .sidebar { display: none; } /* Snippets hidden on mobile for space */
+      .code-panels { grid-template-columns: 1fr; height: 600px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <header>
-    <img src="WEBB-removebg-preview.png" alt="Webb Logo">
-    <h1>Webb Fronto Editor</h1>
+  <img src="WEBB-removebg-preview.png" alt="Webb Logo">
+  <h1>Webb Fronto Editor</h1>
 </header>
 
-<!-- ===== SIDE MENU ===== -->
-<div class="side-menu" id="sideMenu">
-    <div class="menu-header">
-        <h2>Demo Snippets</h2>
-        <input type="text" id="searchDemo" placeholder="Search demos...">
+<div class="app-container">
+  <aside class="sidebar">
+    <h2>Snippet Intelligence</h2>
+    
+    <div class="snippet-card" onclick="loadSnippet('btn')">
+      <i class="fa fa-mouse-pointer"></i> Neon Button
     </div>
-    <div id="demoList" class="demo-list">
-        <a href="#">Basic HTML</a>
-        <a href="#">Flexbox Layout</a>
-        <a href="#">CSS Grid</a>
-        <a href="#">Responsive Design</a>
-        <a href="#">JavaScript DOM</a>
-        <a href="#">Animations</a>
+    
+    <div class="snippet-card" onclick="loadSnippet('card')">
+      <i class="fa fa-id-card"></i> Glassmorphic Card
     </div>
-    <div class="close-menu-bar" id="closeMenuBar">×</div>
-</div>
-
-<!-- ===== CONTAINER ===== -->
-<div class="container">
-    <div class="editor-area">
-        <div class="editor-block">
-            <h3>HTML</h3>
-            <textarea id="htmlCode" placeholder="Write HTML code here..."></textarea>
-        </div>
-        <div class="editor-block">
-            <h3>CSS</h3>
-            <textarea id="cssCode" placeholder="Write CSS code here..."></textarea>
-        </div>
-        <div class="editor-block">
-            <h3>JavaScript</h3>
-            <textarea id="jsCode" placeholder="Write JS code here..."></textarea>
-        </div>
+    
+    <div class="snippet-card" onclick="loadSnippet('grid')">
+      <i class="fa fa-th-large"></i> 3-Column Grid
+    </div>
+    
+    <div class="snippet-card" onclick="loadSnippet('anim')">
+      <i class="fa fa-wand-magic-sparkles"></i> Floating Animation
     </div>
 
-    <button id="runBtn">RUN</button>
+    <div class="snippet-card" onclick="loadSnippet('reset')">
+      <i class="fa fa-refresh"></i> Clear Editor
+    </div>
+  </aside>
 
-    <iframe id="outputFrame"></iframe>
+  <main class="main-editor">
+    <div class="code-panels">
+      <div class="panel">
+        <div class="panel-header">HTML <i class="fa fa-code"></i></div>
+        <textarea id="htmlCode" spellcheck="false" placeholder="<div>Hello World</div>"></textarea>
+      </div>
+      
+      <div class="panel">
+        <div class="panel-header">CSS <i class="fa fa-css3-alt"></i></div>
+        <textarea id="cssCode" spellcheck="false" placeholder="body { background: #000; }"></textarea>
+      </div>
+      
+      <div class="panel">
+        <div class="panel-header">JS <i class="fa fa-js"></i></div>
+        <textarea id="jsCode" spellcheck="false" placeholder="console.log('Ready');"></textarea>
+      </div>
+    </div>
+
+    <div class="output-container">
+      <iframe id="outputFrame"></iframe>
+    </div>
+  </main>
 </div>
 
 <script>
-const sideMenu = document.getElementById('sideMenu');
-const closeBtn = document.getElementById('closeMenuBar');
+  const htmlEditor = document.getElementById('htmlCode');
+  const cssEditor = document.getElementById('cssCode');
+  const jsEditor = document.getElementById('jsCode');
+  const output = document.getElementById('outputFrame');
 
-// Toggle side menu on click (could be linked to a menu button if needed)
-function openMenu(){ sideMenu.classList.add('active'); }
-function closeMenu(){ sideMenu.classList.remove('active'); }
-
-closeBtn.addEventListener('click', closeMenu);
-
-// Demo search filter
-const searchInput = document.getElementById('searchDemo');
-const demoLinks = document.querySelectorAll('#demoList a');
-
-searchInput.addEventListener('keyup', function(){
-    const val = this.value.toLowerCase();
-    demoLinks.forEach(a=>{
-        a.style.display = a.textContent.toLowerCase().includes(val) ? 'block' : 'none';
-    });
-});
-
-// Run button functionality
-const runBtn = document.getElementById('runBtn');
-const htmlCode = document.getElementById('htmlCode');
-const cssCode = document.getElementById('cssCode');
-const jsCode = document.getElementById('jsCode');
-const output = document.getElementById('outputFrame');
-
-runBtn.addEventListener('click', ()=>{
+  // Real-time automatic execution
+  function updatePreview() {
     const content = `
-        <html>
+      <!DOCTYPE html>
+      <html>
         <head>
-        <style>${cssCode.value}</style>
+          <style>
+            body { margin: 0; font-family: sans-serif; }
+            ${cssEditor.value}
+          </style>
         </head>
-        <body>${htmlCode.value}
-        <script>${jsCode.value}<\/script>
+        <body>
+          ${htmlEditor.value}
+          <script>${jsEditor.value}<\/script>
         </body>
-        </html>
+      </html>
     `;
-    output.srcdoc = content;
-});
+    const doc = output.contentDocument || output.contentWindow.document;
+    doc.open();
+    doc.write(content);
+    doc.close();
+  }
+
+  // Listeners for auto-run
+  [htmlEditor, cssEditor, jsEditor].forEach(el => {
+    el.addEventListener('input', updatePreview);
+  });
+
+  // Snippet Library Data
+  const snippets = {
+    btn: {
+      html: `<button class="neon-btn">GOGENIX</button>`,
+      css: `.neon-btn { \n  padding: 15px 40px; \n  background: transparent; \n  color: #4285F4; \n  border: 2px solid #4285F4; \n  font-weight: bold; \n  cursor: pointer; \n  transition: 0.3s; \n  box-shadow: 0 0 10px rgba(66,133,244,0.3); \n} \n.neon-btn:hover { \n  background: #4285F4; \n  color: white; \n  box-shadow: 0 0 30px #4285F4; \n}`,
+      js: `document.querySelector('.neon-btn').onclick = () => alert('Protocol Active');`
+    },
+    card: {
+      html: `<div class="card">\n  <h3>Intelligence</h3>\n  <p>Secure browser-based computing.</p>\n</div>`,
+      css: `body { background: #0f172a; display: flex; justify-content: center; align-items: center; height: 100vh; }\n.card {\n  background: rgba(255,255,255,0.1);\n  backdrop-filter: blur(10px);\n  padding: 30px;\n  border-radius: 20px;\n  border: 1px solid rgba(255,255,255,0.1);\n  color: white;\n  text-align: center;\n}`,
+      js: ``
+    },
+    anim: {
+      html: `<div class="circle"></div>`,
+      css: `.circle {\n  width: 100px; height: 100px;\n  background: linear-gradient(45deg, #4285F4, #9333ea);\n  border-radius: 50%;\n  position: absolute;\n  animation: move 3s infinite alternate ease-in-out;\n}\n@keyframes move {\n  from { left: 10%; top: 10%; }\n  to { left: 80%; top: 80%; }\n}`,
+      js: ``
+    },
+    reset: { html: '', css: '', js: '' }
+  };
+
+  function loadSnippet(key) {
+    const s = snippets[key];
+    htmlEditor.value = s.html;
+    cssEditor.value = s.css;
+    jsEditor.value = s.js;
+    updatePreview();
+  }
+
+  // Set default view
+  window.onload = () => loadSnippet('btn');
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
