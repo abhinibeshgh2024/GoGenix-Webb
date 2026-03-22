@@ -11,164 +11,160 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <title>HTML + CSS Editor | WebbTab</title>
+    <title>WebbTab | HTML + CSS Editor</title>
     <link rel="icon" type="image/jpeg" sizes="32x32" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
+        :root {
+            --bg-dark: #080808;
+            --google-blue: #4285F4;
+            --ms-border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.05);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
 
         body {
-            background: linear-gradient(135deg, #0b102a, #14091f);
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
             color: #fff;
             min-height: 100vh;
-            animation: bodyFade 1.2s ease forwards;
-            padding-bottom: 40px;
-        }
-
-        /* ===== BODY ANIMATION ===== */
-        @keyframes bodyFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            display: flex;
+            flex-direction: column;
         }
 
         /* ===== HEADER ===== */
         header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 20px;
-            background: transparent;
-            animation: fadeSoft 1s ease forwards;
+            text-align: center;
+            padding: 30px 20px;
         }
 
         header img {
-            width: 160px;
-            margin-bottom: 12px;
-            animation: floatY 4.5s ease-in-out infinite, softGlow 4s ease-in-out infinite;
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 5px;
+            animation: float 4s ease-in-out infinite;
         }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
         header h2 {
-            font-size: 20px;
-            color: #93c5fd;
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--google-blue);
+            font-weight: 900;
         }
 
-        /* ===== EDITOR CONTAINER ===== */
-        .editor-container {
+        /* ===== SNIPPET BAR ===== */
+        .snippet-bar {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin: 20px;
+            gap: 10px;
+            padding: 0 20px 20px;
+            flex-wrap: wrap;
         }
 
-        /* ===== PANELS ===== */
+        .snippet-btn {
+            background: var(--glass);
+            border: 1px solid var(--ms-border);
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .snippet-btn:hover {
+            background: var(--google-blue);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* ===== EDITOR GRID ===== */
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         .editor-panel {
-            flex: 1 1 300px;
-            min-width: 280px;
-            max-width: 500px;
-            height: 300px; /* Increased height for better editing */
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 20px;
-            padding: 16px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--ms-border);
+            border-radius: 25px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            animation: fadeSoft 1.2s ease forwards;
+            height: 400px;
         }
 
-        .editor-panel h3 {
-            margin-bottom: 8px;
-            color: #93c5fd;
-            text-align: center;
-            font-size: 16px;
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #64748b;
         }
+
+        .panel-header i { color: var(--google-blue); }
 
         textarea {
             flex: 1;
-            resize: none;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.25);
-            color: #fff;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--ms-border);
+            border-radius: 15px;
+            color: #e2e8f0;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
             font-size: 14px;
+            line-height: 1.6;
+            resize: none;
             outline: none;
-            backdrop-filter: blur(6px);
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        textarea:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
-        }
+        textarea:focus { border-color: var(--google-blue); }
 
         /* ===== OUTPUT ===== */
         .output-container {
-            margin: 20px auto;
-            max-width: 1020px;
-            padding: 0 20px;
+            width: 100%;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto 50px;
         }
 
         .output-panel {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 20px;
-            padding: 16px;
+            background: #fff;
+            border-radius: 25px;
+            height: 400px;
+            overflow: hidden;
+            border: 5px solid var(--glass);
         }
 
-        .output-panel h3 {
-            text-align: center;
-            color: #93c5fd;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .output-panel iframe {
+        iframe {
             width: 100%;
-            height: 350px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: #fdfdfd; /* Light background for output clarity */
+            height: 100%;
+            border: none;
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeSoft {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes floatY {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
-        }
-
-        @keyframes softGlow {
-            0% { filter: drop-shadow(0 0 0 rgba(139, 92, 246, 0.15)); }
-            50% { filter: drop-shadow(0 0 16px rgba(139, 92, 246, 0.55)); }
-            100% { filter: drop-shadow(0 0 0 rgba(139, 92, 246, 0.15)); }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media(max-width: 768px) {
-            .editor-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .editor-panel {
-                width: 100%;
-                max-width: 95%;
-            }
+        /* ===== MOBILE ===== */
+        @media(max-width: 800px) {
+            .editor-container { grid-template-columns: 1fr; }
+            .editor-panel { height: 300px; }
         }
     </style>
 </head>
@@ -176,23 +172,30 @@
 
 <header>
     <img src="WEBB-removebg-preview.png" alt="Webb Logo">
-    <h2>HTML + CSS Editor</h2>
+    <h2>WebbTab Editor</h2>
 </header>
+
+<div class="snippet-bar">
+    <button class="snippet-btn" onclick="injectSnippet('card')"><i class="fa fa-square"></i> Glass Card</button>
+    <button class="snippet-btn" onclick="injectSnippet('grad')"><i class="fa fa-palette"></i> Mesh Gradient</button>
+    <button class="snippet-btn" onclick="injectSnippet('btn')"><i class="fa fa-hand-pointer"></i> Neon Glow</button>
+    <button class="snippet-btn" onclick="injectSnippet('flex')"><i class="fa fa-columns"></i> Flex Center</button>
+    <button class="snippet-btn" onclick="clearAll()"><i class="fa fa-trash"></i> Reset</button>
+</div>
 
 <div class="editor-container">
     <div class="editor-panel">
-        <h3>HTML</h3>
-        <textarea id="htmlCode" placeholder="Write HTML code here..."></textarea>
+        <div class="panel-header">Structure <span>HTML5 <i class="fa fa-code"></i></span></div>
+        <textarea id="htmlCode" spellcheck="false" placeholder=""></textarea>
     </div>
     <div class="editor-panel">
-        <h3>CSS</h3>
-        <textarea id="cssCode" placeholder="Write CSS code here..."></textarea>
+        <div class="panel-header">Styling <span>CSS3 <i class="fa fa-paint-brush"></i></span></div>
+        <textarea id="cssCode" spellcheck="false" placeholder="/* CSS here */"></textarea>
     </div>
 </div>
 
 <div class="output-container">
     <div class="output-panel">
-        <h3>Output Preview</h3>
         <iframe id="output"></iframe>
     </div>
 </div>
@@ -204,16 +207,46 @@
 
     function updateOutput() {
         const html = htmlCode.value;
-        const css = "<style>" + cssCode.value + "</style>";
-        // Setting the source of the iframe
+        const css = `<style>body{margin:0; font-family: sans-serif;}${cssCode.value}</style>`;
         output.srcdoc = css + html;
     }
 
     htmlCode.addEventListener("input", updateOutput);
     cssCode.addEventListener("input", updateOutput);
 
-    // Initial call to set up the iframe if there's default text
-    updateOutput();
+    const snippets = {
+        card: {
+            html: `<div class="card">\n  <h2>Protocol</h2>\n  <p>System Online</p>\n</div>`,
+            css: `body { \n  background: #0f172a; \n  display: flex; \n  justify-content: center; \n  align-items: center; \n  height: 100vh; \n}\n.card {\n  background: rgba(255,255,255,0.1);\n  backdrop-filter: blur(10px);\n  border: 1px solid rgba(255,255,255,0.1);\n  padding: 40px;\n  border-radius: 30px;\n  color: white;\n  text-align: center;\n  box-shadow: 0 20px 50px rgba(0,0,0,0.3);\n}`
+        },
+        grad: {
+            html: `<div class="mesh"></div>`,
+            css: `.mesh {\n  width: 100%; height: 100vh;\n  background: linear-gradient(45deg, #4285F4, #9333ea, #f43f5e);\n  background-size: 400% 400%;\n  animation: flow 10s ease infinite;\n}\n@keyframes flow {\n  0% { background-position: 0% 50%; }\n  50% { background-position: 100% 50%; }\n  100% { background-position: 0% 50%; }\n}`
+        },
+        btn: {
+            html: `<button class="glow">ACTIVATE</button>`,
+            css: `body { display:grid; place-items:center; height:100vh; background:#000; }\n.glow {\n  padding: 15px 40px;\n  background: none;\n  border: 2px solid #4285F4;\n  color: #4285F4;\n  font-weight: 800;\n  letter-spacing: 2px;\n  cursor: pointer;\n  transition: 0.4s;\n}\n.glow:hover {\n  background: #4285F4;\n  color: white;\n  box-shadow: 0 0 40px #4285F4;\n}`
+        },
+        flex: {
+            html: `<div class="parent">\n  <div class="child">Centered</div>\n</div>`,
+            css: `.parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n  background: #f1f5f9;\n}\n.child {\n  padding: 20px;\n  background: #fff;\n  box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n  border-radius: 8px;\n}`
+        }
+    };
+
+    function injectSnippet(type) {
+        htmlCode.value = snippets[type].html;
+        cssCode.value = snippets[type].css;
+        updateOutput();
+    }
+
+    function clearAll() {
+        htmlCode.value = "";
+        cssCode.value = "";
+        updateOutput();
+    }
+
+    // Default view
+    window.onload = () => injectSnippet('card');
 </script>
 
 </body>
