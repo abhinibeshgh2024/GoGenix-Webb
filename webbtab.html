@@ -1,389 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>GoGenix Webb | GenixTab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GoGenix Webb | GenixTab Tactical OS</title>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QXVCXKPVBC');
-  </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXVCXKPVBC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QXVCXKPVBC');
+    </script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <style>
-    :root {
-      --bg-dark: #080808;
-      --google-blue: #4285F4;
-      --google-red: #EA4335;
-      --google-yellow: #FBBC05;
-      --google-green: #34A853;
-      --ms-border: rgba(255, 255, 255, 0.1);
-      --glass: rgba(255, 255, 255, 0.03);
-      --accent-purple: #c9a4ff;
-    }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+        
+        :root {
+            --nato-blue: #004990;
+            --sky-accent: #38bdf8;
+            --slate-bg: #F1F5F9;
+        }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      -webkit-tap-highlight-color: transparent;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--slate-bg);
+            color: #1E293B;
+            overflow-x: hidden;
+        }
 
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      background-color: var(--bg-dark);
-      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #080808 100%);
-      color: #ffffff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
+        /* Tactical Header Styling */
+        .glass-header {
+            background: rgba(0, 73, 144, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    /* --- TRANSPARENT HEADER WITH 180px LOGO --- */
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: absolute; 
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: transparent; 
-    }
+        /* Brand Text Gradient */
+        .brand-gradient {
+            background: linear-gradient(90deg, #004990, #38bdf8, #004990);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
 
-    .logo-container img {
-      width: 180px; 
-      height: 180px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
-    }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
 
-    main {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      padding-top: 220px; 
-    }
+        /* NATO Bento Cards */
+        .bento-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    /* --- NAVBAR: UNIPLAT STYLE --- */
-    .navbar {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-      z-index: 2000;
-    }
+        .bento-card:hover {
+            border-color: var(--nato-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
 
-    .navbar ul {
-      display: flex;
-      gap: 10px;
-      padding: 8px 20px;
-      border-radius: 100px;
-      background: var(--glass);
-      border: 1px solid var(--ms-border);
-      backdrop-filter: blur(20px);
-      list-style: none;
-    }
+        /* Dropdown Tactical Animation */
+        .dropdown-active {
+            display: block !important;
+            animation: slideDown 0.2s ease-out;
+        }
 
-    .nav-btn {
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      padding: 10px 18px;
-      transition: 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .nav-btn:hover { color: #fff; }
-
-    /* --- DROPDOWN OVERHAUL --- */
-    .dropdown {
-      position: absolute;
-      top: 110%;
-      background: rgba(10, 10, 10, 0.95);
-      border: 1px solid var(--ms-border);
-      border-radius: 18px;
-      padding: 10px;
-      display: none;
-      min-width: 200px;
-      backdrop-filter: blur(25px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
-
-    .dropdown a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 15px;
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 14px;
-      border-radius: 10px;
-      transition: 0.2s;
-    }
-
-    .dropdown a:hover {
-      background: var(--glass);
-      color: var(--google-blue);
-      padding-left: 20px;
-    }
-
-    /* --- TEXT STYLES --- */
-    .version-badge {
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: var(--google-blue);
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-    }
-
-    .brand-text {
-      text-align: center;
-      font-size: clamp(12px, 3.5vw, 38px); 
-      font-weight: 800;
-      margin-bottom: 40px;
-      white-space: nowrap; 
-      display: flex;
-      justify-content: center;
-      gap: 1.5vw;
-    }
-
-    .brand-text span:nth-child(1) { color: var(--google-blue); }
-    .brand-text span:nth-child(2) { color: var(--google-red); }
-    .brand-text span:nth-child(3) { color: var(--google-yellow); }
-    .brand-text span:nth-child(4) { color: var(--google-green); }
-
-    /* --- ABOUT SECTION --- */
-    .about-box {
-      max-width: 850px;
-      margin: 0 auto 60px;
-      padding: 40px;
-      background: var(--glass);
-      border: 1px solid var(--ms-border);
-      border-radius: 30px;
-      line-height: 1.8;
-      color: #94a3b8;
-      text-align: center;
-    }
-
-    /* --- TRENDING TOOLS GRID --- */
-    .tools-section { padding: 40px 5%; text-align: center; }
-    .section-title { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: #64748b; margin-bottom: 40px; }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: rgba(255,255,255,0.02);
-      padding: 40px 30px;
-      border-radius: 25px;
-      border: 1px solid var(--ms-border);
-      transition: 0.4s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--google-blue);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .card-icon i { font-size: 40px; color: var(--google-blue); margin-bottom: 20px; }
-    .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
-    .feature-card p { font-size: 14px; color: #64748b; margin-bottom: 25px; }
-
-    .tool-link {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 700;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 12px 30px;
-      border: 1px solid var(--ms-border);
-      border-radius: 50px;
-      transition: 0.3s;
-    }
-
-    .tool-link:hover { background: #fff; color: #000; }
-
-    /* --- ANALYTICS DASHBOARD --- */
-    .analytics-box {
-      max-width: 1000px;
-      width: 90%;
-      margin: 40px auto;
-      padding: 50px 20px;
-      background: rgba(255,255,255,0.01);
-      border-radius: 30px;
-      border: 1px solid var(--ms-border);
-    }
-
-    .count-grid {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .stat-item { text-align: center; flex: 1; }
-    .stat-item span { display: block; font-size: clamp(24px, 4vw, 42px); font-weight: 800; margin-bottom: 5px; color: var(--accent-purple); }
-    .stat-item small { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* --- FOOTER --- */
-    footer {
-      text-align: center;
-      padding: 40px;
-      border-top: 1px solid var(--ms-border);
-      font-size: 10px;
-      color: #475569;
-      letter-spacing: 2px;
-    }
-
-    @media (max-width: 600px) {
-      main { padding-top: 200px; }
-      .navbar ul { flex-direction: row; font-size: 10px; }
-      .nav-btn { padding: 8px 10px; font-size: 11px; }
-      .count-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-      .brand-text { font-size: 4.5vw; }
-    }
-  </style>
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
+<body class="selection:bg-sky-500 selection:text-white">
 
-<body>
+    <header class="fixed top-0 w-full z-50 glass-header py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="logo-container">
+                    <img src="WEBB-removebg-preview.png" alt="GoGenix" class="h-12 w-auto filter brightness-0 invert">
+                </div>
+                <div class="h-8 w-[1px] bg-white/20 hidden md:block"></div>
+                <div class="hidden md:block">
+                    <span class="text-sky-300 text-[10px] font-black uppercase tracking-[0.3em]">NATNEX IQ</span>
+                    <p class="text-white text-xs font-bold">UNIFIED PLATFORM</p>
+                </div>
+            </div>
 
-  <header>
-    <div class="logo-container">
-      <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
-    </div>
-  </header>
+            <nav class="flex items-center gap-1 md:gap-4">
+                <div class="relative group">
+                    <button onclick="toggle('commons')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                        Commons <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </button>
+                    <div id="commons" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
+                        <a href="whiteboard.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
+                        <a href="indexrb.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-file-invoice"></i> Resume Builder</a>
+                        <a href="chart.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
+                        <a href="filo.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-file-export"></i> File Converter</a>
+                        <a href="qr.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+                        <a href="invoice.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fas fa-file-invoice-dollar"></i> Invoice Gen</a>
+                        <a href="speed.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-signal"></i> NetoMeter</a>
+                    </div>
+                </div>
 
-  <main>
-    <div class="version-badge">GXT v2.0</div>
+                <div class="relative group">
+                    <button onclick="toggle('programming')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                        Dev Suite <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </button>
+                    <div id="programming" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
+                        <a href="codex.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-code"></i> HTML / CSS</a>
+                        <a href="fronto.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-code"></i> Full-Stack Studio</a>
+                    </div>
+                </div>
 
-    <nav class="navbar">
-      <ul>
-        <li style="position:relative;">
-          <button class="nav-btn" onclick="toggle('commons')">Commons ▾</button>
-          <div class="dropdown" id="commons">
-            <a href="whiteboard.html"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
-            <a href="indexrb.html"><i class="fa-solid fa-file-invoice"></i> Resume Builder</a>
-            <a href="chart.html"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
-            <a href="filo.html"><i class="fa-solid fa-file-export"></i> File Converter</a>
-            <a href="qr.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
-            <a href="invoice.html"><i class="fas fa-file-invoice-dollar"></i> Invoice Gen</a>
-            <a href="speed.html"><i class="fa-solid fa-signal"></i> NetoMeter</a>
-          </div>
-        </li>
-        <li style="position:relative;">
-          <button class="nav-btn" onclick="toggle('programming')">Dev Suite ▾</button>
-          <div class="dropdown" id="programming">
-            <a href="codex.html"><i class="fa-solid fa-code"></i> HTML / CSS</a>
-            <a href="fronto.html"><i class="fa-solid fa-code"></i> HTML / CSS / JS</a>
-            <a href="#"><i class="fa-solid fa-cube"></i> UI / UX Studio</a>
-          </div>
-        </li>
-        <li style="position:relative;">
-          <button class="nav-btn" onclick="toggle('specials')">Specials ▾</button>
-          <div class="dropdown" id="specials">
-            <a href="unigallery.html"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
-            <a href="videocreator.html"><i class="fa-solid fa-video"></i> VideoCreator</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-
-    <h1 class="brand-text">
-      <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
-    </h1>
-
-    <section class="about-box">
-      <p><b>GenixTab</b> is a high-performance digital ecosystem designed to streamline productivity, technical execution, and creative workflows. Engineered for scalability, GWTv1.0 combines modern <b>Glassmorphism</b> with corporate-grade clarity to provide a sustainable workspace for the disciplined professional.</p>
-    </section>
-
-    <section class="tools-section">
-      <h2 class="section-title">Trending Modules</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="card-icon"><i class="fas fa-user-tie"></i></div>
-          <h3>Resume Builder</h3>
-          <p>ATS-friendly resumes built with professional precision.</p>
-          <a href="indexrb.html" class="tool-link">Initialize</a>
+                <div class="relative group">
+                    <button onclick="toggle('specials')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                        Specials <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </button>
+                    <div id="specials" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
+                        <a href="unigallery.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
+                        <a href="videocreator.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-video"></i> VideoCreator</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <div class="feature-card">
-          <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
-          <h3>Data Visualizer</h3>
-          <p>Transform raw metrics into interactive graphical insights.</p>
-          <a href="chart.html" class="tool-link">Create</a>
-        </div>
-        <div class="feature-card">
-          <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-          <h3>Invoicing</h3>
-          <p>Corporate-grade billing systems for instant generation.</p>
-          <a href="invoice.html" class="tool-link">Generate</a>
-        </div>
-      </div>
-    </section>
+    </header>
 
-    <section class="analytics-box">
-      <div class="count-grid">
-        <div class="stat-item">
-          <span>7</span>
-          <small>Commons</small>
+    <main class="pt-40 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center mb-20">
+            <div class="inline-block px-4 py-1 border border-[#004990] text-[#004990] text-[10px] font-black uppercase tracking-[0.4em] mb-8 rounded-full bg-white">
+                UNIPLAT 2.0
+            </div>
+            <h1 class="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-none mb-10 brand-gradient">
+                Unified. Powerful.<br>Free. Productive.
+            </h1>
+            <div class="max-w-2xl mx-auto bg-white border border-slate-200 p-8 rounded-3xl shadow-sm italic text-slate-500 leading-relaxed text-sm md:text-base">
+                "GenixTab is a high-performance digital ecosystem designed to streamline productivity and creative workflows. Engineered for scalability, UNIPLAT 2.0 update combines industrial clarity with modern efficiency."
+            </div>
         </div>
-        <div class="stat-item">
-          <span>3</span>
-          <small>Programming</small>
+
+        <div class="max-w-6xl mx-auto mb-20">
+            <h2 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em] text-center mb-12">Trending Tactical Modules</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bento-card p-10 rounded-3xl text-center">
+                    <div class="text-[#004990] mb-6"><i class="fas fa-user-tie text-4xl"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight mb-3">Resume Builder</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">ATS-Precise Systems</p>
+                    <a href="indexrb.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                </div>
+
+                <div class="bento-card p-10 rounded-3xl text-center">
+                    <div class="text-[#004990] mb-6"><i class="fas fa-chart-bar text-4xl"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight mb-3">Data Visualizer</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">Raw Metric Insight</p>
+                    <a href="chart.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                </div>
+
+                <div class="bento-card p-10 rounded-3xl text-center">
+                    <div class="text-[#004990] mb-6"><i class="fas fa-file-invoice-dollar text-4xl"></i></div>
+                    <h3 class="text-xl font-black uppercase tracking-tight mb-3">Invoicing</h3>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">Instant Billing Ops</p>
+                    <a href="invoice.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                </div>
+            </div>
         </div>
-        <div class="stat-item">
-          <span>2</span>
-          <small>Specials</small>
-        </div>
-        <div class="stat-item">
-          <span>12</span>
-          <small>Total Suite</small>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    © 2026 GOGENIX WEBB | UNIPLAT SYSTEM GWTv1.0
-  </footer>
+        <section class="max-w-5xl mx-auto bg-[#004990] rounded-[40px] p-12 text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+                <div class="text-center">
+                    <span class="block text-5xl font-black tracking-tighter text-sky-300">7</span>
+                    <p class="text-[10px] font-black uppercase tracking-widest mt-2 opacity-60">Commons</p>
+                </div>
+                <div class="text-center">
+                    <span class="block text-5xl font-black tracking-tighter text-sky-300">3</span>
+                    <p class="text-[10px] font-black uppercase tracking-widest mt-2 opacity-60">Programming</p>
+                </div>
+                <div class="text-center">
+                    <span class="block text-5xl font-black tracking-tighter text-sky-300">2</span>
+                    <p class="text-[10px] font-black uppercase tracking-widest mt-2 opacity-60">Specials</p>
+                </div>
+                <div class="text-center">
+                    <span class="block text-5xl font-black tracking-tighter text-sky-300">12</span>
+                    <p class="text-[10px] font-black uppercase tracking-widest mt-2 opacity-60">Total Suite</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <script>
-    function toggle(id){
-      const el = document.getElementById(id);
-      const isVisible = el.style.display === "block";
-      
-      document.querySelectorAll('.dropdown').forEach(d => d.style.display = "none");
-      el.style.display = isVisible ? "none" : "block";
-    }
+    <footer class="py-12 border-t border-slate-200 text-center">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">© 2026 GOGENIX WEBB | UNIPLAT 2.0 | NatNex IQ</p>
+    </footer>
 
-    document.addEventListener("click", e => {
-      if(!e.target.closest('.nav-btn') && !e.target.closest('.dropdown')){
-        document.querySelectorAll(".dropdown").forEach(d => d.style.display = "none");
-      }
-    });
-  </script>
+    <script>
+        lucide.createIcons();
 
+        function toggle(id){
+            const el = document.getElementById(id);
+            const isVisible = el.classList.contains('dropdown-active');
+            
+            // Close all first
+            document.querySelectorAll('[id="commons"], [id="programming"], [id="specials"]')
+                    .forEach(d => d.classList.remove('dropdown-active'));
+            
+            if (!isVisible) {
+                el.classList.add('dropdown-active');
+            }
+        }
+
+        document.addEventListener("click", e => {
+            if(!e.target.closest('.nav-btn') && !e.target.closest('.relative')){
+                document.querySelectorAll('[id="commons"], [id="programming"], [id="specials"]')
+                        .forEach(d => d.classList.remove('dropdown-active'));
+            }
+        });
+    </script>
 </body>
 </html>
