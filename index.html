@@ -25,6 +25,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         .brand-shimmer {
@@ -96,8 +97,8 @@
             </h1>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-6 mb-16 w-full max-w-2xl justify-center">
-            <a href="webbtab.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group">
+        <div class="flex flex-col md:flex-row gap-6 mb-16 w-full max-w-2xl justify-center items-center">
+            <a href="webbtab.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group w-full max-w-[320px] md:max-w-none">
                 <div class="bg-sky-950/40 p-2 rounded border border-sky-400/20 group-hover:border-sky-400/50 transition-colors">
                     <img src="glogo.png" alt="GenixTab" class="w-8 h-8 object-contain filter brightness-125">
                 </div>
@@ -107,7 +108,7 @@
                 </div>
             </a>
 
-            <a href="webbgames.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group">
+            <a href="webbgames.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group w-full max-w-[320px] md:max-w-none">
                 <div class="bg-sky-950/40 p-2 rounded border border-sky-400/20 group-hover:border-sky-400/50 transition-colors">
                     <img src="glogo.png" alt="WebbJamm" class="w-8 h-8 object-contain filter brightness-125">
                 </div>
@@ -118,7 +119,7 @@
             </a>
         </div>
 
-        <section class="w-full max-w-4xl metallic-panel rounded-2xl p-8 md:p-12 mb-20 relative overflow-hidden">
+        <section class="w-full max-w-4xl metallic-panel rounded-2xl p-8 md:p-12 mb-20 relative overflow-hidden mx-auto">
             <div class="flex items-center gap-2 mb-10 border-b border-sky-400/10 pb-6">
                 <div class="status-pulse"></div>
                 <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-sky-400/70">Global Telemetry Data</h3>
@@ -145,24 +146,31 @@
         </section>
     </main>
 
-    <footer class="w-full flex flex-col items-center pt-16 pb-10 border-t border-sky-400/10">
-        <div class="flex flex-col items-center mb-4">
-            <span class="text-[10px] font-black text-sky-400/40 uppercase tracking-[0.4em] mb-4">A Platform By</span>
-            <img src="natnexlogo.png" alt="NatNex Logo" class="opacity-60 filter brightness-150 transition-opacity hover:opacity-100 duration-300" style="height: 150px; width: 150px; object-fit: contain;">
-       <span class="text-[10px] font-black text-sky-400/40 uppercase tracking-[0.4em] mb-4">NATNEX IQ</span>
+    <footer class="w-full flex flex-col items-center pt-16 pb-12 border-t border-sky-400/10 bg-slate-950/30">
+        
+        <div class="flex flex-col items-center text-center">
+            <span class="text-[10px] font-black text-sky-400/40 uppercase tracking-[0.5em] mb-4">A Platform By</span>
+            <img src="natnexlogo.png" alt="NatNex Logo" class="opacity-70 filter brightness-150 transition-all hover:opacity-100 duration-300 hover:scale-105" style="height: 150px; width: 150px; object-fit: contain;">
+            <span class="text-[11px] font-black text-sky-300 uppercase tracking-[0.6em] mt-2 mb-8">NATNEX IQ</span>
         </div>
         
-        <div class="flex gap-6 mb-10 mt-4">
-            <a href="#" class="w-10 h-10 rounded-md border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
-                <i class="fab fa-linkedin-in text-sm"></i>
+        <div class="flex gap-6 mb-10">
+            <a href="#" class="w-11 h-11 rounded-lg border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-linkedin-in"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-md border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
-                <i class="fab fa-instagram text-sm"></i>
+            <a href="#" class="w-11 h-11 rounded-lg border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-instagram"></i>
             </a>
         </div>
 
-        <p class="text-[9px] font-black text-sky-400/30 uppercase tracking-[0.5em]">© 2026 GOGENIX WEBB | UNIFIED PLATFORM SYSTEM</p>
-        <p class="text-[8px] font-bold text-sky-400/20 mt-2 uppercase tracking-widest">NatNex Technologies Initiative // Ranchi Headquarters</p>
+        <div class="text-center px-4">
+            <p class="text-[10px] md:text-[11px] font-black text-sky-400/40 uppercase tracking-[0.3em] mb-2" style="color: aqua;">
+                @2026 GoGenix Webb | NatNex IQ Product
+            </p>
+            <p class="text-[8px] font-bold text-sky-400/20 uppercase tracking-widest" style="color: white;">
+                MADE BY BHARATIYA
+            </p>
+        </div>
     </footer>
 
     <script>
