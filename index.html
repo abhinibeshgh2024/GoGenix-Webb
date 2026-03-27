@@ -1,293 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>GoGenix Webb | UniPlat 2.0</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GoGenix Webb | UniPlat 2.0 Tactical</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <style>
-    :root {
-      --bg-dark: #080808;
-      --google-blue: #4285F4;
-      --google-red: #EA4335;
-      --google-yellow: #FBBC05;
-      --google-green: #34A853;
-      --ms-border: rgba(255, 255, 255, 0.1);
-      --glass: rgba(255, 255, 255, 0.03);
-    }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+        
+        :root {
+            /* Lighter NATO Blue for contrast against Metallic Black */
+            --nato-light: #7dd3fc; 
+            --nato-muted: #38bdf8;
+            --metallic-black: #0f172a;
+        }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      -webkit-tap-highlight-color: transparent;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Metallic Black Gradient */
+            background: linear-gradient(135deg, #020617 0%, #1e293b 50%, #020617 100%);
+            color: var(--nato-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      background-color: var(--bg-dark);
-      background-image: radial-gradient(circle at 50% 0%, #000000 0%, #80085E 100%);
-      color: #ffffff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
+        /* Shimmering Text Animation */
+        .brand-shimmer {
+            background: linear-gradient(90deg, #7dd3fc, #ffffff, #7dd3fc);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
 
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: absolute; 
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: transparent; 
-    }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
 
-    .logo img {
-      width: 180px; 
-      height: 180px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
-    }
+        /* Tactical Capsule Buttons - Metallic Stealth Style */
+        .capsule-btn {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    main {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 220px; /* Adjusted for the 180px logo */
-    }
+        .capsule-btn:hover {
+            transform: scale(1.02);
+            border-color: var(--nato-light);
+            background: rgba(125, 211, 252, 0.1);
+            box-shadow: 0 0 20px rgba(125, 211, 252, 0.15);
+        }
 
-    .version-badge {
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: white;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
+        /* Stats Section - Metallic Panel */
+        .metallic-panel {
+            background: rgba(2, 6, 23, 0.8);
+            border: 1px solid rgba(125, 211, 252, 0.1);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
 
-    nav {
-      text-align: center;
-      padding: 0 5%;
-    }
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background: #7dd3fc;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 10px #7dd3fc;
+            animation: pulse 2s infinite;
+        }
 
-    .brand-text {
-      /* Adjusted clamp to ensure one-line stays perfectly centered and small enough for phones */
-      font-size: clamp(10px, 3.8vw, 36px); 
-      font-weight: 800;
-      margin-bottom: 45px;
-      white-space: nowrap; 
-      display: flex;
-      justify-content: center;
-      gap: 1.5vw;
-    }
-
-    .brand-text span:nth-child(1) { color: var(--google-blue); }
-    .brand-text span:nth-child(2) { color: var(--google-red); }
-    .brand-text span:nth-child(3) { color: var(--google-yellow); }
-    .brand-text span:nth-child(4) { color: var(--google-green); }
-
-    .nav-button-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-
-    .capsule-btn {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 14px 30px;
-      min-width: 180px;
-      border-radius: 50px;
-      background: var(--glass);
-      border: 1px solid var(--ms-border);
-      backdrop-filter: blur(10px);
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .capsule-btn img {
-      width: 28px;
-      height: 28px;
-    }
-
-    .capsule-btn span {
-      color: #fff;
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-    }
-
-    .capsule-btn:hover {
-      transform: translateY(-5px);
-      border-color: var(--google-blue);
-      box-shadow: 0 10px 25px rgba(66, 133, 244, 0.2);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* --- DASHBOARD: ADDED GAPS AND PADDING --- */
-    .visitor-dashboard {
-      max-width: 900px;
-      width: 90%;
-      margin: 20px auto;
-      padding: 40px 20px;
-      background: rgba(255,255,255,0.02);
-      border-radius: 24px;
-      border: 1px solid var(--ms-border);
-    }
-
-    .stats-grid {
-      display: flex;
-      justify-content: space-evenly; /* Better distribution */
-      align-items: center;
-      gap: 20px; /* Space between items */
-    }
-
-    .stat-item { 
-      text-align: center;
-      padding: 10px; /* Internal spacing */
-      flex: 1; /* Ensures equal width to prevent touching */
-    }
-
-    .stat-item h3 { 
-      font-size: clamp(18px, 4vw, 32px); 
-      font-weight: 800; 
-      margin-bottom: 8px; 
-    }
-
-    .stat-item p { 
-      font-size: clamp(9px, 1.5vw, 11px); 
-      color: white; 
-      text-transform: uppercase; 
-      letter-spacing: 1px;
-    }
-
-    .stat-blue { color: var(--google-blue); }
-    .stat-red { color: var(--google-red); }
-    .stat-yellow { color: var(--google-yellow); }
-    .stat-green { color: var(--google-green); }
-
-    .footer-box {
-      text-align: center;
-      padding: 50px 20px;
-      border-top: 1px solid var(--ms-border);
-      margin-top: auto;
-      color: white;
-    }
-
-    .footer-logo {
-      width: 200px;
-      margin-bottom: 25px;
-      opacity: 0.8;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .social-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--glass);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-decoration: none;
-      border: 1px solid var(--ms-border);
-      transition: 0.3s;
-    }
-
-    .social-icon:hover { background: #fff; color: #000; transform: scale(1.1); }
-
-    footer { padding: 25px; text-align: center; font-size: 10px; color: #ffffff; letter-spacing: 1px; }
-
-    @media (max-width: 600px) {
-      main { justify-content: space-around; } 
-      .nav-button-container { gap: 10px; }
-      .capsule-btn { padding: 12px 18px; min-width: 145px; }
-      .capsule-btn span { font-size: 13px; }
-      .stats-grid { gap: 10px; } /* Slightly smaller gaps on tiny screens */
-      .stat-item { padding: 5px; }
-    }
-  </style>
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+    </style>
 </head>
+<body class="selection:bg-sky-500 selection:text-white">
 
-<body>
+    <header class="w-full flex justify-center pt-10 pb-6">
+        <div class="logo-container relative">
+            <img src="WEBB-removebg-preview.png" alt="GoGenix Logo" class="w-40 h-40 object-contain filter brightness-110 drop-shadow-[0_0_15px_rgba(125,211,252,0.3)]">
+        </div>
+    </header>
 
-  <header>
-    <div class="logo">
-      <img src="WEBB-removebg-preview.png" alt="GoGenix Logo">
+    <main class="flex-grow flex flex-col items-center px-6">
+        <div class="inline-block px-4 py-1 border border-sky-400/30 text-sky-300 text-[10px] font-black uppercase tracking-[0.4em] mb-6 rounded-md bg-sky-950/20 backdrop-blur-md">
+            SYS REGISTRY: UNIPLAT 2.0 // METALLIC OPS
+        </div>
+
+        <div class="text-center mb-12">
+            <h1 class="brand-shimmer text-2xl md:text-5xl font-black uppercase tracking-tighter flex justify-center gap-3 md:gap-6 flex-wrap">
+                <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
+            </h1>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6 mb-16 w-full max-w-2xl justify-center">
+            <a href="webbtab.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group">
+                <div class="bg-sky-950/40 p-2 rounded border border-sky-400/20 group-hover:border-sky-400/50 transition-colors">
+                    <img src="UniPlat.-removebg-preview.png" alt="GenixTab" class="w-8 h-8 object-contain filter brightness-125">
+                </div>
+                <div class="text-left">
+                    <span class="block text-[9px] font-black text-sky-400/60 uppercase tracking-widest">Core Module</span>
+                    <span class="text-lg font-black text-sky-300 group-hover:text-white transition-colors">GenixTab</span>
+                </div>
+            </a>
+
+            <a href="webbgames.html" class="capsule-btn flex items-center gap-5 px-10 py-5 rounded-xl group">
+                <div class="bg-sky-950/40 p-2 rounded border border-sky-400/20 group-hover:border-sky-400/50 transition-colors">
+                    <img src="N-removebg-preview.png" alt="WebbJamm" class="w-8 h-8 object-contain filter brightness-125">
+                </div>
+                <div class="text-left">
+                    <span class="block text-[9px] font-black text-sky-400/60 uppercase tracking-widest">Entertainment</span>
+                    <span class="text-lg font-black text-sky-300 group-hover:text-white transition-colors">WebbJamm</span>
+                </div>
+            </a>
+        </div>
+
+        <section class="w-full max-w-4xl metallic-panel rounded-2xl p-8 md:p-12 mb-20 relative overflow-hidden">
+            <div class="flex items-center gap-2 mb-10 border-b border-sky-400/10 pb-6">
+                <div class="status-pulse"></div>
+                <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-sky-400/70">Global Telemetry Data</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <h3 class="text-4xl font-black text-sky-300 tracking-tighter">320</h3>
+                    <p class="text-[9px] font-bold text-sky-500/50 uppercase tracking-widest mt-2">Verified Users</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-4xl font-black text-sky-300 tracking-tighter">20+</h3>
+                    <p class="text-[9px] font-bold text-sky-500/50 uppercase tracking-widest mt-2">Sector Cities</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-4xl font-black text-sky-300 tracking-tighter">15+</h3>
+                    <p class="text-[9px] font-bold text-sky-500/50 uppercase tracking-widest mt-2">Global Nodes</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-4xl font-black text-sky-300 tracking-tighter">2</h3>
+                    <p class="text-[9px] font-bold text-sky-500/50 uppercase tracking-widest mt-2">Active Modules</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="w-full flex flex-col items-center pt-16 pb-10 border-t border-sky-400/10">
+        <img src="natnexlogo.png" alt="Footer Logo" class="h-12 mb-8 opacity-40 filter brightness-150">
+        
+        <div class="flex gap-6 mb-10">
+            <a href="#" class="w-10 h-10 rounded-md border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-linkedin-in text-sm"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-md border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-instagram text-sm"></i>
+            </a>
+        </div>
+
+        <p class="text-[9px] font-black text-sky-400/30 uppercase tracking-[0.5em]">© 2026 GOGENIX WEBB | UNIFIED PLATFORM SYSTEM</p>
+        <p class="text-[8px] font-bold text-sky-400/20 mt-2 uppercase">A NatNex Technologies Initiative // Secure Environment</p>
     </div>
-  </header>
 
-  <main>
-    <div class="version-badge">UniPlat 2.0</div>
-
-    <nav>
-      <h1 class="brand-text">
-        <span>Unified.</span> <span>Powerful.</span> <span>Free.</span> <span>Productive.</span>
-      </h1>
-      
-      <div class="nav-button-container">
-        <a href="webbtab.html" class="capsule-btn">
-          <img src="UniPlat.-removebg-preview.png" alt="GenixTab">
-          <span>GenixTab</span>
-        </a>
-
-        <a href="webbgames.html" class="capsule-btn">
-          <img src="N-removebg-preview.png" alt="WebbJamm">
-          <span>WebbJamm</span>
-        </a>
-      </div>
-    </nav>
-
-    <section class="visitor-dashboard">
-      <div class="stats-grid">
-          <div class="stat-item">
-              <h3 class="stat-blue">320</h3>
-              <p>Users</p>
-          </div>
-          <div class="stat-item">
-              <h3 class="stat-red">20+</h3>
-              <p>Cities</p>
-          </div>
-          <div class="stat-item">
-              <h3 class="stat-yellow">15+</h3>
-              <p>Countries</p>
-          </div>
-          <div class="stat-item">
-              <h3 class="stat-green">2</h3>
-              <p>Tabs</p>
-          </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="footer-box">
-    <img src="UNITED_PLATFORM__4_-removebg-preview.png" alt="Footer Logo" class="footer-logo">
-    <div class="social-links">
-        <a href="https://linkedin.com/..." class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://instagram.com/..." class="social-icon"><i class="fab fa-instagram"></i></a>
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2026 GOGENIX WEBB | UNIFIED PLATFORM SYSTEM</p>
-  </footer>
-
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
