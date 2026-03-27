@@ -21,49 +21,53 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         
         :root {
-            --nato-blue: #004990;
-            --sky-accent: #38bdf8;
-            --slate-bg: #F1F5F9;
+            --nato-light: #7dd3fc; 
+            --nato-muted: #38bdf8;
+            --metallic-black: #020617;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--slate-bg);
-            color: #1E293B;
+            background: linear-gradient(135deg, #020617 0%, #1e293b 50%, #020617 100%);
+            color: var(--nato-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
         }
 
-        /* Tactical Header Styling */
-        .glass-header {
-            background: rgba(0, 73, 144, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        /* Stacked Header Styling */
+        .tactical-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(125, 211, 252, 0.1);
         }
 
-        /* Brand Text Gradient */
-        .brand-gradient {
-            background: linear-gradient(90deg, #004990, #38bdf8, #004990);
+        .brand-shimmer {
+            background: linear-gradient(90deg, #7dd3fc, #ffffff, #7dd3fc);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
+            animation: shimmer 3s linear infinite;
         }
 
-        @keyframes shine {
+        @keyframes shimmer {
             to { background-position: 200% center; }
         }
 
-        /* NATO Bento Cards */
+        /* Tactical Bento Cards */
         .bento-card {
-            background: white;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(125, 211, 252, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .bento-card:hover {
-            border-color: var(--nato-blue);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border-color: var(--nato-light);
+            transform: translateY(-5px);
+            background: rgba(125, 211, 252, 0.05);
+            box-shadow: 0 0 30px rgba(125, 211, 252, 0.1);
         }
 
         /* Dropdown Tactical Animation */
@@ -76,103 +80,105 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .nav-btn {
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: white;
+            text-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+        }
     </style>
 </head>
 <body class="selection:bg-sky-500 selection:text-white">
 
-    <header class="fixed top-0 w-full z-50 glass-header py-4 px-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="logo-container">
-                    <img src="WEBB-removebg-preview.png" alt="GoGenix" class="h-12 w-auto filter brightness-0 invert">
-                </div>
-                <div class="h-8 w-[1px] bg-white/20 hidden md:block"></div>
-                <div class="hidden md:block">
-                    <span class="text-sky-300 text-[10px] font-black uppercase tracking-[0.3em]">NATNEX IQ</span>
-                    <p class="text-white text-xs font-bold">UNIFIED PLATFORM</p>
-                </div>
+    <header class="fixed top-0 w-full z-50 tactical-header px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col items-center gap-4">
+            <div class="logo-container">
+                <img src="WEBB-removebg-preview.png" alt="GoGenix" class="h-12 w-auto filter brightness-110 drop-shadow-[0_0_8px_rgba(125,211,252,0.4)]">
             </div>
 
-            <nav class="flex items-center gap-1 md:gap-4">
+            <nav class="flex items-center justify-center gap-2 md:gap-8 border-t border-white/5 pt-3 w-full">
                 <div class="relative group">
-                    <button onclick="toggle('commons')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                    <button onclick="toggle('commons')" class="nav-btn text-sky-300/80 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-2 flex items-center gap-2">
                         Commons <i data-lucide="chevron-down" class="w-3 h-3"></i>
                     </button>
-                    <div id="commons" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
-                        <a href="whiteboard.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
-                        <a href="indexrb.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-file-invoice"></i> Resume Builder</a>
-                        <a href="chart.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
-                        <a href="filo.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-file-export"></i> File Converter</a>
-                        <a href="qr.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
-                        <a href="invoice.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fas fa-file-invoice-dollar"></i> Invoice Gen</a>
-                        <a href="speed.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-signal"></i> NetoMeter</a>
+                    <div id="commons" class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-slate-900 border border-sky-400/20 shadow-2xl hidden py-2 rounded-lg backdrop-blur-xl">
+                        <a href="whiteboard.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-chalkboard-user"></i> WhiteBoard</a>
+                        <a href="indexrb.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-file-invoice"></i> Resume Builder</a>
+                        <a href="chart.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-chart-pie"></i> Chart Maker</a>
+                        <a href="filo.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-file-export"></i> File Converter</a>
+                        <a href="qr.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+                        <a href="invoice.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fas fa-file-invoice-dollar"></i> Invoice Gen</a>
+                        <a href="speed.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white"><i class="fa-solid fa-signal"></i> NetoMeter</a>
                     </div>
                 </div>
 
                 <div class="relative group">
-                    <button onclick="toggle('programming')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                    <button onclick="toggle('programming')" class="nav-btn text-sky-300/80 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-2 flex items-center gap-2">
                         Dev Suite <i data-lucide="chevron-down" class="w-3 h-3"></i>
                     </button>
-                    <div id="programming" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
-                        <a href="codex.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-code"></i> HTML / CSS</a>
-                        <a href="fronto.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-code"></i> Full-Stack Studio</a>
+                    <div id="programming" class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-slate-900 border border-sky-400/20 shadow-2xl hidden py-2 rounded-lg backdrop-blur-xl">
+                        <a href="codex.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-code"></i> HTML / CSS</a>
+                        <a href="fronto.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white"><i class="fa-solid fa-code"></i> Full-Stack Studio</a>
                     </div>
                 </div>
 
                 <div class="relative group">
-                    <button onclick="toggle('specials')" class="nav-btn text-white/80 hover:text-white text-[10px] font-black uppercase tracking-widest px-3 py-2 flex items-center gap-2">
+                    <button onclick="toggle('specials')" class="nav-btn text-sky-300/80 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-2 flex items-center gap-2">
                         Specials <i data-lucide="chevron-down" class="w-3 h-3"></i>
                     </button>
-                    <div id="specials" class="absolute top-full right-0 mt-3 w-56 bg-white border border-slate-200 shadow-2xl hidden py-2 rounded-lg">
-                        <a href="unigallery.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
-                        <a href="videocreator.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-[#004990]"><i class="fa-solid fa-video"></i> VideoCreator</a>
+                    <div id="specials" class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-slate-900 border border-sky-400/20 shadow-2xl hidden py-2 rounded-lg backdrop-blur-xl">
+                        <a href="unigallery.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white border-b border-white/5"><i class="fa-solid fa-splotch"></i> Art Gallery</a>
+                        <a href="videocreator.html" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-sky-200 hover:bg-sky-500/10 hover:text-white"><i class="fa-solid fa-video"></i> VideoCreator</a>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
 
-    <main class="pt-40 pb-20 px-6">
+    <main class="pt-52 pb-20 px-6">
         <div class="max-w-4xl mx-auto text-center mb-20">
-            <div class="inline-block px-4 py-1 border border-[#004990] text-[#004990] text-[10px] font-black uppercase tracking-[0.4em] mb-8 rounded-full bg-white">
-                UNIPLAT 2.0
+            <div class="inline-block px-4 py-1 border border-sky-400/30 text-sky-300 text-[10px] font-black uppercase tracking-[0.4em] mb-8 rounded-md bg-sky-950/20 backdrop-blur-md">
+                UNIPLAT 2.0 // TACTICAL OS
             </div>
-            <h1 class="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-none mb-10 brand-gradient">
+            <h1 class="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-none mb-10 brand-shimmer">
                 Unified. Powerful.<br>Free. Productive.
             </h1>
-            <div class="max-w-2xl mx-auto bg-white border border-slate-200 p-8 rounded-3xl shadow-sm italic text-slate-500 leading-relaxed text-sm md:text-base">
-                "GenixTab is a high-performance digital ecosystem designed to streamline productivity and creative workflows. Engineered for scalability, UNIPLAT 2.0 update combines industrial clarity with modern efficiency."
+            <div class="max-w-2xl mx-auto bg-slate-900/40 border border-sky-400/10 p-8 rounded-3xl backdrop-blur-sm italic text-sky-200/60 leading-relaxed text-sm md:text-base">
+                "GenixTab is a high-performance digital ecosystem designed to streamline productivity and creative workflows. Engineered for scalability, the UNIPLAT 2.0 update combines industrial clarity with modern efficiency."
             </div>
         </div>
 
         <div class="max-w-6xl mx-auto mb-20">
-            <h2 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em] text-center mb-12">Trending Tactical Modules</h2>
+            <h2 class="text-[10px] font-black text-sky-500/40 uppercase tracking-[0.5em] text-center mb-12">Trending Tactical Modules</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bento-card p-10 rounded-3xl text-center">
-                    <div class="text-[#004990] mb-6"><i class="fas fa-user-tie text-4xl"></i></div>
+                    <div class="text-sky-300 mb-6"><i class="fas fa-user-tie text-4xl"></i></div>
                     <h3 class="text-xl font-black uppercase tracking-tight mb-3">Resume Builder</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">ATS-Precise Systems</p>
-                    <a href="indexrb.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                    <p class="text-sky-400/50 text-[10px] leading-relaxed mb-8 uppercase font-bold tracking-widest">ATS-Precise Systems</p>
+                    <a href="indexrb.html" class="inline-block w-full py-4 border border-sky-400/30 text-sky-300 font-black text-[10px] uppercase tracking-widest hover:bg-sky-400 hover:text-black transition-all rounded-xl">Initialize Module</a>
                 </div>
 
                 <div class="bento-card p-10 rounded-3xl text-center">
-                    <div class="text-[#004990] mb-6"><i class="fas fa-chart-bar text-4xl"></i></div>
+                    <div class="text-sky-300 mb-6"><i class="fas fa-chart-bar text-4xl"></i></div>
                     <h3 class="text-xl font-black uppercase tracking-tight mb-3">Data Visualizer</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">Raw Metric Insight</p>
-                    <a href="chart.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                    <p class="text-sky-400/50 text-[10px] leading-relaxed mb-8 uppercase font-bold tracking-widest">Raw Metric Insight</p>
+                    <a href="chart.html" class="inline-block w-full py-4 border border-sky-400/30 text-sky-300 font-black text-[10px] uppercase tracking-widest hover:bg-sky-400 hover:text-black transition-all rounded-xl">Initialize Module</a>
                 </div>
 
                 <div class="bento-card p-10 rounded-3xl text-center">
-                    <div class="text-[#004990] mb-6"><i class="fas fa-file-invoice-dollar text-4xl"></i></div>
+                    <div class="text-sky-300 mb-6"><i class="fas fa-file-invoice-dollar text-4xl"></i></div>
                     <h3 class="text-xl font-black uppercase tracking-tight mb-3">Invoicing</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase font-bold tracking-widest">Instant Billing Ops</p>
-                    <a href="invoice.html" class="inline-block w-full py-4 border-2 border-[#004990] text-[#004990] font-black text-[10px] uppercase tracking-widest hover:bg-[#004990] hover:text-white transition-all rounded-xl">Initialize Module</a>
+                    <p class="text-sky-400/50 text-[10px] leading-relaxed mb-8 uppercase font-bold tracking-widest">Instant Billing Ops</p>
+                    <a href="invoice.html" class="inline-block w-full py-4 border border-sky-400/30 text-sky-300 font-black text-[10px] uppercase tracking-widest hover:bg-sky-400 hover:text-black transition-all rounded-xl">Initialize Module</a>
                 </div>
             </div>
         </div>
 
-        <section class="max-w-5xl mx-auto bg-[#004990] rounded-[40px] p-12 text-white shadow-2xl relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <section class="max-w-5xl mx-auto bg-slate-900/80 border border-sky-400/10 rounded-[40px] p-12 text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #7dd3fc 1px, transparent 1px); background-size: 30px 30px;"></div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
                 <div class="text-center">
                     <span class="block text-5xl font-black tracking-tighter text-sky-300">7</span>
@@ -194,8 +200,30 @@
         </section>
     </main>
 
-    <footer class="py-12 border-t border-slate-200 text-center">
-        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">© 2026 GOGENIX WEBB | UNIPLAT 2.0 | NatNex IQ</p>
+    <footer class="w-full flex flex-col items-center pt-16 pb-12 border-t border-sky-400/10 bg-slate-950/30">
+        <div class="flex flex-col items-center text-center">
+            <span class="text-[10px] font-black text-sky-400/40 uppercase tracking-[0.5em] mb-4">A Platform By</span>
+            <img src="natnexlogo.png" alt="NatNex Logo" class="opacity-70 filter brightness-150 transition-all hover:opacity-100 duration-300 hover:scale-105" style="height: 150px; width: 150px; object-fit: contain;">
+            <span class="text-[11px] font-black text-sky-300 uppercase tracking-[0.6em] mt-2 mb-8">NATNEX IQ</span>
+        </div>
+        
+        <div class="flex gap-6 mb-10">
+            <a href="#" class="w-11 h-11 rounded-lg border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="w-11 h-11 rounded-lg border border-sky-400/20 flex items-center justify-center text-sky-400/50 hover:bg-sky-400 hover:text-black hover:border-sky-400 transition-all duration-200">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+
+        <div class="text-center px-4">
+            <p class="text-[10px] md:text-[11px] font-black text-sky-400/40 uppercase tracking-[0.3em] mb-2" style="color: aqua">
+                @2026 GoGenix Webb | NatNex IQ Product
+            </p>
+            <p class="text-[8px] font-bold text-sky-400/20 uppercase tracking-widest" style="color: white">
+                Made by <i style="color:orange;">Bha</i><i style="color:white;">rat</i><i style="color:green;">iya</i>
+            </p>
+        </div>
     </footer>
 
     <script>
@@ -214,8 +242,9 @@
             }
         }
 
+        // Close dropdowns when clicking outside
         document.addEventListener("click", e => {
-            if(!e.target.closest('.nav-btn') && !e.target.closest('.relative')){
+            if(!e.target.closest('.relative')){
                 document.querySelectorAll('[id="commons"], [id="programming"], [id="specials"]')
                         .forEach(d => d.classList.remove('dropdown-active'));
             }
